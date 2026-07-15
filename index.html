@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPEESSO｜不用排隊的咖啡</title>
+  <meta name="description" content="SPEESSO（Speed + Espresso）— 智慧咖啡取餐櫃。線上點餐、指定時段、掃碼取餐，讓忙碌的人不用排隊，也能拿到每天那杯咖啡。">
+  <meta property="og:title" content="SPEESSO｜不用排隊的咖啡">
+  <meta property="og:description" content="線上點餐、指定時段、掃碼取餐。SPEESSO 智慧咖啡取餐櫃，即將上線。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://speesso.com/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@300;600&family=Noto+Sans+TC:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* ---------- 首頁專屬樣式 ---------- */
+    .container { max-width: 72rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+
+    .hero { position: relative; overflow: hidden; }
+    .hero__bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom right, rgba(253, 230, 138, 0.1), transparent, rgba(165, 243, 252, 0.1));
+    }
+    .hero__inner { position: relative; padding-top: 5rem; padding-bottom: 5rem; }
+    .hero__grid { display: grid; gap: 3rem; align-items: center; }
+
+    .brand-logo {
+      margin-bottom: 2rem;
+      animation: logoEntry var(--speed-entry) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    @keyframes logoEntry {
+      0%   { opacity: 0; transform: scale(0.95) translateY(20px); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    }
+    .logo-isometric {
+      font-family: var(--font-brand);
+      font-size: clamp(5rem, 12vw, 8.5rem);
+      position: relative; display: inline-block; line-height: 0.8;
+    }
+    .logo-isometric .s-part {
+      background: linear-gradient(180deg, #1d5c51 0%, var(--speesso-forest-light) 70%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 2px 0px rgba(255, 255, 255, 0.05));
+      font-weight: 600;
+    }
+    .logo-isometric .sup-3 {
+      background: var(--speesso-gold-dazzle);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 0.52em; vertical-align: super; margin-left: -0.12em;
+      filter: drop-shadow(0 0 20px var(--glow));
+    }
+    .brand-text-logo {
+      font-family: var(--font-brand);
+      font-size: clamp(2.2rem, 5vw, 3.9rem);
+      letter-spacing: var(--logo-tracking);
+      background: var(--speesso-gold-dazzle);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+      padding-left: var(--logo-tracking);
+      margin-top: 0.35rem;
+      filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.25));
+    }
+
+    .eyebrow {
+      font-size: 0.875rem; text-transform: uppercase;
+      letter-spacing: 0.28em; color: rgba(252, 211, 77, 0.75);
+      margin-bottom: 1.25rem;
+    }
+    .section-eyebrow {
+      color: rgba(252, 211, 77, 0.65); font-size: 0.875rem;
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 4.5rem);
+      font-weight: 700; line-height: 1.05; letter-spacing: -0.025em;
+    }
+    .h2 { font-size: clamp(1.875rem, 5vw, 3rem); font-weight: 700; line-height: 1.25; }
+
+    .hero__lede {
+      margin-top: 1.5rem; font-size: 1.125rem;
+      color: var(--text-secondary); line-height: 1.75; max-width: 36rem;
+    }
+    .hero__ctas { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .hero__chips { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.875rem; color: var(--text-secondary); }
+    .chip { border-radius: 9999px; padding: 0.5rem 1rem; }
+
+    /* 預熱流程卡片 */
+    .flow-card { border-radius: var(--r-xl); padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+    .flow-card__inner { border-radius: var(--r-lg); border: 1px solid var(--line-soft); padding: 1.5rem; background: rgba(0, 0, 0, 0.2); }
+    .flow-card__hd {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.875rem; color: rgba(252, 211, 77, 0.7);
+      font-family: var(--font-brand); letter-spacing: 0.12em;
+    }
+    .flow-steps { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .flow-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .flow-step__num {
+      width: 2.5rem; height: 2.5rem; flex: 0 0 auto; border-radius: 9999px;
+      display: flex; align-items: center; justify-content: center; font-weight: 600;
+      background: rgba(252, 211, 77, 0.08); border: 1px solid rgba(252, 211, 77, 0.14);
+    }
+    .flow-step__num--on { background: var(--speesso-gold); color: #000; border: none; }
+    .flow-step h3 { font-size: 1.25rem; font-weight: 600; }
+    .flow-step p { color: var(--text-secondary); margin-top: 0.5rem; }
+
+    /* 區塊 */
+    .section { border-top: 1px solid var(--line-soft); }
+    .section__inner { padding-top: 5rem; padding-bottom: 5rem; }
+    .about-grid { display: grid; gap: 3rem; align-items: flex-start; }
+    .about-copy { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.75; display: flex; flex-direction: column; gap: 1.25rem; }
+    .about-copy .punch { color: #fff; font-size: 1.25rem; }
+
+    .card-grid { margin-top: 3rem; display: grid; gap: 1.5rem; }
+    .value-card {
+      border-radius: 1.75rem; border: 1px solid var(--line-soft);
+      padding: 2rem; background: var(--surface);
+    }
+    .value-card h3 { font-size: 1.5rem; font-weight: 600; }
+    .value-card p { margin-top: 1rem; color: var(--text-secondary); line-height: 1.75; }
+
+    .philosophy { max-width: 56rem; margin: 0 auto; text-align: center; }
+    .philosophy p { margin-top: 1.5rem; font-size: 1.125rem; color: var(--text-secondary); line-height: 1.75; }
+
+    /* Waitlist */
+    .waitlist-grid { display: grid; gap: 2rem; align-items: stretch; }
+    .waitlist-card { border-radius: var(--r-xl); padding: 2rem; }
+    .waitlist-card--plain { border: 1px solid var(--line-soft); background: var(--surface); }
+    .waitlist-card .lede { margin-top: 1.25rem; font-size: 1.125rem; color: var(--text-secondary); line-height: 1.75; }
+    .waitlist-facts { display: flex; flex-direction: column; gap: 1.25rem; color: var(--text-secondary); font-size: 1.125rem; }
+    .waitlist-facts .k { font-size: 0.875rem; color: rgba(252, 211, 77, 0.65); margin-bottom: 0.25rem; }
+    .waitlist-ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    /* FAQ */
+    .faq { max-width: 56rem; margin: 0 auto; }
+    .faq__hd { text-align: center; margin-bottom: 3rem; }
+    .faq__list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .faq-item { border-radius: var(--r-lg); padding: 1.5rem; }
+    .faq-item h3 { font-size: 1.25rem; font-weight: 600; }
+    .faq-item p { margin-top: 0.75rem; color: var(--text-secondary); line-height: 1.75; }
+
+    @media (min-width: 640px) {
+      .hero__ctas, .waitlist-ctas { flex-direction: row; }
+    }
+    @media (min-width: 768px) {
+      .hero__inner { padding-top: 7rem; padding-bottom: 7rem; }
+      .hero__grid, .about-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .waitlist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .brand-logo { margin-bottom: 2.5rem; }
+      .flow-card { padding: 2rem; }
+      .waitlist-card { padding: 2.5rem; }
+      .hero__lede { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#top" class="site-header__logo brand-gold">SPEESSO</a>
+
+      <nav class="site-nav">
+        <a href="#about">品牌概念</a>
+        <a href="order.html">線上點餐</a>
+        <a href="#waitlist">搶先體驗</a>
+        <a href="#faq">常見問題</a>
+      </nav>
+
+      <a href="https://line.me/R/ti/p/@speesso" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+        加入 LINE
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__bg"></div>
+      <div class="container hero__inner">
+        <div class="hero__grid">
+          <div>
+            <div class="brand-logo">
+              <div class="logo-isometric">
+                <span class="s-part">S</span><span class="sup-3">3</span>
+              </div>
+              <div class="brand-text-logo">SPEESSO</div>
+            </div>
+
+            <p class="eyebrow">Speed + Espresso</p>
+
+            <h1>不用排隊的咖啡<br>即將上線</h1>
+
+            <p class="hero__lede">
+              Speesso 正在準備第一間店。<br>
+              讓忙碌的人不用排隊，也能更順地拿到每天那杯咖啡。
+            </p>
+
+            <div class="hero__ctas">
+              <a href="https://line.me/R/ti/p/@speesso" target="_blank" rel="noopener noreferrer" class="btn btn--gold">加入 LINE 搶先體驗</a>
+              <a href="order.html" class="btn btn--ghost">預覽線上點餐</a>
+            </div>
+
+            <div class="hero__chips">
+              <span class="glass chip">即將上線</span>
+              <span class="glass chip">LINE 通知</span>
+              <span class="glass chip">搶先體驗</span>
+            </div>
+          </div>
+
+          <div class="glass flow-card">
+            <div class="flow-card__inner">
+              <div class="flow-card__hd">
+                <span>Speesso 預熱流程</span>
+                <span>01 / 03</span>
+              </div>
+
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <div class="flow-step__num flow-step__num--on">1</div>
+                  <div>
+                    <h3>加入 LINE</h3>
+                    <p>先加入官方 LINE，取得第一手上線通知與最新消息。</p>
+                  </div>
+                </div>
+
+                <div class="flow-step">
+                  <div class="flow-step__num">2</div>
+                  <div>
+                    <h3>等待開放通知</h3>
+                    <p>第一間店的位置、開放時段與體驗消息，會優先透過 LINE 發送。</p>
+                  </div>
+                </div>
+
+                <div class="flow-step">
+                  <div class="flow-step__num">3</div>
+                  <div>
+                    <h3>成為第一批體驗者</h3>
+                    <p>Speesso 正式開放時，你會是最早知道、最早體驗的人。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container section__inner about-grid">
+        <div>
+          <p class="section-eyebrow">為什麼會有 Speesso</p>
+          <h2 class="h2">每天早上，<br>你其實沒有時間排隊。</h2>
+        </div>
+        <div class="about-copy">
+          <p>通勤已經很趕，咖啡卻還要等。</p>
+          <p>有時候只能放棄，有時候只能帶著壓力等待。</p>
+          <p class="punch">Speesso 想把這段等待，從你的日常裡拿掉。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 品牌方向 -->
+    <section class="section">
+      <div class="container section__inner">
+        <div style="max-width: 42rem;">
+          <p class="section-eyebrow">品牌方向</p>
+          <h2 class="h2">不是少了服務，<br>而是更好的安排。</h2>
+        </div>
+
+        <div class="card-grid">
+          <div class="value-card">
+            <h3>為忙碌的人而生</h3>
+            <p>Speesso 專為趕時間的日常設計，想讓取咖啡這件事變得更輕、更順。</p>
+          </div>
+          <div class="value-card">
+            <h3>更安靜的體驗</h3>
+            <p>沒有多餘干擾，沒有排隊壓力，讓咖啡回到剛剛好的節奏。</p>
+          </div>
+          <div class="value-card">
+            <h3>值得等待的開始</h3>
+            <p>第一間店正在準備中，現在加入 LINE，就能搶先知道 Speesso 的開放消息。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 品牌理念 -->
+    <section class="section">
+      <div class="container section__inner">
+        <div class="philosophy">
+          <p class="section-eyebrow">品牌理念</p>
+          <h2 class="h2">Speesso 不是一間咖啡店<br>而是一種更有效率的咖啡取得方式</h2>
+          <p>我們希望把咖啡這件小事，做得更剛好。少一點等待，多一點從容，讓每天的開始更順一點。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section id="waitlist" class="section">
+      <div class="container section__inner">
+        <div class="waitlist-grid">
+          <div class="glass waitlist-card">
+            <p class="section-eyebrow">預熱通知</p>
+            <h2 class="h2">第一間店，即將上線</h2>
+            <p class="lede">地址與開放時段確認後，會第一時間透過 LINE 對外通知。</p>
+          </div>
+
+          <div class="waitlist-card waitlist-card--plain">
+            <div class="waitlist-facts">
+              <div>
+                <p class="k">目前狀態</p>
+                <p>Speesso 第一間店籌備中</p>
+              </div>
+              <div>
+                <p class="k">通知方式</p>
+                <p>加入官方 LINE，搶先收到開放消息</p>
+              </div>
+              <div>
+                <p class="k">你會收到</p>
+                <p>上線通知／體驗消息／第一手更新</p>
+              </div>
+            </div>
+
+            <div class="waitlist-ctas">
+              <a href="https://line.me/R/ti/p/@speesso" target="_blank" rel="noopener noreferrer" class="btn btn--gold">加入 LINE 等通知</a>
+              <a href="order.html" class="btn btn--ghost">預覽線上點餐</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container section__inner">
+        <div class="faq">
+          <div class="faq__hd">
+            <p class="section-eyebrow">常見問題</p>
+            <h2 class="h2">先回答你可能會想問的</h2>
+          </div>
+
+          <div class="faq__list">
+            <div class="glass faq-item">
+              <h3>現在可以訂咖啡了嗎？</h3>
+              <p>目前還在預熱階段，你可以先<a href="order.html" style="color: var(--speesso-gold); border-bottom: 1px solid rgba(252,211,77,0.4);">預覽線上點餐流程</a>，正式開放後會透過 LINE 第一時間通知。</p>
+            </div>
+            <div class="glass faq-item">
+              <h3>第一間店在哪裡？</h3>
+              <p>地點確認後會同步公布，加入 LINE 就能優先收到消息。</p>
+            </div>
+            <div class="glass faq-item">
+              <h3>為什麼要先加入 LINE？</h3>
+              <p>因為目前最重要的是讓你在第一時間收到上線通知、體驗資訊與最新更新。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>© 2026 SPEESSO · 速倍速科技有限公司　統一編號 62247268</p>
+      <div class="site-footer__links">
+        <a href="#top">回到上方</a>
+        <a href="order.html">線上點餐</a>
+        <a href="https://line.me/R/ti/p/@speesso" target="_blank" rel="noopener noreferrer">加入 LINE</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

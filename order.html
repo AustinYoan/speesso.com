@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SPEESSO｜線上點餐</title>
+  <meta name="description" content="SPEESSO 智慧咖啡取餐櫃 — 線上點餐、指定時段、掃碼取餐。">
+  <meta property="og:title" content="SPEESSO｜線上點餐">
+  <meta property="og:description" content="線上點餐、指定時段、掃碼取餐。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://speesso.com/order.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@300;600&family=Noto+Sans+TC:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- LIFF SDK：正式環境才需要，瀏覽器開啟時會自動降級 -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    /* ---------- 點餐頁專屬樣式（tokens 來自 assets/style.css） ---------- */
+    body { font-size: 15px; padding-bottom: env(safe-area-inset-bottom); }
+
+    .app { max-width: 480px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; }
+
+    /* Header */
+    .hdr {
+      padding: 1.25rem 1rem 1rem;
+      border-bottom: 1px solid var(--line-soft);
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    }
+    .hdr__brand {
+      font-family: var(--font-brand);
+      font-size: 1.9rem; letter-spacing: 0.18em; line-height: 1;
+    }
+    .hdr__sub { font-size: 11px; color: var(--text-mute); font-family: var(--font-mono); letter-spacing: 0.08em; margin-top: 2px; }
+    .hdr__ctx {
+      font-size: 12px; color: var(--text-secondary); font-family: var(--font-mono);
+      border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; padding: 2px 10px;
+    }
+    .hdr__back { font-size: 12px; color: var(--text-mute); transition: color 0.15s; }
+    .hdr__back:hover { color: var(--speesso-gold); }
+
+    /* Section */
+    .sec { padding: 1.5rem 1rem; border-bottom: 1px solid var(--line-soft); }
+    .sec__hd { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; gap: 0.75rem; }
+    .sec__title { display: flex; align-items: baseline; gap: 0.6rem; font-size: 15px; font-weight: 700; }
+    .sec__num { font-family: var(--font-mono); font-size: 13px; color: var(--speesso-gold); font-weight: 700; }
+    .sec__note { font-size: 12px; color: var(--text-mute); }
+
+    /* Product */
+    .items { display: flex; flex-direction: column; gap: 0.75rem; }
+    .item {
+      display: grid; grid-template-columns: 1fr auto; gap: 0.75rem; align-items: center;
+      background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--r-md); padding: 1rem;
+    }
+    .item__name { font-weight: 600; }
+    .item__desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+    .item__price { font-family: var(--font-mono); font-size: 13px; margin-top: 0.5rem; display: flex; align-items: baseline; gap: 0.5rem; }
+    .item__price b { font-size: 17px; font-weight: 700; }
+    .item__price s { color: var(--text-mute); }
+    .tag-member {
+      font-size: 10px; letter-spacing: 0.06em; font-weight: 700;
+      color: var(--speesso-forest); background: var(--speesso-gold);
+      padding: 1px 5px; border-radius: 3px;
+    }
+
+    /* Stepper */
+    .step { display: flex; align-items: center; gap: 4px; }
+    .step__btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15); background: var(--surface-2);
+      display: grid; place-items: center; font-size: 17px; line-height: 1;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .step__btn:hover:not(:disabled) { border-color: var(--speesso-gold); }
+    .step__btn:disabled { opacity: 0.3; }
+    .step__n { min-width: 28px; text-align: center; font-family: var(--font-mono); font-weight: 700; }
+
+    /* Slots */
+    .slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .slot {
+      border: 1px solid rgba(255, 255, 255, 0.1); background: var(--surface);
+      border-radius: var(--r-sm); padding: 0.75rem 0.25rem;
+      font-family: var(--font-mono); font-size: 13px; text-align: center; color: var(--text-secondary);
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+    }
+    .slot:hover:not(:disabled) { border-color: rgba(252, 211, 77, 0.5); }
+    .slot[aria-pressed="true"] {
+      background: var(--speesso-gold); border-color: var(--speesso-gold);
+      color: var(--speesso-forest); font-weight: 700;
+      box-shadow: 0 6px 18px -8px var(--glow);
+    }
+    .slot:disabled { opacity: 0.28; text-decoration: line-through; }
+    .slot__cap { display: block; font-family: var(--font-body); font-size: 9px; margin-top: 2px; opacity: 0.72; letter-spacing: 0.02em; }
+
+    /* Summary */
+    .sum { display: flex; flex-direction: column; gap: 0.5rem; font-size: 14px; }
+    .sum__row { display: flex; justify-content: space-between; gap: 0.75rem; color: var(--text-secondary); }
+    .sum__row span:last-child { font-family: var(--font-mono); }
+    .sum__row--total {
+      color: var(--text-primary); font-weight: 700; font-size: 17px;
+      border-top: 1px solid rgba(252, 211, 77, 0.18); padding-top: 0.75rem; margin-top: 0.5rem;
+    }
+    .sum__row--total span:last-child { color: var(--speesso-gold); }
+    .sum__save { color: #7FB08A; }
+
+    /* Pay */
+    .pays { display: flex; flex-direction: column; gap: 0.75rem; }
+    .pay {
+      display: flex; align-items: center; gap: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1); background: var(--surface);
+      border-radius: var(--r-md); padding: 1rem;
+      text-align: left; width: 100%;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .pay:hover:not(:disabled) { border-color: rgba(252, 211, 77, 0.5); }
+    .pay[aria-pressed="true"] {
+      border-color: var(--speesso-gold);
+      box-shadow: inset 0 0 0 1px var(--speesso-gold);
+      background: rgba(252, 211, 77, 0.07);
+    }
+    .pay:disabled { opacity: 0.4; }
+    .pay__mark {
+      width: 36px; height: 36px; border-radius: var(--r-sm);
+      display: grid; place-items: center; flex: 0 0 auto;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.02em;
+    }
+    .pay__mark--line { background: #06C755; color: #fff; }
+    .pay__mark--card { background: var(--surface-2); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--text-secondary); font-size: 16px; }
+    .pay__name { font-weight: 600; font-size: 14px; }
+    .pay__hint { display: block; font-size: 11px; color: var(--text-mute); margin-top: 1px; }
+
+    /* CTA */
+    .cta-wrap {
+      position: sticky; bottom: 0; margin-top: auto;
+      background: linear-gradient(to top, var(--speesso-forest) 72%, transparent);
+      padding: 1rem;
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+    .cta {
+      width: 100%; padding: 1rem;
+      background: var(--speesso-gold); color: var(--speesso-forest);
+      border-radius: var(--r-md);
+      font-size: 16px; font-weight: 700; letter-spacing: 0.02em;
+      transition: opacity 0.12s;
+      box-shadow: 0 10px 30px -12px var(--glow);
+    }
+    .cta:disabled { opacity: 0.3; box-shadow: none; }
+    .cta[data-busy="true"] { opacity: 0.6; cursor: wait; }
+
+    /* Msg */
+    .msg {
+      margin: 0 1rem 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--r-sm);
+      font-size: 13px;
+      border: 1px solid #c96a4a;
+      background: rgba(201, 106, 74, 0.12);
+    }
+    .msg[hidden] { display: none; }
+
+    /* Foot */
+    .foot {
+      padding: 1.5rem 1rem 2rem;
+      font-size: 11px; color: var(--text-mute); line-height: 1.7;
+      border-top: 1px solid var(--line-soft);
+    }
+    .foot b { color: var(--text-secondary); font-weight: 600; }
+    .foot a { color: rgba(252, 211, 77, 0.65); }
+    .foot a:hover { color: var(--speesso-gold); }
+  </style>
+</head>
+<body>
+
+<main class="app">
+
+  <header class="hdr">
+    <div>
+      <a href="index.html" class="hdr__brand brand-gold">SPEESSO</a>
+      <div class="hdr__sub">智慧咖啡取餐櫃 · 線上點餐</div>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+      <span class="hdr__ctx" id="ctxLabel">—</span>
+      <a class="hdr__back" href="index.html">← 回官網</a>
+    </div>
+  </header>
+
+  <div class="msg" id="msg" role="alert" hidden></div>
+
+  <!-- ========== 1. 品項 ========== -->
+  <section class="sec" aria-labelledby="secItems">
+    <div class="sec__hd">
+      <h2 class="sec__title" id="secItems"><span class="sec__num">01</span>選擇品項</h2>
+      <span class="sec__note" id="memberNote"></span>
+    </div>
+    <div class="items" id="items"></div>
+  </section>
+
+  <!-- ========== 2. 時段 ========== -->
+  <section class="sec" aria-labelledby="secSlots">
+    <div class="sec__hd">
+      <h2 class="sec__title" id="secSlots"><span class="sec__num">02</span>取餐時段</h2>
+      <span class="sec__note">今天 · 每 5 分鐘一個時段</span>
+    </div>
+    <div class="slots" id="slots"></div>
+  </section>
+
+  <!-- ========== 3. 明細 ========== -->
+  <section class="sec" aria-labelledby="secSum">
+    <div class="sec__hd"><h2 class="sec__title" id="secSum"><span class="sec__num">03</span>訂單明細</h2></div>
+    <div class="sum" id="sum"></div>
+  </section>
+
+  <!-- ========== 4. 付款 ========== -->
+  <section class="sec" aria-labelledby="secPay">
+    <div class="sec__hd"><h2 class="sec__title" id="secPay"><span class="sec__num">04</span>付款方式</h2></div>
+    <div class="pays" id="pays"></div>
+  </section>
+
+  <div class="cta-wrap">
+    <button class="cta" id="cta" disabled>選擇品項</button>
+  </div>
+
+  <footer class="foot">
+    <p><b>速倍速科技有限公司</b>　統一編號 62247268</p>
+    <p>單杯即時交易、即時取餐，不涉及預收款項。付款完成後將於指定時段前備妥，並以取餐碼開櫃。</p>
+    <p>逾時未取者依現場公告處理。付款後如需取消，請於備餐開始前透過官方 LINE 聯繫。</p>
+    <p style="margin-top:8px;"><a href="index.html">← 回 SPEESSO 官網</a></p>
+  </footer>
+
+</main>
+
+<!-- 綠界跳轉用的隱形 form，由 JS 動態填入後自動送出 -->
+<form id="ecpayForm" method="POST" style="display:none"></form>
+
+<script>
+/* ============================================================
+   CONFIG — 改這裡就好
+   ============================================================ */
+const CONFIG = {
+  liffId: "YOUR_LIFF_ID",          // ← 換成你的 LIFF ID
+
+  api: {
+    slots:   "/api/slots",          // GET  → [{ time, capacity }]
+    create:  "/api/payment/create", // POST → { provider, action, ... }
+  },
+
+  // 品項。dim = 你的容量維度 (P/C/L)
+  products: [
+    { id:"americano", name:"美式咖啡",  desc:"淺焙・冰/熱",   dim:"P", price:85,  memberPrice:65  },
+    { id:"latte",     name:"拿鐵",      desc:"全脂/燕麥奶",   dim:"C", price:115, memberPrice:90  },
+  ],
+
+  slot: {
+    minutes: 5,      // 每格時長
+    leadMin: 10,     // 最快幾分鐘後可取
+    horizonMin: 90,  // 往後開放多久
+  },
+
+  maxQtyPerItem: 5,
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  inLine: false,
+  profile: null,     // { userId, displayName }
+  isMember: false,   // 在 LINE 內即視為會員價
+  qty: {},           // { productId: n }
+  slot: null,        // "HH:MM"
+  pay: null,         // "linepay" | "ecpay"
+  slots: [],         // [{ time, capacity }]
+  busy: false,
+};
+
+const $ = (id) => document.getElementById(id);
+const nt = (n) => "NT$" + n.toLocaleString("en-US");
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+(async function boot(){
+  CONFIG.products.forEach(p => state.qty[p.id] = 0);
+
+  await initLiff();
+  await loadSlots();
+
+  renderItems();
+  renderSlots();
+  renderPays();
+  render();
+})();
+
+async function initLiff(){
+  try{
+    if (typeof liff === "undefined") throw new Error("no sdk");
+    await liff.init({ liffId: CONFIG.liffId });
+    state.inLine = liff.isInClient();
+    if (liff.isLoggedIn()){
+      state.profile = await liff.getProfile();
+    }
+  }catch(e){
+    // 一般瀏覽器 / LIFF ID 尚未設定 → 降級成純網頁模式，不擋流程
+    state.inLine = false;
+  }
+  state.isMember = state.inLine && !!state.profile;
+  state.pay = state.inLine ? "linepay" : "ecpay";
+
+  $("ctxLabel").textContent = state.inLine ? "LINE" : "WEB";
+  $("memberNote").textContent = state.isMember
+    ? (state.profile?.displayName ? state.profile.displayName + " · 會員價" : "會員價")
+    : "在 LINE 內下單享會員價";
+}
+
+async function loadSlots(){
+  try{
+    const r = await fetch(CONFIG.api.slots, { headers:{ "Accept":"application/json" } });
+    if (!r.ok) throw new Error(r.status);
+    state.slots = await r.json();
+  }catch(e){
+    state.slots = mockSlots();   // 後端還沒好時本地產生，方便先看畫面
+  }
+}
+
+// 後端未接時的替代資料：從 now+leadMin 開始，每 5 分鐘一格
+function mockSlots(){
+  const out = [];
+  const now = new Date();
+  const start = new Date(now.getTime() + CONFIG.slot.leadMin * 60000);
+  start.setMinutes(Math.ceil(start.getMinutes() / CONFIG.slot.minutes) * CONFIG.slot.minutes, 0, 0);
+  const n = Math.floor(CONFIG.slot.horizonMin / CONFIG.slot.minutes);
+  for (let i = 0; i < n; i++){
+    const t = new Date(start.getTime() + i * CONFIG.slot.minutes * 60000);
+    out.push({
+      time: String(t.getHours()).padStart(2,"0") + ":" + String(t.getMinutes()).padStart(2,"0"),
+      capacity: Math.random() < 0.18 ? 0 : Math.ceil(Math.random() * 4),
+    });
+  }
+  return out;
+}
+
+/* ============================================================
+   PRICE
+   ============================================================ */
+function priceOf(p){ return state.isMember ? p.memberPrice : p.price; }
+
+function totals(){
+  let subtotal = 0, list = 0, count = 0;
+  for (const p of CONFIG.products){
+    const q = state.qty[p.id] || 0;
+    subtotal += priceOf(p) * q;
+    list     += p.price * q;
+    count    += q;
+  }
+  return { subtotal, saved: list - subtotal, count };
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderItems(){
+  $("items").innerHTML = CONFIG.products.map(p => `
+    <article class="item">
+      <div>
+        <div class="item__name">${p.name}</div>
+        <div class="item__desc">${p.desc}</div>
+        <div class="item__price">
+          <b>${nt(priceOf(p))}</b>
+          ${state.isMember ? `<s>${nt(p.price)}</s><span class="tag-member">會員</span>` : ``}
+        </div>
+      </div>
+      <div class="step">
+        <button class="step__btn" data-act="dec" data-id="${p.id}" aria-label="減少 ${p.name}">−</button>
+        <span class="step__n" id="q-${p.id}">0</span>
+        <button class="step__btn" data-act="inc" data-id="${p.id}" aria-label="增加 ${p.name}">+</button>
+      </div>
+    </article>
+  `).join("");
+
+  $("items").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-act]");
+    if (!b) return;
+    const id = b.dataset.id;
+    const d  = b.dataset.act === "inc" ? 1 : -1;
+    state.qty[id] = Math.min(CONFIG.maxQtyPerItem, Math.max(0, (state.qty[id]||0) + d));
+    render();
+  });
+}
+
+function renderSlots(){
+  $("slots").innerHTML = state.slots.map(s => `
+    <button class="slot" data-time="${s.time}" ${s.capacity <= 0 ? "disabled" : ""}
+            aria-pressed="false" aria-label="${s.time}${s.capacity<=0?" 已額滿":""}">
+      ${s.time}
+      <span class="slot__cap">${s.capacity > 0 ? "餘 " + s.capacity : "額滿"}</span>
+    </button>
+  `).join("");
+
+  $("slots").addEventListener("click", (e) => {
+    const b = e.target.closest(".slot");
+    if (!b || b.disabled) return;
+    state.slot = b.dataset.time;
+    render();
+  });
+}
+
+function renderPays(){
+  const opts = [
+    {
+      id:"linepay", name:"LINE Pay",
+      hint: state.inLine ? "不離開 LINE，直接完成付款" : "請在 LINE 內開啟才可使用",
+      mark:`<span class="pay__mark pay__mark--line">PAY</span>`,
+      disabled: !state.inLine,
+    },
+    {
+      id:"ecpay", name:"信用卡",
+      hint:"VISA / Mastercard / JCB，將前往綠界安全付款頁",
+      mark:`<span class="pay__mark pay__mark--card">▣</span>`,
+      disabled: false,
+    },
+  ];
+
+  $("pays").innerHTML = opts.map(o => `
+    <button class="pay" data-pay="${o.id}" ${o.disabled ? "disabled" : ""} aria-pressed="false">
+      ${o.mark}
+      <span>
+        <span class="pay__name">${o.name}</span>
+        <span class="pay__hint">${o.hint}</span>
+      </span>
+    </button>
+  `).join("");
+
+  $("pays").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-pay]");
+    if (!b || b.disabled) return;
+    state.pay = b.dataset.pay;
+    render();
+  });
+}
+
+function render(){
+  // 數量
+  for (const p of CONFIG.products) $("q-" + p.id).textContent = state.qty[p.id] || 0;
+  document.querySelectorAll('[data-act="dec"]').forEach(b => b.disabled = (state.qty[b.dataset.id]||0) <= 0);
+  document.querySelectorAll('[data-act="inc"]').forEach(b => b.disabled = (state.qty[b.dataset.id]||0) >= CONFIG.maxQtyPerItem);
+
+  // 時段
+  document.querySelectorAll(".slot").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.time === state.slot)));
+
+  // 付款
+  document.querySelectorAll("[data-pay]").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.pay === state.pay)));
+
+  // 明細
+  const t = totals();
+  const lines = CONFIG.products
+    .filter(p => state.qty[p.id] > 0)
+    .map(p => `<div class="sum__row"><span>${p.name} × ${state.qty[p.id]}</span><span>${nt(priceOf(p) * state.qty[p.id])}</span></div>`)
+    .join("");
+
+  $("sum").innerHTML = (lines || `<div class="sum__row"><span>尚未選擇品項</span><span>—</span></div>`)
+    + (t.saved > 0 ? `<div class="sum__row sum__save"><span>會員價折抵</span><span>−${nt(t.saved)}</span></div>` : ``)
+    + (state.slot ? `<div class="sum__row"><span>取餐時段</span><span>${state.slot}</span></div>` : ``)
+    + `<div class="sum__row sum__row--total"><span>應付金額</span><span>${nt(t.subtotal)}</span></div>`;
+
+  // CTA
+  const cta = $("cta");
+  if (state.busy){
+    cta.disabled = true; cta.dataset.busy = "true"; cta.textContent = "處理中…";
+  } else {
+    cta.dataset.busy = "false";
+    if (t.count === 0)        { cta.disabled = true;  cta.textContent = "選擇品項"; }
+    else if (!state.slot)     { cta.disabled = true;  cta.textContent = "選擇取餐時段"; }
+    else if (!state.pay)      { cta.disabled = true;  cta.textContent = "選擇付款方式"; }
+    else                      { cta.disabled = false; cta.textContent = `付款 ${nt(t.subtotal)}`; }
+  }
+}
+
+function showMsg(text){
+  const m = $("msg");
+  m.textContent = text;
+  m.hidden = false;
+  m.scrollIntoView({ block:"nearest", behavior:"smooth" });
+}
+function hideMsg(){ $("msg").hidden = true; }
+
+/* ============================================================
+   CHECKOUT
+   前端只負責送出意圖。金額、CheckMacValue、容量鎖定
+   一律由後端決定 —— 前端傳的價格永遠不可信。
+   ============================================================ */
+$("cta").addEventListener("click", async () => {
+  if (state.busy) return;
+  hideMsg();
+  state.busy = true; render();
+
+  try{
+    const body = {
+      items: CONFIG.products
+        .filter(p => state.qty[p.id] > 0)
+        .map(p => ({ id: p.id, qty: state.qty[p.id] })),   // ← 不傳價格
+      slot: state.slot,
+      provider: state.pay,
+      lineUserId: state.profile?.userId || null,
+      idToken: (state.inLine && typeof liff !== "undefined" && liff.isLoggedIn())
+                 ? liff.getIDToken() : null,              // 後端驗這個來認會員身分
+    };
+
+    const r = await fetch(CONFIG.api.create, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) throw new Error((await r.text()) || ("HTTP " + r.status));
+
+    const res = await r.json();
+
+    if (res.action === "form"){
+      // 綠界：後端回 { action:"form", url, fields:{...} } → auto-submit
+      const f = $("ecpayForm");
+      f.action = res.url;
+      f.innerHTML = Object.entries(res.fields)
+        .map(([k,v]) => `<input type="hidden" name="${k}" value="${String(v).replace(/"/g,"&quot;")}">`)
+        .join("");
+      f.submit();
+      return;
+    }
+
+    if (res.action === "redirect"){
+      // LINE Pay：後端 request 完回 { action:"redirect", url }
+      // ⚠️ 導回後端 confirmUrl 時記得還要打 confirm API 才真的扣款
+      location.href = res.url;
+      return;
+    }
+
+    throw new Error("未知的付款回應");
+
+  }catch(err){
+    state.busy = false; render();
+    showMsg("付款無法建立：" + err.message + "。請確認網路後再試一次。");
+  }
+});
+</script>
+</body>
+</html>
