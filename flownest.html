@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowNest 團隊檔案同步｜SPEESSO</title>
+<meta name="description" content="FlowNest 比對本機工作資料夾與團隊共用的 Google Drive 資料夾，列出要上傳、要下載與兩邊都改過的檔案；覆蓋前先備份，可整批復原。免費試用 30 天。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@400;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate" hreflang="zh-Hant" href="https://speesso.com/flownest.html">
+<link rel="alternate" hreflang="en" href="https://speesso.com/en/flownest.html">
+<link rel="alternate" hreflang="x-default" href="https://speesso.com/flownest.html">
+<meta property="og:title" content="FlowNest 團隊檔案同步｜SPEESSO">
+<meta property="og:description" content="FlowNest 比對本機工作資料夾與團隊共用的 Google Drive 資料夾，列出要上傳、要下載與兩邊都改過的檔案；覆蓋前先備份，可整批復原。免費試用 30 天。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://speesso.com/flownest.html">
+<link rel="stylesheet" href="assets/flownest.css">
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav" aria-label="主選單">
+    <a class="logo" href="index.html">SPEESSO</a>
+    <div class="nav-links">
+      <a class="nav-hide-sm" href="index.html#story">我們的產品</a>
+      <a class="nav-hide-sm" href="index.html#dev">設計開發</a>
+      <a class="nav-hide-sm" href="partners.html">合作試行</a>
+      <a class="nav-hide-sm" href="flownest.html" aria-current="page">FlowNest</a>
+      <a class="lang" href="en/flownest.html" lang="en" hreflang="en">EN</a>
+      <a class="btn btn-ink" href="#trial">申請試用</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap p-hero fn-hero">
+    <img class="fn-icon" src="assets/flownest/icon.png" alt="" width="72" height="72">
+    <p class="eyebrow">FLOWNEST · 團隊檔案同步</p>
+    <h1><span class="ph">團隊的設計檔，</span><span class="ph">不再互相覆蓋。</span></h1>
+    <p class="sub"><span class="ph">FlowNest 比對你電腦裡的工作資料夾與團隊共用的 Google Drive 資料夾，</span><span class="ph">列出哪些要上傳、哪些要下載、哪些兩邊都改過。</span><span class="ph">覆蓋前先備份，按錯也能整批復原。</span></p>
+    <div class="fn-acts">
+      <a class="btn btn-ink" href="#trial">免費試用 30 天</a>
+      <a class="btn btn-line" href="flownest-guide.html">看使用方法</a>
+    </div>
+  </section>
+
+  <figure class="fn-video">
+    <video controls preload="none" playsinline poster="assets/flownest/poster-zh.jpg">
+      <source src="assets/flownest/intro-zh.mp4" type="video/mp4">
+    </video>
+    <figcaption>20 秒介紹（有聲音）</figcaption>
+  </figure>
+
+  <!-- 為什麼需要 -->
+  <section class="sheet p-sec" id="why">
+    <div class="wrap">
+      <div class="titleblock"><span>SHEET 01 / 為什麼需要</span><span>PROBLEM</span><span>雲端硬碟只負責同步</span></div>
+      <div class="fn-cards">
+        <div class="fn-card"><span class="k">01</span><h3>被覆蓋</h3><p>兩個人同時改同一份組合件，後存檔的人蓋掉前一個人的工作，沒有提示，也沒有備份。</p></div>
+        <div class="fn-card"><span class="k">02</span><h3>版本不明</h3><p>每台電腦上的版本不一樣，誰的最新、誰改了什麼，只能靠記憶。</p></div>
+        <div class="fn-card"><span class="k">03</span><h3>救不回來</h3><p>誤上傳或誤下載一整批檔案，雲端的垃圾桶找得回單一檔案，找不回「那一次操作」。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 怎麼運作 -->
+  <section class="p-sec" id="how">
+    <div class="wrap">
+      <div class="p-grid">
+        <div class="p-main">
+          <h2><span class="ph">一次掃描，</span><span class="ph">四種答案。</span></h2>
+          <p class="lead">一個專案就是兩個資料夾的配對：你電腦上的工作資料夾，和全隊共用的雲端資料夾。FlowNest 依檔案大小與修改時間比對兩邊，只給四種狀態。</p>
+        </div>
+        <div class="p-side">
+          <ul class="states">
+            <li><span class="chip-s s-up">↑ 要上傳</span><p>你的版本較新，或團隊還沒有這個檔案。</p></li>
+            <li><span class="chip-s s-down">↓ 要下載</span><p>隊友上傳了新版，或你還沒有這個檔案。</p></li>
+            <li><span class="chip-s s-both">⚠ 兩邊都改過</span><p>工具不會自動處理，由你決定保留哪一版。</p></li>
+            <li><span class="chip-s s-ok">✓ 已一致</span><p>兩邊是同一版，不需要處理。</p></li>
+          </ul>
+        </div>
+      </div>
+      <figure class="shot shot-lg">
+        <img src="assets/flownest/zh/project.png" alt="FlowNest 專案畫面：待處理數量、要上傳、要下載與兩邊都改過的檔案數" width="1280" height="820" loading="lazy">
+        <figcaption>專案畫面：一進來就知道有幾個檔案要處理、該做什麼。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 功能 -->
+  <section class="sheet p-sec" id="features">
+    <div class="wrap">
+      <div class="titleblock"><span>SHEET 02 / 功能</span><span>FEATURES</span><span>SOLIDWORKS、圖面、文件皆可</span></div>
+      <div class="p-grid">
+        <div class="p-main">
+          <h2><span class="ph">每一次搬動，</span><span class="ph">都留有退路。</span></h2>
+          <p class="lead">檔案始終是一般檔案，放在原本的資料夾，不上鎖、不改格式。停用工具，檔案原地完好。</p>
+        </div>
+        <div class="p-side">
+          <ol class="specs">
+            <li><span class="n">01</span><div><b>覆蓋前先備份</b><p>被覆蓋的檔案先存一份，保留 30 天，可隨時還原。</p></div></li>
+            <li><span class="n">02</span><div><b>兩邊都改過，由人決定</b><p>列出雙方的修改時間與上傳者，不自動覆蓋任何一邊。</p></div></li>
+            <li><span class="n">03</span><div><b>還原點</b><p>每次同步自動記錄，最近 10 次可整批撤銷。</p></div></li>
+            <li><span class="n">04</span><div><b>團隊狀態</b><p>誰已同步到最新、誰落後幾個檔案，一頁看完。</p></div></li>
+            <li><span class="n">05</span><div><b>上傳備註與同步紀錄</b><p>誰在什麼時候改了什麼，全隊都看得到。</p></div></li>
+            <li><span class="n">06</span><div><b>不需架設伺服器</b><p>共用的雲端資料夾就是全部的基礎設施；檔案不經過我們的伺服器。</p></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="fn-pair">
+        <figure class="shot">
+          <img src="assets/flownest/zh/conflict.png" alt="衝突處理畫面：保留我的版本、取得團隊版本、稍後處理" width="1280" height="820" loading="lazy">
+          <figcaption>兩邊都改過：列出事實，由你選擇。</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/flownest/zh/team.png" alt="團隊狀態畫面：每位成員的同步進度與版本" width="1280" height="820" loading="lazy">
+          <figcaption>團隊狀態：每位成員的同步進度。</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 免費試用 -->
+  <section class="p-sec fn-trial" id="trial">
+    <div class="wrap">
+      <div class="titleblock"><span>SHEET 03 / 免費試用</span><span>TRIAL · 30 天</span><span>Windows 10／11</span></div>
+      <div class="p-grid">
+        <div class="p-main">
+          <h2><span class="ph">先用 30 天，</span><span class="ph">再決定。</span></h2>
+          <p class="lead">填寫申請後，我們會寄出試用版下載連結與專屬序號。</p>
+        </div>
+        <div class="p-side">
+          <h3 class="mini">申請流程</h3>
+          <ol class="specs">
+            <li><span class="n">01</span><div><b>填寫申請</b><p>姓名、公司或團隊、Email、試用人數，以及主要使用的檔案類型。</p></div></li>
+            <li><span class="n">02</span><div><b>收到下載連結與序號</b><p>三個工作天內回覆。一組序號對應一台電腦，多人試用請註明人數。</p></div></li>
+            <li><span class="n">03</span><div><b>開始使用</b><p>執行 FlowNest、輸入序號，建立第一個專案。步驟請見<a href="flownest-guide.html">使用方法</a>。</p></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 class="mini">試用條件</h3>
+      <div class="deal deal-lg">
+        <div><b>試用期間</b><p>30 天，免費（自序號寄出當天起算）</p></div>
+        <div><b>需要準備</b><p>Windows 10／11 電腦，以及團隊共用的 Google Drive 資料夾</p></div>
+        <div><b>試用結束後</b><p>正式授權方案，請來信洽詢</p></div>
+      </div>
+
+      <div class="p-cta">
+        <p class="note">也可以直接來信 <a href="mailto:austin@speesso.com">austin@speesso.com</a>。</p>
+        <a class="btn btn-ink" href="mailto:austin@speesso.com?subject=FlowNest%20%E8%A9%A6%E7%94%A8%E7%94%B3%E8%AB%8B&amp;body=%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E5%85%AC%E5%8F%B8%EF%BC%8F%E5%9C%98%E9%9A%8A%EF%BC%9A%0AEmail%EF%BC%9A%0A%E8%A9%A6%E7%94%A8%E4%BA%BA%E6%95%B8%EF%BC%88%E4%B8%80%E5%8F%B0%E9%9B%BB%E8%85%A6%E4%B8%80%E7%B5%84%E5%BA%8F%E8%99%9F%EF%BC%89%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E6%AA%94%E6%A1%88%E9%A1%9E%E5%9E%8B%EF%BC%88%E4%BE%8B%E5%A6%82%20SOLIDWORKS%E3%80%81%E5%9C%96%E9%9D%A2%E3%80%81%E6%96%87%E4%BB%B6%EF%BC%89%EF%BC%9A%0A%E7%9B%AE%E5%89%8D%E5%9C%98%E9%9A%8A%E6%80%8E%E9%BA%BC%E5%85%B1%E7%94%A8%E6%AA%94%E6%A1%88%EF%BC%9A%0A">申請免費試用</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 常見問題 -->
+  <section class="wrap faq">
+    <h2>常見問題</h2>
+    <div class="faq-grid">
+      <div>
+        <details><summary>檔案會經過你們的伺服器嗎？</summary><p>不會。檔案只在你的電腦與團隊的 Google Drive 共用資料夾之間傳輸。</p></details>
+        <details><summary>一定要用 Google Drive 嗎？</summary><p>FlowNest 是針對 Google Drive 共用資料夾設計與測試的。每位成員的電腦都要能在檔案總管看到這個共用資料夾，例如安裝 Google Drive 電腦版。</p></details>
+        <details><summary>停止使用之後，檔案會怎樣？</summary><p>檔案都是一般檔案，留在原本的資料夾，不受影響。</p></details>
+      </div>
+      <div>
+        <details><summary>有 Mac 版嗎？</summary><p>試用版目前提供 Windows 版。需要 Mac 版請來信洽詢。</p></details>
+        <details><summary>執行時出現 Windows 安全性警告？</summary><p>第一次執行可能出現 SmartScreen 提示，選「其他資訊」→「仍要執行」即可。</p></details>
+        <details><summary>換電腦怎麼辦？</summary><p>在新電腦輸入同一組序號重新啟用即可，不需要另外申請。</p></details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="lockup" href="index.html" aria-label="SPEESSO 首頁">
+      <span class="s3" aria-hidden="true"><span class="s-part">S</span><span class="sup-3">3</span></span>
+      <span class="brand-text">SPEESSO</span>
+    </a>
+    <div class="info">
+      <span>速倍速科技有限公司 · 統一編號 62247268</span>
+      <a href="https://line.me/R/ti/p/@speesso">LINE @speesso</a>
+      <a href="mailto:austin@speesso.com">austin@speesso.com</a>
+      <a href="https://www.instagram.com/speessooo/">Instagram @speessooo</a>
+      <a href="https://www.facebook.com/profile.php?id=61586292744102">Facebook Speesso</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+/* FlowNest 產品頁與使用方法頁（疊在 style.css 之上）
+   顏色取自 FlowNest 介面：藍綠＝上傳／一致、洋紅＝下載、黃＝兩邊都改過 */
+:root {
+  --fn-teal: #0A86A8;
+  --fn-teal-bg: #E3F2F7;
+  --fn-pink: #C8006A;
+  --fn-pink-bg: #F9E3EE;
+  --fn-amber: #8A6200;
+  --fn-amber-bg: #FBF0D2;
+  --fn-ui: #F2F2F1;   /* 截圖底色，圖框用 */
+}
+
+/* Hero */
+.fn-hero { padding-bottom: 40px; }
+.fn-icon { display: block; width: 72px; height: 72px; margin: 0 auto 18px; border-radius: 18px; }
+.fn-hero .eyebrow { text-align: center; }
+.fn-acts { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+.fn-acts .btn { margin: 0; }
+
+/* 影片與截圖框 */
+.fn-video { margin: 0 auto; max-width: 960px; padding: 0 24px 72px; }
+.fn-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--fn-ui); border: 1px solid var(--line); border-radius: 14px; }
+.fn-video figcaption, .shot figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-3); }
+.shot { margin: 0; }
+.shot img { display: block; width: 100%; height: auto; background: var(--fn-ui); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 28px rgba(47, 58, 74, 0.10); }
+.shot-lg { margin: 8px 0 0; }
+
+/* 痛點三卡 */
+.fn-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; padding: 32px 0 56px; }
+.fn-card { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 24px; }
+.fn-card .k { font-family: var(--mono); font-size: 13px; color: var(--mono-ink); }
+.fn-card h3 { margin: 6px 0 8px; font-family: var(--serif); font-weight: 900; font-size: 24px; }
+.fn-card p { margin: 0; font-size: 15px; color: var(--ink-2); }
+
+/* 四種狀態 */
+.states { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.states li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: baseline; padding: 14px 0; border-bottom: 1px dashed rgba(47, 58, 74, 0.35); }
+.states p { margin: 0; font-size: 15px; color: var(--ink-2); }
+.chip-s { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.s-ok, .s-up { background: var(--fn-teal-bg); color: var(--fn-teal); }
+.s-down { background: var(--fn-pink-bg); color: var(--fn-pink); }
+.s-both { background: var(--fn-amber-bg); color: var(--fn-amber); }
+
+.fn-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 28px 40px; padding: 16px 0 8px; }
+
+/* 試用 */
+.fn-steps { counter-reset: s; }
+.fn-trial .p-cta .btn { margin-top: 0; }
+.fn-trial .p-cta .note a { color: inherit; }
+
+/* 使用方法頁 */
+.g-toc { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 28px; padding: 0; list-style: none; }
+.g-toc a { display: inline-block; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--ink); text-decoration: none; background: var(--paper); }
+.g-toc a:hover { background: var(--latte); }
+.g-sec { padding-top: 56px; padding-bottom: 56px; border-top: 1px solid rgba(47, 58, 74, 0.25); scroll-margin-top: 8px; }
+.g-sec:first-of-type { border-top: 0; }
+.g-head { display: flex; gap: 16px; align-items: baseline; }
+.g-head .n { font-family: var(--mono); font-size: 14px; color: var(--mono-ink); }
+.g-head h2 { margin: 0; font-family: var(--serif); font-weight: 900; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.35; }
+.g-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 28px 48px; align-items: start; margin-top: 20px; }
+.g-body.solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.g-text > p { margin: 0 0 14px; font-size: 16px; color: var(--ink-2); }
+.g-text ol, .g-text ul { margin: 0 0 14px; padding-left: 22px; }
+.g-text li { margin: 0 0 8px; font-size: 16px; }
+.g-text li b, .g-text p b { color: var(--ink); }
+.g-note { margin: 16px 0 0; padding: 14px 16px; border-left: 3px solid var(--fn-teal); background: var(--fn-teal-bg); border-radius: 0 10px 10px 0; font-size: 15px; color: var(--ink); }
+.g-note.warn { border-left-color: var(--fn-amber); background: var(--fn-amber-bg); }
+.g-shots { display: grid; gap: 20px; }
+code.k { white-space: nowrap; font-family: var(--mono); font-size: 14px; background: rgba(47, 58, 74, 0.08); padding: 1px 6px; border-radius: 6px; }
+.g-dl { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.g-dl .btn { margin: 0; }
+
+@media (max-width: 899px) {
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .states li { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (max-width: 480px) {
+  .fn-video { padding-left: 16px; padding-right: 16px; }
+}

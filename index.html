@@ -34,7 +34,7 @@
   .top .nav-links a { color: var(--fg2); }
   .top .nav-links a.btn-ink { background: var(--fg); color: var(--bg); }
   html.is-dark .top .nav-links a.btn-ink { background: var(--gold); color: var(--night); }
-  @media (max-width: 760px) { .top .nav-links a.hide-md { display: none; } }
+  @media (max-width: 860px) { .top .nav-links a.hide-md { display: none; } }
   @media (max-width: 480px) { .top .logo { font-size: 26px; } .top .nav-links a.hide-sm { display: none; } }
   .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
   .progress i { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(0); }
@@ -120,6 +120,20 @@
   .dev-list .no { font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
   .dev-list b { display: block; margin: 6px 0 4px; font-size: 18px; }
   .dev-list p { margin: 0; font-size: 15px; color: var(--fg2); }
+
+  /* 3b. FlowNest（自有軟體） */
+  .fnb { padding-top: 0; padding-bottom: 104px; scroll-margin-top: 40px; }
+  .fnb-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 56px; align-items: center; border-top: 1px solid var(--line); padding-top: 64px; }
+  .fnb .k { margin: 0 0 18px; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--fg2); }
+  .fnb-name { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font-size: 20px; }
+  .fnb-name img { width: 44px; height: 44px; border-radius: 11px; }
+  .fnb h2 { margin: 0; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.3; }
+  .fnb .lead { margin: 20px 0 0; max-width: 520px; font-size: 17px; color: var(--fg2); }
+  .fnb .acts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .fnb .acts .btn { margin: 0; }
+  .fnb-shot { margin: 0; }
+  .fnb-shot img { display: block; width: 100%; height: auto; background: #F2F2F1; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 28px rgba(47, 58, 74, .10); }
+  @media (max-width: 899px) { .fnb-in { grid-template-columns: minmax(0, 1fr); padding-top: 48px; } }
 
   /* 4. 收尾 */
   .close { padding-top: 96px; padding-bottom: 112px; text-align: center; border-top: 1px solid rgba(46, 42, 38, .12); }
@@ -282,6 +296,7 @@
       <a class="hide-md" href="#ch1">我們的產品</a>
       <a class="hide-sm" href="#dev">設計開發</a>
       <a class="hide-md" href="partners.html">合作試行</a>
+      <a class="hide-md" href="#flownest">FlowNest</a>
       <a class="lang" href="en/" lang="en" hreflang="en">EN</a>
       <a class="btn btn-ink" href="#contact">聯絡我們</a>
     </div>
@@ -457,6 +472,23 @@
       <li><span class="no">04</span><b>製造可行性評估</b><p>材料、製程、成本與後續生產方式討論。</p></li>
     </ul>
     <a class="btn btn-ink rv" href="https://line.me/R/ti/p/@speesso">聊聊你的產品想法</a>
+  </section>
+
+  <!-- 3b. FlowNest（自有軟體） -->
+  <section class="wrap fnb" id="flownest">
+    <div class="fnb-in">
+      <div class="fnb-txt rv">
+        <p class="k">SOFTWARE / 團隊檔案同步</p>
+        <p class="fnb-name"><img src="assets/flownest/icon.png" alt="" width="44" height="44"><b>FlowNest</b></p>
+        <h2><span class="ph">團隊的設計檔，</span><span class="ph">不再互相覆蓋。</span></h2>
+        <p class="lead"><span class="ph">比對本機工作資料夾與團隊共用的 Google Drive 資料夾，</span><span class="ph">列出要上傳、要下載與兩邊都改過的檔案。</span><span class="ph">覆蓋前先備份，按錯也能整批復原。</span></p>
+        <div class="acts">
+          <a class="btn btn-ink" href="flownest.html">了解 FlowNest</a>
+          <a class="btn btn-line" href="flownest.html#trial">免費試用 30 天</a>
+        </div>
+      </div>
+      <figure class="fnb-shot rv"><img src="assets/flownest/zh/project.png" alt="FlowNest 專案畫面" width="1280" height="820" loading="lazy"></figure>
+    </div>
   </section>
 
   <!-- 4. 合作邀請 -->

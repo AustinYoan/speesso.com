@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Use FlowNest | SPEESSO</title>
+<meta name="description" content="FlowNest quick start: install and activate, create a project, read the main screen, sync files, handle files changed on both sides, and undo a sync.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@400;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate" hreflang="zh-Hant" href="https://speesso.com/flownest-guide.html">
+<link rel="alternate" hreflang="en" href="https://speesso.com/en/flownest-guide.html">
+<link rel="alternate" hreflang="x-default" href="https://speesso.com/flownest-guide.html">
+<meta property="og:title" content="How to Use FlowNest | SPEESSO">
+<meta property="og:description" content="FlowNest quick start: install and activate, create a project, sync files, handle conflicts, and undo a sync.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://speesso.com/en/flownest-guide.html">
+<link rel="stylesheet" href="../assets/flownest.css">
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav" aria-label="Main menu">
+    <a class="logo" href="index.html">SPEESSO</a>
+    <div class="nav-links">
+      <a class="nav-hide-sm" href="index.html#story">Products</a>
+      <a class="nav-hide-sm" href="index.html#dev">Development</a>
+      <a class="nav-hide-sm" href="partners.html">Pilot program</a>
+      <a class="nav-hide-sm" href="flownest.html" aria-current="page">FlowNest</a>
+      <a class="lang" href="../flownest-guide.html" lang="zh-Hant" hreflang="zh-Hant">中文</a>
+      <a class="btn btn-ink" href="flownest.html#trial">Free trial</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap p-hero fn-hero">
+    <img class="fn-icon" src="../assets/flownest/icon.png" alt="" width="72" height="72">
+    <p class="eyebrow">FLOWNEST · HOW TO USE IT</p>
+    <h1><span class="ph">From installation</span> <span class="ph">to your first sync.</span></h1>
+    <p class="sub">This page covers the everyday tasks. For every feature, see the user manual (PDF).</p>
+    <ul class="g-toc">
+      <li><a href="#prepare">Before you start</a></li>
+      <li><a href="#install">Install and activate</a></li>
+      <li><a href="#project">Create a project</a></li>
+      <li><a href="#home">The main screen</a></li>
+      <li><a href="#sync">Sync files</a></li>
+      <li><a href="#conflict">Changed on both sides</a></li>
+      <li><a href="#undo">Undo a mistake</a></li>
+      <li><a href="#team">Team status</a></li>
+      <li><a href="#manual">Full manual</a></li>
+    </ul>
+  </section>
+
+  <div class="wrap">
+
+    <section class="g-sec" id="prepare">
+      <div class="g-head"><span class="n">00</span><h2>Before you start</h2></div>
+      <div class="g-body solo">
+        <div class="g-text">
+          <ul>
+            <li><b>Computer</b>: Windows 10 or 11. No installer and no administrator rights needed.</li>
+            <li><b>Shared folder</b>: a Google Drive folder your team shares, visible in File Explorer on every member's computer (for example through Google Drive for desktop).</li>
+            <li><b>Serial number</b>: one per computer, in the form <code class="k">FLOW-XXXXX-XXXXX-XXXXX-XXXXX</code>, sent with your trial email. No serial yet? <a href="flownest.html#trial">Request a trial</a>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="install">
+      <div class="g-head"><span class="n">01</span><h2>Install and activate</h2></div>
+      <div class="g-body solo">
+        <div class="g-text">
+          <ol>
+            <li>Unzip the trial package and double-click <code class="k">FlowNest_RV1.exe</code>. The first start takes 5–10 seconds.</li>
+            <li>If SmartScreen appears, choose "More info", then "Run anyway".</li>
+            <li>Enter your serial number. Paste it whole; dashes and letter case do not matter. You only enter it once.</li>
+          </ol>
+          <p class="g-note">The serial is tied to this computer. On a new computer, enter the same serial. A trial serial shows an on-screen reminder for its last two weeks.</p>
+          <p class="g-note warn">Closing the window only minimises FlowNest to the notification area; it keeps watching and tells you when a teammate uploads. To exit completely, right-click the tray icon → Quit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="project">
+      <div class="g-head"><span class="n">02</span><h2>Create a project</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>A project is the work folder on your computer plus the cloud folder your whole team shares. Click "+ New project" on the left and follow three steps:</p>
+          <ol>
+            <li><b>Who you are</b>: your name (what teammates see in the log) and, optionally, your email.</li>
+            <li><b>Pick two folders</b>: your local work folder, then the shared cloud folder. The screen reports live how many files were found, which teammates already use the folder, and what the first sync will do.</li>
+            <li><b>Invite the team</b>: send teammates the location of the shared folder. When they pick the same shared folder, they are on the same project. Each person's local folder can be anywhere.</li>
+          </ol>
+          <p class="g-note">Nothing is saved and no file is moved until you press Finish.</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="../assets/flownest/en/wizard1.png" alt="New project, step 1: name and email" width="1280" height="820" loading="lazy"><figcaption>Step 1: your name and email</figcaption></figure>
+          <figure class="shot"><img src="../assets/flownest/en/wizard2.png" alt="New project, step 2: choose the local and shared folders" width="1280" height="820" loading="lazy"><figcaption>Step 2: choose folders, with the check reported live</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="home">
+      <div class="g-head"><span class="n">03</span><h2>The main screen</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>FlowNest compares both sides by file size and modification time, and puts every file in one of four states:</p>
+          <ul class="states">
+            <li><span class="chip-s s-up">↑ Upload</span><p>Your version is newer, or the team doesn't have the file yet.</p></li>
+            <li><span class="chip-s s-down">↓ Download</span><p>A teammate's version is newer, or you don't have the file yet.</p></li>
+            <li><span class="chip-s s-both">⚠ Both changed</span><p>You decide; the tool never handles it automatically.</p></li>
+            <li><span class="chip-s s-ok">✓ In sync</span><p>Both sides hold the same version.</p></li>
+          </ul>
+          <p style="margin-top:16px">The guidance strip at the top always says, in one sentence, what to do next. Your projects are on the left, each card showing how many files need attention.</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="../assets/flownest/en/project.png" alt="Project screen: guidance strip, project cards, ring and three state cards" width="1280" height="820" loading="lazy"><figcaption>Project screen</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="sync">
+      <div class="g-head"><span class="n">04</span><h2>Sync files</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>Three ways, depending on how much control you want:</p>
+          <ol>
+            <li><b>Sync everything</b>: the everyday choice. All differences are handled in both directions, except files changed on both sides.</li>
+            <li><b>Upload only / download only</b>: one direction at a time, so you can check in between.</li>
+            <li><b>File by file</b>: press "See the files first" and confirm each file on the comparison screen.</li>
+          </ol>
+          <p>Any sync that uploads first asks for an upload note describing what changed, which teammates see in the sync log. A download-only sync first lists the files that will arrive.</p>
+          <p class="g-note">You can cancel at any point. Finished files stay, the file in progress returns to its original state, and no half-written file is left behind.</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="../assets/flownest/en/compare.png" alt="Comparison screen: grouped list with both timestamps per row" width="1280" height="820" loading="lazy"><figcaption>Comparison screen: tick files, or Skip one with a reason</figcaption></figure>
+          <figure class="shot"><img src="../assets/flownest/en/transfer.png" alt="Transfer progress screen" width="1280" height="820" loading="lazy"><figcaption>Transfer progress: cancellable at any point</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="conflict">
+      <div class="g-head"><span class="n">05</span><h2>Changed on both sides</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>When a teammate uploads a new version, you don't download it, and you keep editing your older copy, the file shows "⚠ Changed on both sides". There is no safe automatic answer, so FlowNest shows both modification times, how far apart they are, the file sizes and who uploaded, and lets you choose:</p>
+          <ul>
+            <li><b>Keep my version</b>: your file is uploaded; the team's copy is backed up first.</li>
+            <li><b>Take the team's version</b>: the team's file is downloaded; yours is backed up first.</li>
+            <li><b>Decide later</b>: nothing moves.</li>
+          </ul>
+          <p>Apply your choices when you are done. Whichever side is overwritten is kept for 30 days.</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="../assets/flownest/en/conflict.png" alt="Conflict screen: both timestamps and three choices" width="1280" height="820" loading="lazy"><figcaption>Conflicts</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="undo">
+      <div class="g-head"><span class="n">06</span><h2>Undo a mistake</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p><b>Right after a sync</b>: "↩ Undo this sync" on the result screen reverses the whole batch.</p>
+          <p><b>Noticed later</b>: every sync records a restore point, and the last 10 are kept per project. Open "↩ Restore points" on the project screen, pick a sync and choose "Undo this one":</p>
+          <ul>
+            <li>Files that sync added are removed (backed up once more first).</li>
+            <li>Files that sync overwrote are restored from backup.</li>
+            <li>Files changed again after that sync are skipped, so newer work is never overwritten.</li>
+          </ul>
+          <p>To take a single file back to an older version, open "Pick files manually" and choose a version from that file's history. Backups are kept for 30 days.</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="../assets/flownest/en/done.png" alt="Result screen: totals and the undo button" width="1280" height="820" loading="lazy"><figcaption>Result screen</figcaption></figure>
+          <figure class="shot"><img src="../assets/flownest/en/restore.png" alt="Restore points: the last 10 syncs" width="1280" height="820" loading="lazy"><figcaption>Restore points: the last 10 syncs</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="team">
+      <div class="g-head"><span class="n">07</span><h2>Team status</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>"Team status" at the bottom left lists everyone who has used the project: name, email, program version, last seen, and sync progress. The roster maintains itself; nobody has to register anyone.</p>
+          <p>The first person to use a project is its administrator, who can remove members or hand the role to someone else. A pig marks whoever is furthest behind, and "Remind" copies a ready-made message.</p>
+          <p class="g-note">The roster controls who is listed, not Google Drive access. To cut someone off completely, also remove their access to the shared folder in Google Drive.</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="../assets/flownest/en/team.png" alt="Team status screen" width="1280" height="820" loading="lazy"><figcaption>Team status</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="manual">
+      <div class="g-head"><span class="n">08</span><h2>Full manual</h2></div>
+      <div class="g-body solo">
+        <div class="g-text">
+          <p>Restore points, manual file picking, the sync log, settings, export and import, and every other feature are covered in the user manual.</p>
+          <div class="g-dl">
+            <a class="btn btn-ink" href="../assets/flownest/FlowNest_Manual_en.pdf">User Manual (English PDF)</a>
+          </div>
+          <p style="margin-top:20px">If something goes wrong, use "💬 Report a problem…" in the program's sidebar, or email <a href="mailto:austin@speesso.com">austin@speesso.com</a>.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="lockup" href="index.html" aria-label="SPEESSO home">
+      <span class="s3" aria-hidden="true"><span class="s-part">S</span><span class="sup-3">3</span></span>
+      <span class="brand-text">SPEESSO</span>
+    </a>
+    <div class="info">
+      <span>SPEESSO (速倍速科技有限公司) · Tax ID 62247268</span>
+      <a href="https://line.me/R/ti/p/@speesso">LINE @speesso</a>
+      <a href="mailto:austin@speesso.com">austin@speesso.com</a>
+      <a href="https://www.instagram.com/speessooo/">Instagram @speessooo</a>
+      <a href="https://www.facebook.com/profile.php?id=61586292744102">Facebook Speesso</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

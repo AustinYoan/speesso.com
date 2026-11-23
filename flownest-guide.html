@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowNest 使用方法｜SPEESSO</title>
+<meta name="description" content="FlowNest 快速上手：安裝與啟用、建立專案、看懂主畫面、同步檔案、處理兩邊都改過的檔案、按錯時整批復原。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@400;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate" hreflang="zh-Hant" href="https://speesso.com/flownest-guide.html">
+<link rel="alternate" hreflang="en" href="https://speesso.com/en/flownest-guide.html">
+<link rel="alternate" hreflang="x-default" href="https://speesso.com/flownest-guide.html">
+<meta property="og:title" content="FlowNest 使用方法｜SPEESSO">
+<meta property="og:description" content="FlowNest 快速上手：安裝與啟用、建立專案、同步檔案、處理兩邊都改過的檔案、按錯時整批復原。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://speesso.com/flownest-guide.html">
+<link rel="stylesheet" href="assets/flownest.css">
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav" aria-label="主選單">
+    <a class="logo" href="index.html">SPEESSO</a>
+    <div class="nav-links">
+      <a class="nav-hide-sm" href="index.html#story">我們的產品</a>
+      <a class="nav-hide-sm" href="index.html#dev">設計開發</a>
+      <a class="nav-hide-sm" href="partners.html">合作試行</a>
+      <a class="nav-hide-sm" href="flownest.html" aria-current="page">FlowNest</a>
+      <a class="lang" href="en/flownest-guide.html" lang="en" hreflang="en">EN</a>
+      <a class="btn btn-ink" href="flownest.html#trial">申請試用</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap p-hero fn-hero">
+    <img class="fn-icon" src="assets/flownest/icon.png" alt="" width="72" height="72">
+    <p class="eyebrow">FLOWNEST · 使用方法</p>
+    <h1><span class="ph">從安裝到</span><span class="ph">第一次同步。</span></h1>
+    <p class="sub"><span class="ph">這一頁整理日常會用到的操作。</span><span class="ph">完整功能請參考使用說明書（PDF）。</span></p>
+    <ul class="g-toc">
+      <li><a href="#prepare">開始前</a></li>
+      <li><a href="#install">安裝與啟用</a></li>
+      <li><a href="#project">建立專案</a></li>
+      <li><a href="#home">看懂主畫面</a></li>
+      <li><a href="#sync">同步檔案</a></li>
+      <li><a href="#conflict">兩邊都改過</a></li>
+      <li><a href="#undo">按錯了怎麼辦</a></li>
+      <li><a href="#team">團隊狀態</a></li>
+      <li><a href="#manual">完整說明書</a></li>
+    </ul>
+  </section>
+
+  <div class="wrap">
+
+    <section class="g-sec" id="prepare">
+      <div class="g-head"><span class="n">00</span><h2>開始前</h2></div>
+      <div class="g-body solo">
+        <div class="g-text">
+          <ul>
+            <li><b>電腦</b>：Windows 10 或 11。免安裝，不需要系統管理員權限。</li>
+            <li><b>共用資料夾</b>：一個團隊共用的 Google Drive 資料夾，每位成員的電腦都能在檔案總管看到它（例如透過 Google Drive 電腦版）。</li>
+            <li><b>序號</b>：每台電腦一組，格式為 <code class="k">FLOW-XXXXX-XXXXX-XXXXX-XXXXX</code>，隨試用通知信寄出。還沒有序號請先<a href="flownest.html#trial">申請試用</a>。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="install">
+      <div class="g-head"><span class="n">01</span><h2>安裝與啟用</h2></div>
+      <div class="g-body solo">
+        <div class="g-text">
+          <ol>
+            <li>解壓縮試用包，點兩下 <code class="k">FlowNest_RV1.exe</code>。第一次啟動需要 5–10 秒。</li>
+            <li>若出現 SmartScreen 警告，選「其他資訊」→「仍要執行」。</li>
+            <li>輸入產品序號。可以整段貼上，連字號與大小寫不拘，只需輸入一次。</li>
+          </ol>
+          <p class="g-note">序號綁定這台電腦。換電腦時，在新電腦輸入同一組序號即可。試用序號到期前兩週，畫面上會提醒。</p>
+          <p class="g-note warn">關閉視窗只會縮到右下角系統匣，程式會繼續監看，隊友上傳時發出通知。要完全結束，請在系統匣圖示按右鍵 → Quit。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="project">
+      <div class="g-head"><span class="n">02</span><h2>建立專案</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>一個專案＝你電腦上的工作資料夾＋全隊共用的雲端資料夾。點左側「＋ 新增專案」，照三個步驟走：</p>
+          <ol>
+            <li><b>你是誰</b>：輸入名字（隊友在紀錄裡看到的稱呼）與 Email（選填）。</li>
+            <li><b>選兩個資料夾</b>：先選本機工作資料夾，再選共用雲端資料夾。畫面會即時告訴你找到幾個檔案、哪些隊友已經在用，以及第一次同步會發生什麼。</li>
+            <li><b>邀請隊友</b>：把共用資料夾的位置傳給隊友，他們新增專案時選同一個共用資料夾即可。各自的本機資料夾可以不同。</li>
+          </ol>
+          <p class="g-note">按「完成」之前，不會寫入任何設定，也不會搬動任何檔案。</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="assets/flownest/zh/wizard1.png" alt="新增專案第 1 步：輸入名字與 Email" width="1280" height="820" loading="lazy"><figcaption>第 1 步：名字與 Email</figcaption></figure>
+          <figure class="shot"><img src="assets/flownest/zh/wizard2.png" alt="新增專案第 2 步：選擇本機與共用資料夾" width="1280" height="820" loading="lazy"><figcaption>第 2 步：選資料夾，並即時顯示檢查結果</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="home">
+      <div class="g-head"><span class="n">03</span><h2>看懂主畫面</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>FlowNest 依檔案大小與修改時間比對兩邊，每個檔案歸成四種狀態之一：</p>
+          <ul class="states">
+            <li><span class="chip-s s-up">↑ 要上傳</span><p>你的版本較新，或團隊還沒有這個檔案。</p></li>
+            <li><span class="chip-s s-down">↓ 要下載</span><p>隊友的版本較新，或你還沒有這個檔案。</p></li>
+            <li><span class="chip-s s-both">⚠ 兩邊都改過</span><p>需要你決定，工具不會自動處理。</p></li>
+            <li><span class="chip-s s-ok">✓ 已一致</span><p>兩邊是同一版。</p></li>
+          </ul>
+          <p style="margin-top:16px">畫面最上方的引導列，永遠用一句話告訴你下一步做什麼。左側是你的專案，每張卡片顯示待處理的數量。</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="assets/flownest/zh/project.png" alt="專案畫面：引導列、專案卡、環形圖與三張分類卡" width="1280" height="820" loading="lazy"><figcaption>專案畫面</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="sync">
+      <div class="g-head"><span class="n">04</span><h2>同步檔案</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>依你想要的控制程度，有三種方式：</p>
+          <ol>
+            <li><b>一鍵同步</b>：日常建議。所有差異自動雙向處理，兩邊都改過的檔案除外。</li>
+            <li><b>只上傳／只下載</b>：一次只處理一個方向，方便中間檢查。</li>
+            <li><b>逐檔勾選</b>：按「先看有哪些檔案」，在比對頁逐一確認後再同步。</li>
+          </ol>
+          <p>含上傳的同步會先請你寫一段「上傳備註」，說明這次改了什麼，隊友在同步紀錄裡看得到。純下載則會先列出將下載的檔案讓你確認。</p>
+          <p class="g-note">傳輸途中可以隨時取消。已完成的檔案保留，進行中的檔案還原原狀，不會留下寫到一半的檔案。</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="assets/flownest/zh/compare.png" alt="檔案比對頁：分組清單與每列的時間對照" width="1280" height="820" loading="lazy"><figcaption>檔案比對頁：逐檔勾選，或附上理由「略過」</figcaption></figure>
+          <figure class="shot"><img src="assets/flownest/zh/transfer.png" alt="傳輸進度畫面" width="1280" height="820" loading="lazy"><figcaption>傳輸進度：可隨時取消</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="conflict">
+      <div class="g-head"><span class="n">05</span><h2>兩邊都改過</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>隊友上傳了新版，你沒有下載，又在自己的舊版上繼續修改，就會出現「⚠ 兩邊都改過」。這種情況沒有安全的自動答案，FlowNest 會列出雙方的修改時間、相差多久、檔案大小與上傳者，由你選擇：</p>
+          <ul>
+            <li><b>保留我的版本</b>：上傳你的版本，團隊的舊版先備份。</li>
+            <li><b>取得團隊版本</b>：下載團隊的版本，你的舊版先備份。</li>
+            <li><b>稍後處理</b>：先不動。</li>
+          </ul>
+          <p>做完決定後按「套用這些決定」。無論選哪一邊，被覆蓋的版本都會保留 30 天。</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="assets/flownest/zh/conflict.png" alt="衝突處理畫面：雙方時間對照與三個選擇" width="1280" height="820" loading="lazy"><figcaption>衝突處理</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="undo">
+      <div class="g-head"><span class="n">06</span><h2>按錯了怎麼辦</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p><b>剛同步完</b>：結果頁右側的「↩ 復原這次同步」可以當場整批撤銷。</p>
+          <p><b>之後才發現</b>：每次同步都會自動記一個還原點，每個專案保留最近 10 次。從專案頁右上「↩ 還原點」挑一次，按「還原這次」：</p>
+          <ul>
+            <li>那次新增的檔案會被移除（移除前再備份一次）。</li>
+            <li>那次覆蓋的檔案從備份精準還原。</li>
+            <li>同步之後又被修改過的檔案自動跳過，不會蓋掉之後的新工作。</li>
+          </ul>
+          <p>只想讓單一檔案回到舊版：在「手動選擇檔案」裡，從該檔的版本歷史挑一版還原。備份保留 30 天。</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="assets/flownest/zh/done.png" alt="同步完成頁：結果統計與復原入口" width="1280" height="820" loading="lazy"><figcaption>同步完成頁</figcaption></figure>
+          <figure class="shot"><img src="assets/flownest/zh/restore.png" alt="還原點：最近 10 次同步" width="1280" height="820" loading="lazy"><figcaption>還原點：最近 10 次同步</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="team">
+      <div class="g-head"><span class="n">07</span><h2>團隊狀態</h2></div>
+      <div class="g-body">
+        <div class="g-text">
+          <p>左下「團隊狀態」列出用過這個專案的每一位成員：名字、Email、使用的版本、最後上線時間，以及已同步的進度。成員名冊自動維護，不需要任何人手動登錄。</p>
+          <p>第一位使用專案的人是管理者，可以移除成員或把管理者交給別人。落後最多的隊友旁邊會出現一隻小豬，按「提醒」可以複製一段提醒訊息。</p>
+          <p class="g-note">名冊管理的是「顯示與名單」，不是 Google Drive 的存取權限。要讓某人完全無法存取，請同時在 Google Drive 收回共用資料夾的權限。</p>
+        </div>
+        <div class="g-shots">
+          <figure class="shot"><img src="assets/flownest/zh/team.png" alt="團隊狀態畫面" width="1280" height="820" loading="lazy"><figcaption>團隊狀態</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="manual">
+      <div class="g-head"><span class="n">08</span><h2>完整說明書</h2></div>
+      <div class="g-body solo">
+        <div class="g-text">
+          <p>還原點、手動選擇檔案、同步紀錄、設定、匯出與匯入等完整功能，請參考使用說明書。</p>
+          <div class="g-dl">
+            <a class="btn btn-ink" href="assets/flownest/FlowNest_Manual_zh.pdf">使用說明書（中文 PDF）</a>
+            <a class="btn btn-line" href="assets/flownest/FlowNest_Manual_en.pdf" hreflang="en">User Manual（English PDF）</a>
+          </div>
+          <p style="margin-top:20px">使用上有問題，可以從程式側邊欄的「💬 回報問題…」送出，或來信 <a href="mailto:austin@speesso.com">austin@speesso.com</a>。</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="lockup" href="index.html" aria-label="SPEESSO 首頁">
+      <span class="s3" aria-hidden="true"><span class="s-part">S</span><span class="sup-3">3</span></span>
+      <span class="brand-text">SPEESSO</span>
+    </a>
+    <div class="info">
+      <span>速倍速科技有限公司 · 統一編號 62247268</span>
+      <a href="https://line.me/R/ti/p/@speesso">LINE @speesso</a>
+      <a href="mailto:austin@speesso.com">austin@speesso.com</a>
+      <a href="https://www.instagram.com/speessooo/">Instagram @speessooo</a>
+      <a href="https://www.facebook.com/profile.php?id=61586292744102">Facebook Speesso</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
