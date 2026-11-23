@@ -10,27 +10,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@400;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@300;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate" hreflang="zh-Hant" href="https://speesso.com/">
+<link rel="alternate" hreflang="en" href="https://speesso.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://speesso.com/">
 <meta property="og:title" content="SPEESSO｜速倍速科技">
 <meta property="og:description" content="速倍速科技開發智慧取餐櫃與守望相助 SOS 系統，也協助企業進行機構、電子控制與原型開發。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://speesso.com/">
 <style>
-  /* L5：沉浸式捲動 — 往下捲＝時間往前走。07:58 → 13:20 → 22:14 → 隔天（設計開發）
-     動畫只在 html.anim 時啟用；未啟用 JS 或系統設定「減少動態」時，退回一般直排頁面。 */
-  :root { --bg: var(--paper); --fg: var(--ink); --fg2: var(--ink-2); --grid-o: 0; --ease: cubic-bezier(.2, .7, .1, 1); }
+  /* L6：走一段路 — 線條小人從咖啡店（07:58）走到工作室（13:20），再走回社區（22:14）。
+     三種模式：
+       html.anim          一般動畫：往下捲＝小人往前走，街景跟著捲動
+       html.anim.calm     溫和版（系統「減少動態」）：內容一樣依序出現，只淡入淡出，街景不滑動、小人不走路
+       html（無 class）   沒有 JS：三段直排，插圖放在各段文字下面 */
+  :root { --bg: var(--paper); --fg: var(--ink); --fg2: var(--ink-2); --ease: cubic-bezier(.2, .7, .1, 1); }
   html.is-dark { --fg: var(--night-text); --fg2: var(--night-2); }
   body { background: var(--bg); color: var(--fg); }
 
-  /* 導覽：固定在上方，顏色跟著時段變 */
+  /* 導覽 */
   .top { position: fixed; inset: 0 0 auto 0; z-index: 20; background: var(--bg); transition: color .4s; }
   .top .logo { color: var(--fg); }
-  .top .nav { flex-wrap: nowrap; }
-  .top .nav-links { flex-wrap: nowrap; }
+  .top .nav, .top .nav-links { flex-wrap: nowrap; }
   .top .nav-links a { color: var(--fg2); }
   .top .nav-links a.btn-ink { background: var(--fg); color: var(--bg); }
   html.is-dark .top .nav-links a.btn-ink { background: var(--gold); color: var(--night); }
   @media (max-width: 760px) { .top .nav-links a.hide-md { display: none; } }
-  @media (max-width: 480px) { .top .logo { font-size: 26px; } }
+  @media (max-width: 480px) { .top .logo { font-size: 26px; } .top .nav-links a.hide-sm { display: none; } }
   .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
   .progress i { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(0); }
 
@@ -53,62 +58,56 @@
   html.anim .cue { animation-delay: .9s; }
   @keyframes rise { to { transform: none; } }
   @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes op { from { opacity: 0; } to { opacity: 1; } }
 
-  /* 2. 故事：靜態（預設）就是三段直排 */
+  /* 2. 三段文字（靜態預設：直排） */
   .ch { padding: 72px 24px; }
   .ch-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px 64px; align-items: center; }
-  .ch-time { margin: 0 0 8px; font-family: var(--num); font-size: clamp(72px, 10vw, 128px); line-height: 1; }
+  .ch-time { margin: 0 0 8px; font-family: var(--num); font-size: clamp(64px, 9vw, 112px); line-height: 1; }
   .ch-1 { background: var(--latte); }
   .ch-2 { background: var(--sheet); }
   .ch-3 { background: var(--night); color: var(--night-text); }
   .ch-3 .ch-time { color: var(--gold); }
   .when { margin: 0 0 12px; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; color: var(--fg2); }
   .ch-3 .when, .ch-3 .fact, .ch-3 .desc, .ch-3 .spec { color: var(--night-2); }
-  .scene { margin: 0 0 22px; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.3; }
+  .scene { margin: 0 0 20px; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.2vw, 42px); line-height: 1.3; }
   .scene.sm { font-size: clamp(24px, 2.6vw, 32px); }
   .ch h2 { margin: 0 0 6px; font-size: clamp(18px, 1.8vw, 21px); }
   .desc { margin: 0 0 8px; font-size: 16px; color: var(--fg2); max-width: 480px; }
   .spec { margin: 0 0 8px; font-size: 14px; color: var(--fg2); max-width: 480px; }
   .fact { margin: 8px 0 22px; font-family: var(--mono); font-size: 13px; }
   .txt-b { margin-top: 32px; }
-  .vis { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+  .scene-src { display: flex; justify-content: center; }
+  .scene-src svg { width: min(100%, 460px); height: auto; }
 
-  /* 取餐櫃示意 */
-  .tags { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; min-height: 36px; }
-  .tag { padding: 7px 14px; border-radius: 999px; background: var(--paper); border: 1px solid rgba(46, 42, 38, .25); font-size: 14px; font-weight: 700; color: var(--ink); }
-  .tag i { font-style: normal; font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-3); margin-right: 6px; }
-  .locker { width: min(100%, 440px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px; border: 2px solid var(--ink); border-radius: 6px; background: rgba(255, 255, 255, .35); perspective: 700px; }
-  .cell { position: relative; aspect-ratio: 1; border: 2px solid var(--ink); border-radius: 3px; background: rgba(255, 255, 255, .5); overflow: visible; transition: background .6s, box-shadow .6s; }
-  .cup { position: absolute; left: 50%; bottom: 10%; width: 40%; height: 54%; margin-left: -20%; background: #fff; border: 2px solid var(--ink); border-top: 0; clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%); transition: transform .9s var(--ease), opacity .5s; }
-  .cup::after { content: ""; position: absolute; left: 0; right: 0; top: 32%; height: 28%; background: var(--latte-line); }
-  .lid { position: absolute; left: 50%; bottom: calc(10% + 54%); width: 48%; height: 8%; margin-left: -24%; background: var(--ink); border-radius: 3px 3px 0 0; transition: transform .9s var(--ease), opacity .5s; }
-  .door { position: absolute; inset: -2px; border: 2px solid var(--ink); border-radius: 3px; background: rgba(47, 58, 74, .14); transform-origin: left center; transition: transform 1s var(--ease); }
-  .door::after { content: ""; position: absolute; right: 10%; top: 44%; width: 4px; height: 12%; background: var(--ink); border-radius: 2px; }
-  .ch-1 .c3 { background: #FFF6E2; box-shadow: 0 0 0 3px var(--gold), 0 0 36px rgba(247, 200, 115, .8); }
-  .ch-1 .door { transform: rotateY(-72deg); }
-  .dim { font-family: var(--mono); font-size: 12px; color: var(--fg2); }
-
-  /* 13:20：工作桌 */
-  .bench { width: min(100%, 500px); border: 1px solid var(--line); background: rgba(251, 246, 238, .7); }
-  .bench .tb { display: flex; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
+  /* 工作桌四項 */
+  .bench { width: min(100%, 480px); margin: 16px 0 0; border: 1px solid var(--line); background: rgba(251, 246, 238, .7); }
+  .bench .tb { display: flex; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
   .bench ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
-  .bench li { padding: 18px 16px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; transition: opacity .6s var(--ease), transform .6s var(--ease); }
+  .bench li { padding: 12px 14px 14px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; transition: opacity .6s var(--ease), transform .6s var(--ease); }
   .bench li:nth-child(2n) { border-right: 0; }
   .bench li:nth-child(n+3) { border-bottom: 0; }
   .bench .no { font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
-  .bench b { font-size: 17px; color: var(--ink); }
-  .bench span:last-child { font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+  .bench b { font-size: 16px; color: var(--ink); }
+  .bench span:last-child { font-size: 13px; line-height: 1.5; color: var(--ink-2); }
 
-  /* SOS 示意 */
-  .sos { width: min(100%, 440px); height: auto; overflow: visible; }
-  .sos .ln { fill: none; stroke: var(--night-2); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset .9s var(--ease); }
-  .sos .ring { fill: none; stroke: var(--gold); stroke-width: 2; transform-box: fill-box; transform-origin: center; opacity: 0; }
-  .sos .core { fill: var(--gold); }
-  .sos .core-t { fill: var(--night); font: 700 18px var(--mono); text-anchor: middle; }
-  .sos .node circle { fill: var(--night); stroke: var(--night-2); stroke-width: 2; transition: fill .5s, stroke .5s; }
-  .sos .node text { fill: var(--night-2); font: 700 17px var(--sans); transition: fill .5s; }
-  .ch-3 .node circle { fill: var(--gold); stroke: var(--gold); }
-  .ch-3 .node text { fill: var(--night-text); }
+  /* 街景插圖（線條，跟著前景色變） */
+  .sc path, .sc rect, .sc circle { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .sc text { fill: currentColor; font: 700 22px var(--sans); text-anchor: middle; stroke: none; }
+  .sc .gold { fill: var(--gold); }
+  .sc .paper { fill: var(--paper); }
+  .sc .win { fill: var(--gold); fill-opacity: 0; transition: fill-opacity .8s; }
+  .ch-3 .sc .win, html.is-dark .sc .win { fill-opacity: 1; }
+  .sc .cell-door { fill: var(--paper); transform-origin: 312px 146px; transition: transform .8s var(--ease); }
+  .sc .cell-glow { fill: var(--gold); transition: opacity .6s; }
+  .sc .cell-cup { fill: #fff; transition: opacity .5s; }
+  .sc .proto { transition: fill .6s; }
+  .sc .sos-btn { fill: var(--gold); }
+  .sc .ring { stroke: var(--gold); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .sc .ln { stroke: var(--gold); stroke-width: 2.5; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset .9s var(--ease); }
+  .sc .pill rect { fill: var(--gold); stroke: none; }
+  .sc .pill text { fill: var(--night); font-size: 15px; }
+  .sc .pill { transition: opacity .5s .5s; }
 
   /* 3. 設計開發 */
   .dev { padding-top: 128px; padding-bottom: 104px; }
@@ -132,20 +131,21 @@
   .rv { transition: opacity 1s var(--ease), transform 1s var(--ease); }
   html.anim .rv:not(.in) { opacity: 0; transform: translateY(24px); }
 
-  /* ===== 動畫模式 ===== */
-  html.anim .tale { height: 520vh; position: relative; }
-  html.anim .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
-  html.anim .gridbg { position: absolute; inset: 0; opacity: var(--grid-o); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
-  html.anim .stage-in { position: relative; max-width: 1200px; height: 100%; margin: 0 auto; padding: 104px 24px 84px; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-  html.anim .clock { grid-area: 1 / 1; margin: 0; font-family: var(--num); font-size: clamp(76px, 13vw, 190px); line-height: .9; transition: color .5s; }
+  /* ===== 動畫模式（含溫和版） ===== */
+  html:not(.anim) .clock, html:not(.anim) .rail, html:not(.anim) .street { display: none; }
+  html.anim .tale { height: 820vh; position: relative; }
+  html.anim .stage { position: sticky; top: 0; height: 100svh; overflow: hidden;
+    --gh: 15svh; --wx: 66vw; --sw: min(520px, 42vw); }
+  html.anim .stage-in { position: relative; z-index: 2; max-width: 1200px; height: 100%; margin: 0 auto; padding: 96px 24px 84px; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; pointer-events: none; }
+  html.anim .stage-in a { pointer-events: auto; }
+  html.anim .clock { grid-area: 1 / 1; justify-self: start; margin: 0; font-family: var(--num); font-size: clamp(64px, 9vw, 128px); line-height: .9; transition: color .5s; }
   html.is-dark .clock { color: var(--gold); }
   .clock .d { display: inline-block; width: .6em; text-align: center; }
-  html:not(.anim) .clock, html:not(.anim) .rail, html:not(.anim) .gridbg { display: none; }
-  html.anim .ch-time { display: none; }
-  html.anim .ch { grid-area: 2 / 1; padding: 0; background: none; color: inherit; align-self: stretch; visibility: hidden; transition: visibility 0s .6s; }
+  html.anim .ch-time, html.anim .scene-src { display: none; }
+  html.anim .ch { grid-area: 2 / 1; padding: 0; background: none; color: inherit; align-self: start; padding-top: 20px; visibility: hidden; transition: visibility 0s .6s; }
   html.anim .ch.on { visibility: visible; transition: visibility 0s 0s; }
-  html.anim .ch-in { height: 100%; grid-template-columns: 1fr 1fr; align-items: center; }
-  html.anim .ch .txt > * { opacity: 0; transform: translateY(26px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+  html.anim .ch-in { display: block; margin: 0; max-width: min(480px, 42vw); }
+  html.anim .ch .txt > * { opacity: 0; transform: translateY(22px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
   html.anim .ch.on .txt > * { opacity: 1; transform: none; transition-duration: .9s; }
   html.anim .ch.on .txt > :nth-child(2) { transition-delay: .08s; }
   html.anim .ch.on .txt > :nth-child(3) { transition-delay: .16s; }
@@ -153,77 +153,124 @@
   html.anim .ch.on .txt > :nth-child(5) { transition-delay: .28s; }
   html.anim .ch.on .txt > :nth-child(6) { transition-delay: .34s; }
   html.anim .ch.on .txt > :nth-child(7) { transition-delay: .40s; }
-  html.anim .ch.on .txt > :nth-child(8) { transition-delay: .46s; }
-  html.anim .ch .vis { opacity: 0; transform: scale(.96); transition: opacity .6s var(--ease), transform .8s var(--ease); }
-  html.anim .ch.on .vis { opacity: 1; transform: none; }
   html.anim .ch-3 .when, html.anim .ch-3 .fact, html.anim .ch-3 .desc, html.anim .ch-3 .spec { color: var(--fg2); }
-
-  /* 取餐櫃分步：s1 點餐 → s2 放入亮燈 → s3 開門取餐 */
-  html.anim .ch-1 .tag { opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
-  html.anim .ch-1.s1 .t1, html.anim .ch-1.s3 .t2 { opacity: 1; transform: none; }
-  html.anim .ch-1 .cup, html.anim .ch-1 .lid { opacity: 0; transform: translateY(-140%); }
-  html.anim .ch-1.s2 .cup, html.anim .ch-1.s2 .lid { opacity: 1; transform: none; }
-  html.anim .ch-1 .c3 { background: rgba(255, 255, 255, .5); box-shadow: none; }
-  html.anim .ch-1.s2 .c3 { background: #FFF6E2; box-shadow: 0 0 0 3px var(--gold), 0 0 36px rgba(247, 200, 115, .8); }
-  html.anim .ch-1 .door { transform: none; }
-  html.anim .ch-1.s2:not(.s3) .door { transition-delay: .5s; }
-  html.anim .ch-1.s3 .door { transform: rotateY(-72deg); }
-  /* 13:20：四項依序出現；s5 後文字換成「你的也可以」 */
-  html.anim .ch-2 .bench li { opacity: .12; transform: translateY(8px); }
-  html.anim .ch-2.s1 li:nth-child(1), html.anim .ch-2.s2 li:nth-child(2), html.anim .ch-2.s3 li:nth-child(3), html.anim .ch-2.s4 li:nth-child(4) { opacity: 1; transform: none; }
+  /* 13:20：四項依序亮起；w5 後換成「你的也可以」 */
+  html.anim .bench li { opacity: .15; transform: translateY(6px); }
+  html.anim .stage.w1 .bench li:nth-child(1), html.anim .stage.w2 .bench li:nth-child(2), html.anim .stage.w3 .bench li:nth-child(3), html.anim .stage.w4 .bench li:nth-child(4) { opacity: 1; transform: none; }
   html.anim .txt-stack { display: grid; }
   html.anim .txt-stack > .txt { grid-area: 1 / 1; margin: 0; }
-  html.anim .ch-2.on:not(.s5) .txt-b > * { opacity: 0; transform: translateY(26px); transition-delay: 0s; }
-  html.anim .ch-2.on.s5 .txt-a > * { opacity: 0; transform: translateY(-18px); transition-duration: .5s; transition-delay: 0s; }
-  html.anim .ch-2:not(.s5) .txt-b, html.anim .ch-2.s5 .txt-a { visibility: hidden; transition: visibility 0s .6s; }
-  html.anim .ch-2.s5 .txt-b, html.anim .ch-2:not(.s5) .txt-a { visibility: visible; }
-  /* SOS：s1 按下發出波紋 → s2/s3/s4 三個對象依序亮起 */
-  html.anim .ch-3 .ln { stroke-dashoffset: 1; }
-  html.anim .ch-3.s2 .l1, html.anim .ch-3.s3 .l2, html.anim .ch-3.s4 .l3 { stroke-dashoffset: 0; }
-  html.anim .ch-3 .node circle { fill: var(--night); stroke: var(--night-2); }
-  html.anim .ch-3 .node text { fill: var(--night-2); }
-  html.anim .ch-3.s2 .n1 circle, html.anim .ch-3.s3 .n2 circle, html.anim .ch-3.s4 .n3 circle { fill: var(--gold); stroke: var(--gold); transition-delay: .5s; }
-  html.anim .ch-3.s2 .n1 text, html.anim .ch-3.s3 .n2 text, html.anim .ch-3.s4 .n3 text { fill: var(--night-text); transition-delay: .5s; }
-  html.anim .ch-3.s1 .ring { animation: ring 2.4s var(--ease) infinite; }
-  html.anim .ch-3.s1 .ring:nth-child(2) { animation-delay: .8s; }
-  html.anim .ch-3.s1 .ring:nth-child(3) { animation-delay: 1.6s; }
-  html.anim .ch-3.s1 .core { animation: press 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-  @keyframes ring { 0% { opacity: .8; transform: scale(1); } 100% { opacity: 0; transform: scale(2.8); } }
-  @keyframes press { 0%, 100% { transform: scale(1); } 8% { transform: scale(.9); } 16% { transform: scale(1); } }
+  html.anim .stage:not(.w5) .ch-2.on .txt-b > * { opacity: 0; transform: translateY(22px); transition-delay: 0s; }
+  html.anim .stage.w5 .ch-2.on .txt-a > * { opacity: 0; transform: translateY(-16px); transition-duration: .5s; transition-delay: 0s; }
+  html.anim .stage:not(.w5) .ch-2 .txt-b, html.anim .stage.w5 .ch-2 .txt-a { visibility: hidden; transition: visibility 0s .6s; }
+
+  /* 街：地面、街景、小人 */
+  .street { position: absolute; inset: 0; z-index: 1; color: var(--fg); transition: color .5s; }
+  .ground { position: absolute; left: 0; right: 0; bottom: 0; height: var(--gh); border-top: 3px solid currentColor; background: rgba(46, 42, 38, .05); }
+  html.is-dark .ground { background: rgba(0, 0, 0, .12); }
+  .track { position: absolute; left: 0; bottom: var(--gh); width: 300vw; display: flex; align-items: flex-end; transform: translateX(calc(var(--q, 0) * -200vw)); will-change: transform; }
+  .stop { width: 100vw; flex: none; display: flex; align-items: flex-end; padding-left: calc(var(--wx) - var(--sw) / 2); }
+  .stop svg { width: var(--sw); height: auto; display: block; overflow: visible; }
+  .walker { position: absolute; left: var(--wx); bottom: var(--gh); width: 54px; margin-left: -27px; z-index: 2; }
+  .walker svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .walker .w { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; }
+  .walker .head { fill: var(--bg); stroke: currentColor; stroke-width: 4; }
+  .walker .hcup { fill: #fff; stroke: currentColor; stroke-width: 3; opacity: 0; transition: opacity .4s; }
+  .stage.cup .walker .hcup { opacity: 1; }
+  .walker .leg1, .walker .leg2, .walker .bodyg { transform-origin: 30px 74px; }
+  .walker.walking .leg1 { animation: swing .44s ease-in-out infinite alternate; }
+  .walker.walking .leg2 { animation: swing .44s ease-in-out infinite alternate-reverse; }
+  .walker.walking .bodyg { animation: bob .22s ease-in-out infinite alternate; }
+  .walker.back svg { transform: scaleX(-1); }
+  @keyframes swing { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+  @keyframes bob { to { transform: translateY(-2px); } }
+
+  /* 07:58 咖啡店：k3 放入亮燈 → k4 開門、杯子到手上 */
+  html.anim .sc .cell-glow, html.anim .sc .cell-cup { opacity: 0; }
+  html.anim .stage.k3 .sc .cell-glow, html.anim .stage.k3:not(.k4) .sc .cell-cup { opacity: 1; }
+  html.anim .stage.k4 .sc .cell-door { transform: scaleX(.18); }
+  html.anim .stage.k4 .sc .cell-glow { opacity: .55; }
+  /* 13:20 工作室：桌上的原型亮起 */
+  html.anim .sc .proto { fill: none; }
+  html.anim .stage.w1 .sc .proto { fill: var(--gold); }
+  /* 22:14 社區：n1 按下發出波紋 → n2～n4 三條線依序連到家人、鄰居、照護者 */
+  html.anim .sc .ln { stroke-dashoffset: 1; }
+  html.anim .sc .pill { opacity: 0; }
+  html.anim .stage.n2 .sc .l1, html.anim .stage.n3 .sc .l2, html.anim .stage.n4 .sc .l3 { stroke-dashoffset: 0; }
+  html.anim .stage.n2 .sc .p1, html.anim .stage.n3 .sc .p2, html.anim .stage.n4 .sc .p3 { opacity: 1; }
+  html.anim .stage.n1 .sc .ring { animation: ring 2.4s var(--ease) infinite; }
+  html.anim .stage.n1 .sc .ring:nth-of-type(2) { animation-delay: .8s; }
+  html.anim .stage.n1 .sc .ring:nth-of-type(3) { animation-delay: 1.6s; }
+  @keyframes ring { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
+
+  /* 桌機：咖啡店上方的手機對話 */
+  .pop { position: absolute; z-index: 3; left: calc(var(--wx) - 150px); bottom: calc(var(--gh) + var(--sw) * .625 + 18px); width: 300px; opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+  .stage.chat-on .pop { opacity: 1; transform: none; }
+  .chat { max-height: calc(100svh - var(--gh) - var(--sw) * .625 - 120px); padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; overflow: hidden; border: 3px solid var(--ink); border-radius: 22px; background: #EFE6D8; color: var(--ink); }
+  .chat .hd { align-self: center; margin-bottom: 2px; font-size: 12px; font-weight: 700; color: var(--ink-3); }
+  .bub { max-width: 86%; padding: 8px 12px; border-radius: 16px; font-size: 14px; line-height: 1.5; opacity: 0; transform: translateY(8px); transition: opacity .4s var(--ease), transform .4s var(--ease); }
+  .bub.me { align-self: flex-end; background: var(--ink); color: var(--paper); border-bottom-right-radius: 5px; }
+  .bub.sys { align-self: flex-start; background: #fff; border-bottom-left-radius: 5px; }
+  .stage.k1 .m1, .stage.k2 .m2, .stage.k3 .m3, .stage.k5 .m4 { opacity: 1; transform: none; }
+  .pop::after { content: ""; position: absolute; left: 50%; bottom: -12px; width: 18px; height: 18px; margin-left: -9px; background: #EFE6D8; border-right: 3px solid var(--ink); border-bottom: 3px solid var(--ink); transform: rotate(45deg); }
+  @media (max-width: 899px), (max-height: 699px) { .pop { display: none; } }
 
   /* 時段導引（桌機右下） */
-  .rail { position: absolute; right: 24px; bottom: 20px; display: flex; gap: 24px; z-index: 2; }
-  .rail a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 44px; font-family: var(--mono); font-size: 12px; color: var(--fg2); text-decoration: none; opacity: .55; transition: opacity .3s; }
+  .rail { position: absolute; right: 24px; bottom: 16px; display: flex; gap: 24px; z-index: 4; }
+  .rail a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 44px; font-family: var(--mono); font-size: 12px; color: var(--fg2); text-decoration: none; opacity: .6; transition: opacity .3s; }
   .rail a::after { content: ""; width: 18px; height: 2px; background: currentColor; transition: width .3s var(--ease); }
   .rail a.on { opacity: 1; color: var(--fg); }
   .rail a.on::after { width: 36px; }
 
+  /* 矮的桌機螢幕：收掉工作桌的小字與規格行，避免壓到地面 */
+  @media (min-width: 900px) and (max-height: 860px) {
+    html.anim .bench span:last-child, html.anim .spec { display: none; }
+    html.anim .clock { font-size: clamp(56px, min(9vw, 12svh), 128px); }
+    html.anim .stage-in { padding-top: 80px; }
+    html.anim .ch { padding-top: 8px; }
+  }
+
+  /* 英文字數較多：桌機文字欄放寬一點，較矮的螢幕收掉工作桌小字與規格行 */
+  html[lang="en"].anim .ch-in { max-width: min(540px, 40vw); }
+  @media (min-width: 900px) and (max-height: 980px) {
+    html[lang="en"].anim .bench span:last-child, html[lang="en"].anim .spec { display: none; }
+  }
+  @media (min-width: 900px) and (max-height: 800px) {
+    html[lang="en"].anim .txt-a .desc { display: none; }
+  }
+
+  /* 手機：文字在上、街景在下 */
   @media (max-width: 899px) {
-    html.anim .stage-in { padding: 84px 20px 24px; }
-    html.anim .clock { font-size: clamp(64px, 20vw, 96px); }
-    html.anim .ch-in { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 22px; }
-    html.anim .ch .vis { order: -1; }
-    html.anim .scene { font-size: 26px; margin-bottom: 12px; }
+    html.anim .stage { --gh: 14svh; --wx: 50vw; --sw: min(88vw, 52svh); }
+    html.anim .stage-in { padding: 80px 20px 24px; }
+    html.anim .clock { font-size: clamp(56px, 17vw, 84px); }
+    html.anim .ch { padding-top: 12px; }
+    html.anim .ch-in { max-width: none; }
+    html.anim .scene { font-size: 25px; margin-bottom: 10px; }
     html.anim .scene.sm { font-size: 22px; }
     html.anim .desc { font-size: 15px; margin-bottom: 4px; }
-    html.anim .spec { font-size: 13px; }
-    html.anim .when { margin-bottom: 8px; }
-    html.anim .fact { margin: 4px 0 14px; }
-    .locker { width: min(100%, 300px); gap: 8px; padding: 9px; }
-    .bench { width: 100%; }
-    .bench li { padding: 10px 12px 12px; }
-    .bench b { font-size: 15px; }
-    .bench span:last-child { font-size: 13px; }
-    .sos { width: min(100%, 300px); }
+    html.anim .spec, html.anim .bench { display: none; }
+    html.anim .when { margin-bottom: 6px; }
+    html.anim .fact { margin: 4px 0 12px; }
     .rail { display: none; }
   }
   @media (max-width: 899px) and (max-height: 760px) {
-    html.anim .spec, html.anim .ch .vis .tags, html.anim .ch .vis .dim { display: none; }
-  }
-  @media (max-width: 899px) and (max-height: 700px) {
+    html.anim .stage { --sw: min(88vw, 42svh); }
     html.anim .desc { display: none; }
-    html.anim .ch-2 .bench span:last-child { display: none; }
   }
+
+  /* 溫和版（系統「減少動態」）：不滑動、不走路，只淡入淡出 */
+  html.calm .intro h1 .ln > span { transform: none; opacity: 0; animation: op 1s ease forwards; }
+  html.calm .intro .eyebrow, html.calm .intro .sub, html.calm .cue { animation-name: op; }
+  html.calm .cue .bar::after { animation: none; top: 30%; }
+  html.calm .ch .txt > *, html.calm .bench li, html.calm .bub, html.calm .pop, html.calm .rv:not(.in) { transform: none !important; }
+  html.calm .track { width: 100vw; transform: none; height: calc(var(--sw) * .625); }
+  html.calm .stop { position: absolute; left: 0; bottom: 0; opacity: 0; transition: opacity .9s ease; }
+  html.calm .stop.cur { opacity: 1; }
+  html.calm .walker { transition: opacity .5s; }
+  html.calm .stage.walk .walker { opacity: 0; }
+  html.calm .sc .cell-door { transition: none; }
+  html.calm .stage.n1 .sc .ring { animation: none; opacity: .5; transform: scale(2); }
+  html.calm .stage.n1 .sc .ring:nth-of-type(2) { opacity: .25; transform: scale(3); }
 </style>
 </head>
 <body>
@@ -233,8 +280,9 @@
     <a class="logo" href="#">SPEESSO</a>
     <div class="nav-links">
       <a class="hide-md" href="#ch1">我們的產品</a>
-      <a href="#dev">設計開發</a>
+      <a class="hide-sm" href="#dev">設計開發</a>
       <a class="hide-md" href="partners.html">合作試行</a>
+      <a class="lang" href="en/" lang="en" hreflang="en">EN</a>
       <a class="btn btn-ink" href="#contact">聯絡我們</a>
     </div>
   </nav>
@@ -250,10 +298,35 @@
     <div class="cue" aria-hidden="true"><span class="bar"></span>往下看看，我們正在做什麼。</div>
   </section>
 
-  <!-- 2. 一天的故事 -->
+  <!-- 2. 走一段路 -->
   <section class="tale" id="story">
     <div class="stage">
-      <div class="gridbg" aria-hidden="true"></div>
+      <div class="street" aria-hidden="true">
+        <div class="track"></div>
+        <div class="ground"></div>
+        <div class="walker">
+          <svg viewBox="0 0 60 116">
+            <g class="bodyg">
+              <circle class="head" cx="30" cy="16" r="12"/>
+              <path class="w" d="M30 30 V74"/>
+              <path class="w" d="M30 42 L16 62"/>
+              <path class="w" d="M30 42 L44 58"/>
+              <rect class="hcup" x="40" y="47" width="12" height="15" rx="2"/>
+            </g>
+            <path class="w leg1" d="M30 74 V112"/>
+            <path class="w leg2" d="M30 74 V112"/>
+          </svg>
+        </div>
+        <div class="pop">
+          <div class="chat">
+            <span class="hd">SPEESSO 取餐</span>
+            <div class="bub me m1">一杯熱拿鐵，大杯</div>
+            <div class="bub sys m2">已收到訂單，付款完成 ✓</div>
+            <div class="bub sys m3">餐點好了，放在 3 號格。到店掃碼就能取餐。</div>
+            <div class="bub me m4">拿到了，謝謝！</div>
+          </div>
+        </div>
+      </div>
       <nav class="rail" aria-label="時段">
         <a href="#ch1" data-i="0">07:58 取餐櫃</a>
         <a href="#ch2" data-i="1">13:20 工作桌</a>
@@ -262,7 +335,7 @@
       <div class="stage-in">
         <p class="clock" aria-hidden="true"><span class="d">0</span><span class="d">7</span>:<span class="d">5</span><span class="d">8</span></p>
 
-        <article class="ch ch-1" id="ch1" data-steps="0.08,0.34,0.62">
+        <article class="ch ch-1" id="ch1" data-range="0.05,0.31">
           <div class="ch-in">
             <div class="txt">
               <p class="ch-time">07:58</p>
@@ -274,19 +347,25 @@
               <p class="fact">徵求台北地區咖啡店，參與產品試行。</p>
               <a class="btn btn-ink" href="partners.html#locker">了解取餐櫃試行</a>
             </div>
-            <div class="vis" aria-hidden="true">
-              <div class="tags"><span class="tag t1"><i>01</i>LINE 點餐付款</span><span class="tag t2"><i>02</i>掃碼取餐</span></div>
-              <div class="locker">
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell c3"><div class="lid"></div><div class="cup"></div><div class="door"></div></div>
-              </div>
-              <div class="dim">3 格模組 · 每格內部約 25 cm</div>
+            <div class="scene-src" aria-hidden="true">
+              <svg class="sc" viewBox="0 0 400 250">
+                <path d="M40 250 V92 H360 V250"/>
+                <path d="M30 92 L48 56 H352 L370 92 Z"/>
+                <path d="M30 92 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 46 0"/>
+                <text x="200" y="84">咖啡</text>
+                <rect x="66" y="140" width="82" height="60" rx="3"/>
+                <path d="M170 250 V146 H230 V250"/>
+                <rect class="cell-glow" x="314" y="148" width="26" height="50"/>
+                <path class="cell-cup" d="M320 168 L323 192 H331 L334 168 Z"/>
+                <rect class="cell-door" x="312" y="146" width="30" height="54"/>
+                <rect x="252" y="146" width="90" height="54" rx="3"/>
+                <path d="M282 146 V200 M312 146 V200"/>
+              </svg>
             </div>
           </div>
         </article>
 
-        <article class="ch ch-2" id="ch2" data-steps="0.05,0.15,0.25,0.35,0.52">
+        <article class="ch ch-2" id="ch2" data-range="0.40,0.645">
           <div class="ch-in">
             <div class="txt-stack">
               <div class="txt txt-a">
@@ -294,6 +373,15 @@
                 <p class="when">下午 · 我們的工作桌</p>
                 <p class="scene"><span class="ph">畫圖、打樣、測試。</span><br><span class="ph">然後再改一次。</span></p>
                 <p class="desc"><span class="ph">從機構、電路到軟體，我們自己設計、整合，也自己到現場驗證。</span><span class="ph">除了開發自己的產品，我們也協助企業把想法變成能夠測試的實體。</span></p>
+                <div class="bench">
+                  <div class="tb"><span>WORKBENCH</span><span>4 項</span></div>
+                  <ul>
+                    <li><span class="no">01</span><b>機構設計</b><span>產品結構、零件設計、鈑金與組裝</span></li>
+                    <li><span class="no">02</span><b>電子與控制</b><span>電路設計、PCB、韌體與控制整合</span></li>
+                    <li><span class="no">03</span><b>軟體與系統</b><span>系統介面、雲端與軟硬體連接</span></li>
+                    <li><span class="no">04</span><b>原型與驗證</b><span>打樣、功能測試、製造可行性評估</span></li>
+                  </ul>
+                </div>
               </div>
               <div class="txt txt-b">
                 <p class="when">設計開發 · 接受委託</p>
@@ -302,21 +390,23 @@
                 <a class="btn btn-ink" href="#dev">了解設計開發服務</a>
               </div>
             </div>
-            <div class="vis">
-              <div class="bench">
-                <div class="tb"><span>WORKBENCH</span><span>4 項</span></div>
-                <ul>
-                  <li><span class="no">01</span><b>機構設計</b><span>產品結構、零件設計、鈑金與組裝</span></li>
-                  <li><span class="no">02</span><b>電子與控制</b><span>電路設計、PCB、韌體與控制整合</span></li>
-                  <li><span class="no">03</span><b>軟體與系統</b><span>系統介面、雲端與軟硬體連接</span></li>
-                  <li><span class="no">04</span><b>原型與驗證</b><span>打樣、功能測試、製造可行性評估</span></li>
-                </ul>
-              </div>
+            <div class="scene-src" aria-hidden="true">
+              <svg class="sc" viewBox="0 0 400 250">
+                <path d="M50 250 V70 H350 V250"/>
+                <text x="200" y="56">工作室</text>
+                <rect x="70" y="100" width="84" height="70" rx="3"/>
+                <path d="M84 156 L94 126 L110 120 M110 120 l9 -3 l-2 10 z"/>
+                <path d="M172 250 V146 H228 V250"/>
+                <rect x="246" y="100" width="88" height="90" rx="3"/>
+                <path d="M256 170 H324"/>
+                <rect class="proto gold" x="266" y="152" width="22" height="18" rx="2"/>
+                <path d="M298 170 V160 H314 V170"/>
+              </svg>
             </div>
           </div>
         </article>
 
-        <article class="ch ch-3" id="ch3" data-steps="0.06,0.26,0.42,0.58">
+        <article class="ch ch-3" id="ch3" data-range="0.745,1.01">
           <div class="ch-in">
             <div class="txt">
               <p class="ch-time">22:14</p>
@@ -328,17 +418,25 @@
               <p class="fact">徵求有意願參與產品測試的社區。</p>
               <a class="btn btn-gold" href="partners.html#sos">了解 SOS 試行</a>
             </div>
-            <div class="vis" aria-hidden="true">
-              <svg class="sos" viewBox="0 0 380 260">
-                <path class="ln l1" pathLength="1" d="M118 130 C190 130 200 46 262 46"/>
-                <path class="ln l2" pathLength="1" d="M118 130 L262 130"/>
-                <path class="ln l3" pathLength="1" d="M118 130 C190 130 200 214 262 214"/>
-                <g><circle class="ring" cx="80" cy="130" r="38"/><circle class="ring" cx="80" cy="130" r="38"/><circle class="ring" cx="80" cy="130" r="38"/></g>
-                <circle class="core" cx="80" cy="130" r="38"/>
-                <text class="core-t" x="80" y="136">SOS</text>
-                <g class="node n1"><circle cx="278" cy="46" r="15"/><text x="302" y="52">家人</text></g>
-                <g class="node n2"><circle cx="278" cy="130" r="15"/><text x="302" y="136">鄰居</text></g>
-                <g class="node n3"><circle cx="278" cy="214" r="15"/><text x="302" y="220">照護者</text></g>
+            <div class="scene-src" aria-hidden="true">
+              <svg class="sc" viewBox="0 0 400 250">
+                <path d="M20 250 V150 L96 92 L172 150 V250"/>
+                <rect class="win" x="56" y="160" width="26" height="26"/>
+                <rect class="win" x="110" y="160" width="26" height="26"/>
+                <path d="M228 250 V132 L304 66 L380 132 V250"/>
+                <rect class="win" x="250" y="146" width="28" height="28"/>
+                <rect class="win" x="330" y="146" width="28" height="28"/>
+                <path d="M286 250 V196 H322 V250"/>
+                <path class="ln l1" pathLength="1" d="M342 205 C 300 150 140 120 96 74"/>
+                <path class="ln l2" pathLength="1" d="M342 205 C 372 150 330 90 304 48"/>
+                <path class="ln l3" pathLength="1" d="M342 205 C 300 196 230 150 200 104"/>
+                <circle class="ring" cx="342" cy="214" r="9"/>
+                <circle class="ring" cx="342" cy="214" r="9"/>
+                <circle class="ring" cx="342" cy="214" r="9"/>
+                <circle class="sos-btn" cx="342" cy="214" r="9"/>
+                <g class="pill p1"><rect x="70" y="48" width="52" height="26" rx="13"/><text x="96" y="67">鄰居</text></g>
+                <g class="pill p2"><rect x="278" y="22" width="52" height="26" rx="13"/><text x="304" y="41">家人</text></g>
+                <g class="pill p3"><rect x="164" y="78" width="72" height="26" rx="13"/><text x="200" y="97">照護者</text></g>
               </svg>
             </div>
           </div>
@@ -391,57 +489,79 @@
 
 <script>
 (function () {
-  var root = document.documentElement;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || /[?&]static\b/.test(location.search)) return; // 退回一般直排頁面
+  var root = document.documentElement, qs = location.search;
+  if (/[?&]static\b/.test(qs)) return;                       // 縮圖用：直排靜態
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]calm\b/.test(qs);
   root.classList.add('anim');
+  if (calm) root.classList.add('calm');                      // 溫和版
 
   var story = document.getElementById('story');
+  var stage = story.querySelector('.stage');
   var dev = document.getElementById('dev');
+  var track = story.querySelector('.track');
+  var walker = story.querySelector('.walker');
+  // 把各段的插圖搬進街景（沒有 JS 時插圖留在各段文字下方）
+  var stops = [].slice.call(story.querySelectorAll('.scene-src svg')).map(function (svg) {
+    var d = document.createElement('div');
+    d.className = 'stop';
+    d.appendChild(svg);
+    track.appendChild(d);
+    return d;
+  });
   var chs = [].slice.call(story.querySelectorAll('.ch'));
-  var steps = chs.map(function (c) { return c.dataset.steps.split(',').map(Number); });
+  var ranges = chs.map(function (c) { return c.dataset.range.split(',').map(Number); });
   var digits = [].slice.call(document.querySelectorAll('.clock .d'));
   var bar = document.querySelector('.progress i');
   var rail = [].slice.call(document.querySelectorAll('.rail a'));
 
+  // 各段的小步驟（故事進度 p）
+  var STEPS = {
+    k: [0.07, 0.12, 0.17, 0.22, 0.26],   // 咖啡店：點餐、付款、放入亮燈、開門拿走、謝謝
+    w: [0.41, 0.44, 0.47, 0.50, 0.55],   // 工作室：四項依序、換成「你的也可以」
+    n: [0.76, 0.80, 0.84, 0.88]          // 社區：按下、家人、鄰居、照護者
+  };
   var C = { paper: [251, 246, 238], latte: [246, 227, 200], sheet: [243, 236, 224], night: [47, 58, 74] };
-  // 背景：米白 → 奶茶（早上）→ 圖紙（下午）→ 夜藍（深夜）→ 隔天的米白（設計開發）
-  var BG = [[-1, C.paper], [0, C.latte], [0.30, C.latte], [0.38, C.sheet], [0.60, C.sheet], [0.69, C.night], [9, C.night]];
-  var GRID = [[-1, 0], [0.30, 0], [0.38, 1], [0.60, 1], [0.69, 0], [9, 0]];
-  // 時鐘（分鐘）：07:58 停住 → 走到 13:20 停住 → 走到 22:14
-  var TIME = [[0, 478], [0.28, 478], [0.40, 800], [0.60, 800], [0.72, 1334], [1, 1334]];
+  var BG = [[-1, C.paper], [0, C.latte], [0.31, C.latte], [0.40, C.sheet], [0.645, C.sheet], [0.745, C.night], [9, C.night]];
+  var TIME = [[0, 478], [0.31, 478], [0.40, 800], [0.645, 800], [0.745, 1334], [1, 1334]];
 
-  function smooth(t) { return t * t * (3 - 2 * t); }
+  function clamp(x) { return Math.max(0, Math.min(1, x)); }
+  function sm(t) { t = clamp(t); return t * t * (3 - 2 * t); }
   function at(K, p, mix) {
     if (p <= K[0][0]) return K[0][1];
     for (var i = 0; i < K.length - 1; i++) {
       var a = K[i], b = K[i + 1];
-      if (p <= b[0]) return mix(a[1], b[1], smooth((p - a[0]) / (b[0] - a[0])));
+      if (p <= b[0]) return mix(a[1], b[1], sm((p - a[0]) / (b[0] - a[0])));
     }
     return K[K.length - 1][1];
   }
   function mixN(a, b, t) { return a + (b - a) * t; }
   function mixC(a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); }
-  function clamp(x) { return Math.max(0, Math.min(1, x)); }
+  // 小人的位置 q：-0.3 走進畫面 → 0 咖啡店 → 0.5 工作室 → 1 社區（中間是走路）
+  function qmap(p) {
+    if (p < 0.05) return -0.3 + 0.3 * sm(p / 0.05);
+    if (p < 0.31) return 0;
+    if (p < 0.40) return 0.5 * sm((p - 0.31) / 0.09);
+    if (p < 0.645) return 0.5;
+    if (p < 0.745) return 0.5 + 0.5 * sm((p - 0.645) / 0.10);
+    return 1;
+  }
 
-  var lastTime = '', lastBg = '', ticking = false;
+  var lastTime = '', lastBg = '', lastQ = null, wt = 0, ticking = false;
   function frame() {
     ticking = false;
-    var r = story.getBoundingClientRect(), vh = window.innerHeight;
-    var total = r.height - vh;
-    var p = -r.top / total;                 // 故事進度，可小於 0 或大於 1
-    var pc = r.top > 0 ? -Math.min(1, r.top / vh) : p;  // 進故事前用一個螢幕高度過渡
+    var r = story.getBoundingClientRect(), vh = innerHeight;
+    var p = -r.top / (r.height - vh);
+    var pc = r.top > 0 ? -Math.min(1, r.top / vh) : p;   // 進故事前用一個螢幕高度過渡
 
     var bg = at(BG, pc, mixC);
     var dTop = dev.getBoundingClientRect().top;          // 設計開發區進場：夜藍 → 米白
-    if (dTop < vh) bg = mixC(bg, C.paper, smooth(clamp((vh - dTop) / (vh * 0.6))));
+    if (dTop < vh) bg = mixC(bg, C.paper, sm((vh - dTop) / (vh * 0.6)));
     var key = bg.join(',');
     if (key !== lastBg) {
       lastBg = key;
       root.style.setProperty('--bg', 'rgb(' + key + ')');
       root.classList.toggle('is-dark', (0.299 * bg[0] + 0.587 * bg[1] + 0.114 * bg[2]) < 150);
     }
-    root.style.setProperty('--grid-o', at(GRID, pc, mixN).toFixed(3));
 
     var pp = clamp(p);
     var m = Math.round(at(TIME, pp, mixN));
@@ -449,25 +569,41 @@
     if (s !== lastTime) { lastTime = s; for (var k = 0; k < 4; k++) digits[k].textContent = s[k]; }
     bar.style.transform = 'scaleX(' + pp.toFixed(4) + ')';
 
-    var idx = pp < 0.34 ? 0 : pp < 0.64 ? 1 : 2;
-    var bounds = [[0, 0.34], [0.34, 0.64], [0.64, 1]];
-    chs.forEach(function (c, i) {
-      c.classList.toggle('on', i === idx);
-      var lp = clamp((pp - bounds[i][0]) / (bounds[i][1] - bounds[i][0]));
-      steps[i].forEach(function (th, j) { c.classList.toggle('s' + (j + 1), i === idx && lp >= th); });
+    chs.forEach(function (c, i) { c.classList.toggle('on', pp >= ranges[i][0] && pp < ranges[i][1]); });
+    Object.keys(STEPS).forEach(function (g) {
+      STEPS[g].forEach(function (t, j) { stage.classList.toggle(g + (j + 1), pp >= t); });
     });
+    stage.classList.toggle('chat-on', pp >= 0.07 && pp < 0.31);
+    stage.classList.toggle('cup', pp >= 0.22 && pp < 0.45);
+
+    var q = qmap(pp), moving = lastQ !== null && Math.abs(q - lastQ) > 0.0003;
+    stage.classList.toggle('walk', (q > 0.02 && q < 0.48) || (q > 0.52 && q < 0.98));
+    if (calm) {
+      var cur = q < 0.25 ? 0 : q < 0.75 ? 1 : 2;
+      stops.forEach(function (d, i) { d.classList.toggle('cur', i === cur); });
+    } else {
+      stage.style.setProperty('--q', q.toFixed(4));
+      if (moving) {
+        walker.classList.add('walking');
+        walker.classList.toggle('back', q < lastQ);
+        clearTimeout(wt);
+        wt = setTimeout(function () { walker.classList.remove('walking'); }, 180);
+      }
+    }
+    lastQ = q;
+    var idx = pp < 0.355 ? 0 : pp < 0.695 ? 1 : 2;
     rail.forEach(function (a, i) { a.classList.toggle('on', i === idx); });
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
   frame();
 
-  // 時段導引與導覽的 #ch1～#ch3：跳到該段畫面完整的位置
-  var mid = [0.22, 0.42, 0.86];
+  // 時段導引與導覽的 #ch1～#ch3：跳到該段內容完整的位置
+  var mid = [0.24, 0.52, 0.92];
   function jump(i) {
-    var top = story.offsetTop + (story.offsetHeight - window.innerHeight) * mid[i];
-    window.scrollTo({ top: top, behavior: 'smooth' });
+    var top = story.offsetTop + (story.offsetHeight - innerHeight) * mid[i];
+    scrollTo({ top: top, behavior: calm ? 'auto' : 'smooth' });
   }
   ['#ch1', '#ch2', '#ch3'].forEach(function (h, i) {
     document.querySelectorAll('a[href="' + h + '"]').forEach(function (a) {
