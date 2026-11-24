@@ -4,500 +4,300 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SPEESSO | Product Development</title>
-<meta name="description" content="SPEESSO is a product development company. We build our own smart pickup locker and Neighborhood Watch SOS System, and help companies with mechanical design, electronics and prototyping.">
+<meta name="description" content="SPEESSO is a product development company. We build our own smart pickup locker, Neighborhood Watch SOS System and FlowNest team file sync, and help companies with mechanical design, electronics and prototyping.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@400;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Patrick+Hand&family=Noto+Sans+TC:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="alternate" hreflang="zh-Hant" href="https://speesso.com/">
 <link rel="alternate" hreflang="en" href="https://speesso.com/en/">
 <link rel="alternate" hreflang="x-default" href="https://speesso.com/">
 <meta property="og:title" content="SPEESSO | Product Development">
-<meta property="og:description" content="SPEESSO builds a smart pickup locker and a Neighborhood Watch SOS System, and helps companies with mechanical design, electronics and prototyping.">
+<meta property="og:description" content="SPEESSO builds a smart pickup locker, a Neighborhood Watch SOS System and FlowNest team file sync, and helps companies with mechanical design, electronics and prototyping.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://speesso.com/en/">
 <style>
-  /* L6：走一段路 — 線條小人從咖啡店（07:58）走到工作室（13:20），再走回社區（22:14）。
-     三種模式：
-       html.anim          一般動畫：往下捲＝小人往前走，街景跟著捲動
-       html.anim.calm     溫和版（系統「減少動態」）：內容一樣依序出現，只淡入淡出，街景不滑動、小人不走路
-       html（無 class）   沒有 JS：三段直排，插圖放在各段文字下面 */
-  :root { --bg: var(--paper); --fg: var(--ink); --fg2: var(--ink-2); --ease: cubic-bezier(.2, .7, .1, 1); }
-  html.is-dark { --fg: var(--night-text); --fg2: var(--night-2); }
-  body { background: var(--bg); color: var(--fg); }
+  /* L8：一筆畫 — 一條線從左邊進來，畫出咖啡杯、資料夾與雲、鬧鐘、燈泡、房子，再從右邊出去。
+     點線上的小圖：金色筆尖沿著線走過去、那一段畫上螢光筆、鬧鐘指針走到那個時刻，下方說明面板把小圖放大重畫一次並逐步說明。
+     手機：同一條線改成蛇行三排。系統「減少動態」：不畫線、不走動，直接顯示。 */
+  :root { --ink-c: #23201D; --hl: #F7C873; --hand: 'LXGW WenKai TC', 'Noto Sans TC', serif; --hnum: 'Patrick Hand', 'LXGW WenKai TC', sans-serif; --ease: cubic-bezier(.2, .7, .1, 1); }
+  body { background: var(--paper); }
+  .nav .logo { color: var(--ink-c); }
 
-  /* 導覽 */
-  .top { position: fixed; inset: 0 0 auto 0; z-index: 20; background: var(--bg); transition: color .4s; }
-  .top .logo { color: var(--fg); }
-  .top .nav, .top .nav-links { flex-wrap: nowrap; }
-  .top .nav-links a { color: var(--fg2); }
-  .top .nav-links a.btn-ink { background: var(--fg); color: var(--bg); }
-  html.is-dark .top .nav-links a.btn-ink { background: var(--gold); color: var(--night); }
-  @media (max-width: 860px) { .top .nav-links a.hide-md { display: none; } }
-  @media (max-width: 480px) { .top .logo { font-size: 26px; } .top .nav-links a.hide-sm { display: none; } }
-  .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
-  .progress i { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(0); }
+  .kv { padding-top: 36px; text-align: center; }
+  .kv .eyebrow { margin: 0 0 10px; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--ink-3); }
+  .kv h1 { margin: 0; font: 400 clamp(32px, 4.6vw, 56px)/1.3 var(--hand); color: var(--ink-c); }
+  .kv .sub { margin: 14px auto 0; max-width: 560px; font-size: 17px; color: var(--ink-2); }
 
-  /* 1. 開場 */
-  .intro { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 96px; padding-bottom: 56px; }
-  .intro .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--fg2); }
-  .intro h1 { margin: 0; font-family: var(--serif); font-weight: 900; font-size: clamp(42px, 7.6vw, 96px); line-height: 1.18; }
-  .intro h1 .ln { display: block; overflow: hidden; padding-bottom: .06em; }
-  .intro h1 .ln > span { display: inline-block; }
-  .intro .sub { margin: 26px 0 0; max-width: 600px; font-size: clamp(17px, 1.6vw, 19px); color: var(--fg2); }
-  .cue { margin-top: auto; padding-top: 48px; display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--fg2); }
-  .cue .bar { width: 1px; height: 48px; background: rgba(46, 42, 38, .2); position: relative; overflow: hidden; }
-  .cue .bar::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--fg); animation: cue 2.2s var(--ease) infinite; }
-  @keyframes cue { to { top: 100%; } }
-  html.anim .intro h1 .ln > span { transform: translateY(110%); animation: rise 1.1s var(--ease) forwards; }
-  html.anim .intro h1 .ln:nth-child(2) > span { animation-delay: .18s; }
-  html.anim .intro .eyebrow, html.anim .intro .sub, html.anim .cue { opacity: 0; animation: fade 1s var(--ease) forwards; }
-  html.anim .intro .eyebrow { animation-delay: .05s; }
-  html.anim .intro .sub { animation-delay: .55s; }
-  html.anim .cue { animation-delay: .9s; }
-  @keyframes rise { to { transform: none; } }
-  @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-  @keyframes op { from { opacity: 0; } to { opacity: 1; } }
+  .line-wrap { max-width: 1180px; margin: 0 auto; padding: 8px 12px 0; }
+  #line { display: block; width: 100%; height: auto; overflow: visible; -webkit-tap-highlight-color: transparent; }
+  #line .ln { fill: none; stroke: var(--ink-c); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+  #line .main { transition: stroke-dashoffset 3s cubic-bezier(.45, .05, .35, 1); }
+  #line .hlp { fill: none; stroke: var(--hl); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; opacity: .7; }
+  #line .x { opacity: 0; transition: opacity .8s ease; }
+  #line.ready .x { opacity: 1; }
+  #line .tm { font: 19px var(--hnum); fill: var(--ink-c); text-anchor: middle; }
+  #line .nm { font: 16px var(--hand); fill: var(--ink-2); text-anchor: middle; }
+  #line .hit { fill: transparent; cursor: pointer; }
+  #line .lbl { transition: transform .4s var(--ease); }
+  #line .on .lbl { transform: translateY(-2px); }
+  #line .on .nm { fill: var(--ink-c); }
+  #line .pen { fill: var(--hl); stroke: var(--ink-c); stroke-width: 2; }
+  #line .hand { transition: transform .9s var(--ease); }
+  .hint { margin: 6px 0 0; text-align: center; font: 16px var(--hand); color: var(--ink-3); }
 
-  /* 2. 三段文字（靜態預設：直排） */
-  .ch { padding: 72px 24px; }
-  .ch-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px 64px; align-items: center; }
-  .ch-time { margin: 0 0 8px; font-family: var(--num); font-size: clamp(64px, 9vw, 112px); line-height: 1; }
-  .ch-1 { background: var(--latte); }
-  .ch-2 { background: var(--sheet); }
-  .ch-3 { background: var(--night); color: var(--night-text); }
-  .ch-3 .ch-time { color: var(--gold); }
-  .when { margin: 0 0 12px; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; color: var(--fg2); }
-  .ch-3 .when, .ch-3 .fact, .ch-3 .desc, .ch-3 .spec { color: var(--night-2); }
-  .scene { margin: 0 0 20px; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.2vw, 42px); line-height: 1.3; }
-  .scene.sm { font-size: clamp(24px, 2.6vw, 32px); }
-  .ch h2 { margin: 0 0 6px; font-size: clamp(18px, 1.8vw, 21px); }
-  .desc { margin: 0 0 8px; font-size: 16px; color: var(--fg2); max-width: 480px; }
-  .spec { margin: 0 0 8px; font-size: 14px; color: var(--fg2); max-width: 480px; }
-  .fact { margin: 8px 0 22px; font-family: var(--mono); font-size: 13px; }
-  .txt-b { margin-top: 32px; }
-  .scene-src { display: flex; justify-content: center; }
-  .scene-src svg { width: min(100%, 460px); height: auto; }
+  /* 細節小動畫 */
+  .steam { animation: steam 2.4s ease-in-out infinite; }
+  .steam.b { animation-delay: .7s; }
+  @keyframes steam { 0%, 100% { opacity: .1; transform: translateY(3px); } 50% { opacity: 1; transform: translateY(-2px); } }
+  .ray { animation: ray 2s ease-in-out infinite; }
+  @keyframes ray { 0%, 100% { opacity: .1; } 50% { opacity: 1; } }
+  .arr { animation: arr 2.6s ease-in-out infinite; }
+  @keyframes arr { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+  .wv { animation: wv 1.8s ease-out infinite; opacity: 0; }
+  .wv.b { animation-delay: .6s; }
+  @keyframes wv { 0% { opacity: 1; } 100% { opacity: 0; } }
 
-  /* 工作桌四項 */
-  .bench { width: min(100%, 480px); margin: 16px 0 0; border: 1px solid var(--line); background: rgba(251, 246, 238, .7); }
-  .bench .tb { display: flex; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
-  .bench ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
-  .bench li { padding: 12px 14px 14px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; transition: opacity .6s var(--ease), transform .6s var(--ease); }
-  .bench li:nth-child(2n) { border-right: 0; }
-  .bench li:nth-child(n+3) { border-bottom: 0; }
-  .bench .no { font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
-  .bench b { font-size: 16px; color: var(--ink); }
-  .bench span:last-child { font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+  /* 說明面板 */
+  .panel { max-width: 920px; margin: 28px auto 0; padding: 28px; border: 2px solid var(--ink-c); border-radius: 18px 26px 20px 24px / 24px 18px 26px 20px; background: #FFFDF8; scroll-margin-top: 12px; }
+  @media (max-width: 640px) { .panel { margin: 20px 16px 0; padding: 22px 18px; } }
+  .js .item, .js .intro-card { display: none; }
+  .js .item.on, .js .intro-card.on { display: grid; animation: pin .5s var(--ease); }
+  @keyframes pin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  html:not(.js) .intro-card { display: none; }
+  html:not(.js) .item { margin-bottom: 40px; }
+  .item { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px 36px; align-items: start; }
+  .intro-card { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: 760px) { .item { grid-template-columns: minmax(0, 1fr); } }
+  .big { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto; overflow: visible; }
+  .big .ln { fill: none; stroke: var(--ink-c); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .big .main { transition: stroke-dashoffset 1.4s cubic-bezier(.45, .05, .35, 1); }
+  .when { margin: 0 0 6px; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; color: var(--ink-3); }
+  .panel h2 { margin: 0 0 6px; font: 400 clamp(28px, 3vw, 36px)/1.3 var(--hand); color: var(--ink-c); }
+  .line { margin: 0 0 10px; font: 20px var(--hand); color: var(--ink-c); }
+  .desc { margin: 0 0 10px; font-size: 16px; color: var(--ink-2); }
+  .spec { margin: 0 0 6px; font-size: 14px; color: var(--ink-2); }
+  .fact { margin: 6px 0 18px; font: 17px var(--hand); color: var(--ink-c); }
+  .fact::before { content: "→ "; }
+  .steps { list-style: none; counter-reset: s; margin: 14px 0; padding: 0; display: grid; gap: 2px; }
+  .steps li { counter-increment: s; display: flex; gap: 12px; padding: 7px 10px; border-radius: 10px; font-size: 15px; line-height: 1.55; transition: opacity .45s, background-color .45s; }
+  .steps li::before { content: counter(s); flex: none; width: 22px; font: 19px/1.2 var(--hnum); color: var(--ink-3); }
+  .steps li span { display: block; font-size: 13px; color: var(--ink-2); }
+  .js .steps li { opacity: .4; }
+  .js .steps li.done { opacity: 1; }
+  .js .steps li.cur { opacity: 1; background: rgba(247, 200, 115, .35); }
+  .acts { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .acts .btn { margin: 0; }
+  .btn-ink { background: var(--ink-c); }
+  .replay { min-height: 48px; padding: 0 12px; border: 0; background: none; font: 17px var(--hand); color: var(--ink-c); cursor: pointer; opacity: .75; }
+  .replay:hover { opacity: 1; }
+  .replay:focus-visible, .pick:focus-visible { outline: 3px solid var(--hl); outline-offset: 2px; }
+  html:not(.js) .replay { display: none; }
+  .intro-card .desc { max-width: 620px; }
+  .picks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .pick { min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--ink-c); border-radius: 999px; background: none; font: 16px var(--hand); color: var(--ink-c); cursor: pointer; }
+  .pick b { font: 18px var(--hnum); margin-right: 6px; font-weight: 400; }
+  .pick:hover { background: rgba(247, 200, 115, .35); }
 
-  /* 街景插圖（線條，跟著前景色變） */
-  .sc path, .sc rect, .sc circle { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-  .sc text { fill: currentColor; font: 700 22px var(--sans); text-anchor: middle; stroke: none; }
-  .sc .gold { fill: var(--gold); }
-  .sc .paper { fill: var(--paper); }
-  .sc .win { fill: var(--gold); fill-opacity: 0; transition: fill-opacity .8s; }
-  .ch-3 .sc .win, html.is-dark .sc .win { fill-opacity: 1; }
-  .sc .cell-door { fill: var(--paper); transform-origin: 312px 146px; transition: transform .8s var(--ease); }
-  .sc .cell-glow { fill: var(--gold); transition: opacity .6s; }
-  .sc .cell-cup { fill: #fff; transition: opacity .5s; }
-  .sc .proto { transition: fill .6s; }
-  .sc .sos-btn { fill: var(--gold); }
-  .sc .ring { stroke: var(--gold); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
-  .sc .ln { stroke: var(--gold); stroke-width: 2.5; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset .9s var(--ease); }
-  .sc .pill rect { fill: var(--gold); stroke: none; }
-  .sc .pill text { fill: var(--night); font-size: 15px; }
-  .sc .pill { transition: opacity .5s .5s; }
-
-  /* 3. 設計開發 */
-  .dev { padding-top: 128px; padding-bottom: 104px; }
-  .dev, .close { scroll-margin-top: 40px; }
-  .dev .k { margin: 0 0 18px; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--fg2); }
-  .dev h2 { margin: 0; font-family: var(--serif); font-weight: 900; font-size: clamp(32px, 4.6vw, 56px); line-height: 1.25; }
-  .dev .lead { margin: 24px 0 0; max-width: 640px; font-size: 17px; color: var(--fg2); }
-  .dev-list { list-style: none; margin: 56px 0 44px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 0 32px; }
-  .dev-list li { border-top: 1px solid var(--line); padding: 18px 0 24px; }
-  .dev-list .no { font-family: var(--mono); font-size: 12px; color: var(--mono-ink); }
-  .dev-list b { display: block; margin: 6px 0 4px; font-size: 18px; }
-  .dev-list p { margin: 0; font-size: 15px; color: var(--fg2); }
-
-  /* 3b. FlowNest（自有軟體） */
-  .fnb { padding-top: 0; padding-bottom: 104px; scroll-margin-top: 40px; }
-  .fnb-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 56px; align-items: center; border-top: 1px solid var(--line); padding-top: 64px; }
-  .fnb .k { margin: 0 0 18px; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--fg2); }
-  .fnb-name { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font-size: 20px; }
-  .fnb-name img { width: 44px; height: 44px; border-radius: 11px; }
-  .fnb h2 { margin: 0; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.3; }
-  .fnb .lead { margin: 20px 0 0; max-width: 520px; font-size: 17px; color: var(--fg2); }
-  .fnb .acts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-  .fnb .acts .btn { margin: 0; }
-  .fnb-shot { margin: 0; }
-  .fnb-shot img { display: block; width: 100%; height: auto; background: #F2F2F1; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 28px rgba(47, 58, 74, .10); }
-  @media (max-width: 899px) { .fnb-in { grid-template-columns: minmax(0, 1fr); padding-top: 48px; } }
-
-  /* 4. 收尾 */
-  .close { padding-top: 96px; padding-bottom: 112px; text-align: center; border-top: 1px solid rgba(46, 42, 38, .12); }
-  .close h2.big { margin: 0 auto; max-width: 820px; font-family: var(--serif); font-weight: 900; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.45; }
-  .close .sub { margin: 20px auto 0; max-width: 560px; color: var(--fg2); font-size: 17px; }
-  .close .acts { margin-top: 32px; }
-  .close .line-id { margin: 22px 0 0; font-family: var(--mono); font-size: 13px; color: var(--fg2); }
+  .close { padding-top: 88px; padding-bottom: 104px; text-align: center; }
+  .close h2.big2 { margin: 0 auto; max-width: 820px; font: 400 clamp(26px, 3.4vw, 40px)/1.45 var(--hand); color: var(--ink-c); }
+  .close .sub { margin: 18px auto 0; max-width: 560px; color: var(--ink-2); font-size: 17px; }
+  .close .acts { justify-content: center; margin-top: 28px; }
+  .close .line-id { margin: 22px 0 0; font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
   .close .line-id a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; }
-  .rv { transition: opacity 1s var(--ease), transform 1s var(--ease); }
-  html.anim .rv:not(.in) { opacity: 0; transform: translateY(24px); }
+  @media (max-width: 860px) { .nav-links a.hide-md { display: none; } }
 
-  /* ===== 動畫模式（含溫和版） ===== */
-  html:not(.anim) .clock, html:not(.anim) .rail, html:not(.anim) .street { display: none; }
-  html.anim .tale { height: 820vh; position: relative; }
-  html.anim .stage { position: sticky; top: 0; height: 100svh; overflow: hidden;
-    --gh: 15svh; --wx: 66vw; --sw: min(520px, 42vw); }
-  html.anim .stage-in { position: relative; z-index: 2; max-width: 1200px; height: 100%; margin: 0 auto; padding: 96px 24px 84px; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; pointer-events: none; }
-  html.anim .stage-in a { pointer-events: auto; }
-  html.anim .clock { grid-area: 1 / 1; justify-self: start; margin: 0; font-family: var(--num); font-size: clamp(64px, 9vw, 128px); line-height: .9; transition: color .5s; }
-  html.is-dark .clock { color: var(--gold); }
-  .clock .d { display: inline-block; width: .6em; text-align: center; }
-  html.anim .ch-time, html.anim .scene-src { display: none; }
-  html.anim .ch { grid-area: 2 / 1; padding: 0; background: none; color: inherit; align-self: start; padding-top: 20px; visibility: hidden; transition: visibility 0s .6s; }
-  html.anim .ch.on { visibility: visible; transition: visibility 0s 0s; }
-  html.anim .ch-in { display: block; margin: 0; max-width: min(480px, 42vw); }
-  html.anim .ch .txt > * { opacity: 0; transform: translateY(22px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-  html.anim .ch.on .txt > * { opacity: 1; transform: none; transition-duration: .9s; }
-  html.anim .ch.on .txt > :nth-child(2) { transition-delay: .08s; }
-  html.anim .ch.on .txt > :nth-child(3) { transition-delay: .16s; }
-  html.anim .ch.on .txt > :nth-child(4) { transition-delay: .22s; }
-  html.anim .ch.on .txt > :nth-child(5) { transition-delay: .28s; }
-  html.anim .ch.on .txt > :nth-child(6) { transition-delay: .34s; }
-  html.anim .ch.on .txt > :nth-child(7) { transition-delay: .40s; }
-  html.anim .ch-3 .when, html.anim .ch-3 .fact, html.anim .ch-3 .desc, html.anim .ch-3 .spec { color: var(--fg2); }
-  /* 13:20：四項依序亮起；w5 後換成「你的也可以」 */
-  html.anim .bench li { opacity: .15; transform: translateY(6px); }
-  html.anim .stage.w1 .bench li:nth-child(1), html.anim .stage.w2 .bench li:nth-child(2), html.anim .stage.w3 .bench li:nth-child(3), html.anim .stage.w4 .bench li:nth-child(4) { opacity: 1; transform: none; }
-  html.anim .txt-stack { display: grid; }
-  html.anim .txt-stack > .txt { grid-area: 1 / 1; margin: 0; }
-  html.anim .stage:not(.w5) .ch-2.on .txt-b > * { opacity: 0; transform: translateY(22px); transition-delay: 0s; }
-  html.anim .stage.w5 .ch-2.on .txt-a > * { opacity: 0; transform: translateY(-16px); transition-duration: .5s; transition-delay: 0s; }
-  html.anim .stage:not(.w5) .ch-2 .txt-b, html.anim .stage.w5 .ch-2 .txt-a { visibility: hidden; transition: visibility 0s .6s; }
+  /* 頁尾：米白 → 品牌深綠，用手繪起伏的邊（兩層：後面一層半透明）＋一條細墨線，不是一刀切 */
+  .close { padding-bottom: 40px; }
+  .foot-wave { display: block; width: 100%; height: clamp(90px, 10vw, 170px); margin-bottom: -2px; position: relative; z-index: 1; }
+  .foot-wave .w1 { fill: #E4E6DC; }
+  .foot-wave .w2 { fill: #9DB2A8; opacity: .55; }
+  .foot-wave .w3 { fill: #2F5249; opacity: .75; }
+  .foot-wave .front { fill: var(--speesso-forest); }
+  .foot-wave .edge { fill: none; stroke: var(--ink-c); stroke-width: 1.6; stroke-linecap: round; opacity: .55; vector-effect: non-scaling-stroke; }
+  .footer .wrap { padding-top: 28px; }
 
-  /* 街：地面、街景、小人 */
-  .street { position: absolute; inset: 0; z-index: 1; color: var(--fg); transition: color .5s; }
-  .ground { position: absolute; left: 0; right: 0; bottom: 0; height: var(--gh); border-top: 3px solid currentColor; background: rgba(46, 42, 38, .05); }
-  html.is-dark .ground { background: rgba(0, 0, 0, .12); }
-  .track { position: absolute; left: 0; bottom: var(--gh); width: 300vw; display: flex; align-items: flex-end; transform: translateX(calc(var(--q, 0) * -200vw)); will-change: transform; }
-  .stop { width: 100vw; flex: none; display: flex; align-items: flex-end; padding-left: calc(var(--wx) - var(--sw) / 2); }
-  .stop svg { width: var(--sw); height: auto; display: block; overflow: visible; }
-  .walker { position: absolute; left: var(--wx); bottom: var(--gh); width: 54px; margin-left: -27px; z-index: 2; }
-  .walker svg { width: 100%; height: auto; display: block; overflow: visible; }
-  .walker .w { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; }
-  .walker .head { fill: var(--bg); stroke: currentColor; stroke-width: 4; }
-  .walker .hcup { fill: #fff; stroke: currentColor; stroke-width: 3; opacity: 0; transition: opacity .4s; }
-  .stage.cup .walker .hcup { opacity: 1; }
-  .walker .leg1, .walker .leg2, .walker .bodyg { transform-origin: 30px 74px; }
-  .walker.walking .leg1 { animation: swing .44s ease-in-out infinite alternate; }
-  .walker.walking .leg2 { animation: swing .44s ease-in-out infinite alternate-reverse; }
-  .walker.walking .bodyg { animation: bob .22s ease-in-out infinite alternate; }
-  .walker.back svg { transform: scaleX(-1); }
-  @keyframes swing { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
-  @keyframes bob { to { transform: translateY(-2px); } }
-
-  /* 07:58 咖啡店：k3 放入亮燈 → k4 開門、杯子到手上 */
-  html.anim .sc .cell-glow, html.anim .sc .cell-cup { opacity: 0; }
-  html.anim .stage.k3 .sc .cell-glow, html.anim .stage.k3:not(.k4) .sc .cell-cup { opacity: 1; }
-  html.anim .stage.k4 .sc .cell-door { transform: scaleX(.18); }
-  html.anim .stage.k4 .sc .cell-glow { opacity: .55; }
-  /* 13:20 工作室：桌上的原型亮起 */
-  html.anim .sc .proto { fill: none; }
-  html.anim .stage.w1 .sc .proto { fill: var(--gold); }
-  /* 22:14 社區：n1 按下發出波紋 → n2～n4 三條線依序連到家人、鄰居、照護者 */
-  html.anim .sc .ln { stroke-dashoffset: 1; }
-  html.anim .sc .pill { opacity: 0; }
-  html.anim .stage.n2 .sc .l1, html.anim .stage.n3 .sc .l2, html.anim .stage.n4 .sc .l3 { stroke-dashoffset: 0; }
-  html.anim .stage.n2 .sc .p1, html.anim .stage.n3 .sc .p2, html.anim .stage.n4 .sc .p3 { opacity: 1; }
-  html.anim .stage.n1 .sc .ring { animation: ring 2.4s var(--ease) infinite; }
-  html.anim .stage.n1 .sc .ring:nth-of-type(2) { animation-delay: .8s; }
-  html.anim .stage.n1 .sc .ring:nth-of-type(3) { animation-delay: 1.6s; }
-  @keyframes ring { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
-
-  /* 桌機：咖啡店上方的手機對話 */
-  .pop { position: absolute; z-index: 3; left: calc(var(--wx) - 150px); bottom: calc(var(--gh) + var(--sw) * .625 + 18px); width: 300px; opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
-  .stage.chat-on .pop { opacity: 1; transform: none; }
-  .chat { max-height: calc(100svh - var(--gh) - var(--sw) * .625 - 120px); padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; overflow: hidden; border: 3px solid var(--ink); border-radius: 22px; background: #EFE6D8; color: var(--ink); }
-  .chat .hd { align-self: center; margin-bottom: 2px; font-size: 12px; font-weight: 700; color: var(--ink-3); }
-  .bub { max-width: 86%; padding: 8px 12px; border-radius: 16px; font-size: 14px; line-height: 1.5; opacity: 0; transform: translateY(8px); transition: opacity .4s var(--ease), transform .4s var(--ease); }
-  .bub.me { align-self: flex-end; background: var(--ink); color: var(--paper); border-bottom-right-radius: 5px; }
-  .bub.sys { align-self: flex-start; background: #fff; border-bottom-left-radius: 5px; }
-  .stage.k1 .m1, .stage.k2 .m2, .stage.k3 .m3, .stage.k5 .m4 { opacity: 1; transform: none; }
-  .pop::after { content: ""; position: absolute; left: 50%; bottom: -12px; width: 18px; height: 18px; margin-left: -9px; background: #EFE6D8; border-right: 3px solid var(--ink); border-bottom: 3px solid var(--ink); transform: rotate(45deg); }
-  @media (max-width: 899px), (max-height: 699px) { .pop { display: none; } }
-
-  /* 時段導引（桌機右下） */
-  .rail { position: absolute; right: 24px; bottom: 16px; display: flex; gap: 24px; z-index: 4; }
-  .rail a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 44px; font-family: var(--mono); font-size: 12px; color: var(--fg2); text-decoration: none; opacity: .6; transition: opacity .3s; }
-  .rail a::after { content: ""; width: 18px; height: 2px; background: currentColor; transition: width .3s var(--ease); }
-  .rail a.on { opacity: 1; color: var(--fg); }
-  .rail a.on::after { width: 36px; }
-
-  /* 矮的桌機螢幕：收掉工作桌的小字與規格行，避免壓到地面 */
-  @media (min-width: 900px) and (max-height: 860px) {
-    html.anim .bench span:last-child, html.anim .spec { display: none; }
-    html.anim .clock { font-size: clamp(56px, min(9vw, 12svh), 128px); }
-    html.anim .stage-in { padding-top: 80px; }
-    html.anim .ch { padding-top: 8px; }
-  }
-
-  /* 英文字數較多：桌機文字欄放寬一點，較矮的螢幕收掉工作桌小字與規格行 */
-  html[lang="en"].anim .ch-in { max-width: min(540px, 40vw); }
-  @media (min-width: 900px) and (max-height: 980px) {
-    html[lang="en"].anim .bench span:last-child, html[lang="en"].anim .spec { display: none; }
-  }
-  @media (min-width: 900px) and (max-height: 800px) {
-    html[lang="en"].anim .txt-a .desc { display: none; }
-  }
-
-  /* 手機：文字在上、街景在下 */
-  @media (max-width: 899px) {
-    html.anim .stage { --gh: 14svh; --wx: 50vw; --sw: min(88vw, 52svh); }
-    html.anim .stage-in { padding: 80px 20px 24px; }
-    html.anim .clock { font-size: clamp(56px, 17vw, 84px); }
-    html.anim .ch { padding-top: 12px; }
-    html.anim .ch-in { max-width: none; }
-    html.anim .scene { font-size: 25px; margin-bottom: 10px; }
-    html.anim .scene.sm { font-size: 22px; }
-    html.anim .desc { font-size: 15px; margin-bottom: 4px; }
-    html.anim .spec, html.anim .bench { display: none; }
-    html.anim .when { margin-bottom: 6px; }
-    html.anim .fact { margin: 4px 0 12px; }
-    .rail { display: none; }
-  }
-  @media (max-width: 899px) and (max-height: 760px) {
-    html.anim .stage { --sw: min(88vw, 42svh); }
-    html.anim .desc { display: none; }
-  }
-
-  /* 溫和版（系統「減少動態」）：不滑動、不走路，只淡入淡出 */
-  html.calm .intro h1 .ln > span { transform: none; opacity: 0; animation: op 1s ease forwards; }
-  html.calm .intro .eyebrow, html.calm .intro .sub, html.calm .cue { animation-name: op; }
-  html.calm .cue .bar::after { animation: none; top: 30%; }
-  html.calm .ch .txt > *, html.calm .bench li, html.calm .bub, html.calm .pop, html.calm .rv:not(.in) { transform: none !important; }
-  html.calm .track { width: 100vw; transform: none; height: calc(var(--sw) * .625); }
-  html.calm .stop { position: absolute; left: 0; bottom: 0; opacity: 0; transition: opacity .9s ease; }
-  html.calm .stop.cur { opacity: 1; }
-  html.calm .walker { transition: opacity .5s; }
-  html.calm .stage.walk .walker { opacity: 0; }
-  html.calm .sc .cell-door { transition: none; }
-  html.calm .stage.n1 .sc .ring { animation: none; opacity: .5; transform: scale(2); }
-  html.calm .stage.n1 .sc .ring:nth-of-type(2) { opacity: .25; transform: scale(3); }
+  /* 浪上的衝浪小人：沿著最上面那條墨線滑行，到邊緣就轉身；點他會跳一下 */
+  .foot-sea { position: relative; overflow: hidden; padding-top: 70px; margin-top: -70px; pointer-events: none; }
+  .surfer { position: absolute; left: 0; top: 0; width: clamp(64px, 6vw, 100px); height: clamp(64px, 6vw, 100px); pointer-events: auto; cursor: pointer; transform-origin: 0 0; will-change: transform; -webkit-tap-highlight-color: transparent; }
+  .surfer svg { display: block; width: 100%; height: 100%; overflow: visible; transform: translate(-50%, -87%); }
+  .surfer .ln { fill: none; stroke: var(--ink-c); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .surfer .board { fill: var(--paper); stroke: var(--ink-c); stroke-width: 2.2; stroke-linejoin: round; }
+  .surfer .stripe { stroke: var(--hl); stroke-width: 3; stroke-linecap: round; }
+  .surfer .head { fill: var(--paper); stroke: var(--ink-c); stroke-width: 2.2; }
+  .surfer .spray { animation: spray .7s ease-out infinite; }
+  .surfer .spray.b { animation-delay: .35s; }
+  @keyframes spray { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(-6px, -5px); } }
+  .surfer .body { transform-origin: 0 0; }
+  .surfer.hop .body { animation: hop .6s cubic-bezier(.3, 1.5, .5, 1); }
+  @keyframes hop { 0% { transform: none; } 40% { transform: translateY(-22px) rotate(-12deg); } 100% { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01s !important; } }
 </style>
 </head>
 <body>
 
-<header class="top">
+<header>
   <nav class="wrap nav" aria-label="Main menu">
     <a class="logo" href="#">SPEESSO</a>
     <div class="nav-links">
-      <a class="hide-md" href="#ch1">Products</a>
-      <a class="hide-sm" href="#dev">Development</a>
+      <a class="hide-md" href="#story">Our day</a>
+      <a class="hide-md" href="#dev">Development</a>
       <a class="hide-md" href="partners.html">Pilot program</a>
       <a class="hide-md" href="#flownest">FlowNest</a>
       <a class="lang" href="../" lang="zh-Hant" hreflang="zh-Hant">中文</a>
       <a class="btn btn-ink" href="#contact">Contact</a>
     </div>
   </nav>
-  <div class="progress" aria-hidden="true"><i></i></div>
 </header>
 
 <main>
-  <section class="wrap intro">
+  <section class="wrap kv">
     <p class="eyebrow">SPEESSO / PRODUCT DEVELOPMENT</p>
-    <h1><span class="ln"><span>Some ideas</span></span><span class="ln"><span>really can be built.</span></span></h1>
-    <p class="sub">From small everyday hassles to products people actually use. We like building things ourselves, and we help others turn their ideas into reality.</p>
-    <div class="cue" aria-hidden="true"><span class="bar"></span>Scroll down to see what we are working on.</div>
+    <h1><span class="ph">Some ideas</span> <span class="ph">really can be built.</span></h1>
+    <p class="sub">One line draws our whole day. Tap a drawing on the line to see what we are doing at that hour.</p>
   </section>
 
-  <section class="tale" id="story">
-    <div class="stage">
-      <div class="street" aria-hidden="true">
-        <div class="track"></div>
-        <div class="ground"></div>
-        <div class="walker">
-          <svg viewBox="0 0 60 116">
-            <g class="bodyg">
-              <circle class="head" cx="30" cy="16" r="12"/>
-              <path class="w" d="M30 30 V74"/>
-              <path class="w" d="M30 42 L16 62"/>
-              <path class="w" d="M30 42 L44 58"/>
-              <rect class="hcup" x="40" y="47" width="12" height="15" rx="2"/>
-            </g>
-            <path class="w leg1" d="M30 74 V112"/>
-            <path class="w leg2" d="M30 74 V112"/>
-          </svg>
-        </div>
-        <div class="pop">
-          <div class="chat">
-            <span class="hd">SPEESSO Pickup</span>
-            <div class="bub me m1">One large hot latte, please</div>
-            <div class="bub sys m2">Order received. Payment complete ✓</div>
-            <div class="bub sys m3">Your order is ready in compartment 3. Scan the code in store to pick it up.</div>
-            <div class="bub me m4">Got it, thanks!</div>
-          </div>
+  <section id="story">
+    <div class="line-wrap"><svg id="line" aria-hidden="true"></svg></div>
+
+    <div class="panel" id="panel" aria-live="polite">
+      <div class="intro-card on" id="intro">
+        <p class="when">Now · Taipei <b id="now-t">--:--</b></p>
+        <h2>Four things in our day</h2>
+        <p class="desc">The pickup locker in the morning, team file sync before noon, product development in the afternoon, and Neighborhood Watch late at night.</p>
+        <div class="picks">
+          <button class="pick" type="button" data-go="locker"><b>07:58</b>Pickup locker</button>
+          <button class="pick" type="button" data-go="flownest"><b>09:30</b>FlowNest</button>
+          <button class="pick" type="button" data-go="dev"><b>13:20</b>Development</button>
+          <button class="pick" type="button" data-go="sos"><b>22:14</b>SOS system</button>
         </div>
       </div>
-      <nav class="rail" aria-label="Times of day">
-        <a href="#ch1" data-i="0">07:58 Locker</a>
-        <a href="#ch2" data-i="1">13:20 Workbench</a>
-        <a href="#ch3" data-i="2">22:14 SOS</a>
-      </nav>
-      <div class="stage-in">
-        <p class="clock" aria-hidden="true"><span class="d">0</span><span class="d">7</span>:<span class="d">5</span><span class="d">8</span></p>
 
-        <article class="ch ch-1" id="ch1" data-range="0.05,0.31">
-          <div class="ch-in">
-            <div class="txt">
-              <p class="ch-time">07:58</p>
-              <p class="when">Morning · Coffee shop</p>
-              <p class="scene">Coffee ordered.<br>Just grab it and go.</p>
-              <h2>Smart Pickup Locker</h2>
-              <p class="desc">Order and pay ahead on LINE, then scan a code to pick up in store. One less wait makes buying coffee easier.</p>
-              <p class="spec">A modular 3-compartment unit that sits on a shelf, so it takes up no floor space.</p>
-              <p class="fact">Now looking for Taipei coffee shops to join a pilot.</p>
-              <a class="btn btn-ink" href="partners.html#locker">About the locker pilot</a>
-            </div>
-            <div class="scene-src" aria-hidden="true">
-              <svg class="sc" viewBox="0 0 400 250">
-                <path d="M40 250 V92 H360 V250"/>
-                <path d="M30 92 L48 56 H352 L370 92 Z"/>
-                <path d="M30 92 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 42 0 q21 22 46 0"/>
-                <text x="200" y="84">COFFEE</text>
-                <rect x="66" y="140" width="82" height="60" rx="3"/>
-                <path d="M170 250 V146 H230 V250"/>
-                <rect class="cell-glow" x="314" y="148" width="26" height="50"/>
-                <path class="cell-cup" d="M320 168 L323 192 H331 L334 168 Z"/>
-                <rect class="cell-door" x="312" y="146" width="30" height="54"/>
-                <rect x="252" y="146" width="90" height="54" rx="3"/>
-                <path d="M282 146 V200 M312 146 V200"/>
-              </svg>
-            </div>
+      <article class="item" id="p-locker" data-steps="3" data-g="cup">
+        <svg class="big" aria-hidden="true"></svg>
+        <div>
+          <p class="when">07:58 · Morning · Coffee shop</p>
+          <h2>Smart Pickup Locker</h2>
+          <p class="line">Coffee ordered. Just grab it and go.</p>
+          <p class="desc">Order and pay ahead on LINE, then scan a code to pick up in store. One less wait makes buying coffee easier.</p>
+          <ol class="steps">
+            <li>Order and pay on LINE</li>
+            <li>The staff place your order in a compartment, and it lights up</li>
+            <li>Scan the code in store, and the door opens for pickup</li>
+          </ol>
+          <p class="spec">A modular 3-compartment unit that sits on a shelf, so it takes up no floor space.</p>
+          <p class="fact">Now looking for Taipei coffee shops to join a pilot.</p>
+          <div class="acts">
+            <a class="btn btn-ink" href="partners.html#locker">About the locker pilot</a>
+            <button class="replay" type="button">↻ Draw again</button>
           </div>
-        </article>
-
-        <article class="ch ch-2" id="ch2" data-range="0.40,0.645">
-          <div class="ch-in">
-            <div class="txt-stack">
-              <div class="txt txt-a">
-                <p class="ch-time">13:20</p>
-                <p class="when">Afternoon · Our workbench</p>
-                <p class="scene">Draw, prototype, test.<br>Then revise once more.</p>
-                <p class="desc">From mechanics and electronics to software, we design and integrate it all ourselves, and test it on site. Besides our own products, we help companies turn ideas into physical prototypes they can test.</p>
-                <div class="bench">
-                  <div class="tb"><span>WORKBENCH</span><span>4 areas</span></div>
-                  <ul>
-                    <li><span class="no">01</span><b>Mechanical design</b><span>Product structure, parts, sheet metal and assembly</span></li>
-                    <li><span class="no">02</span><b>Electronics &amp; control</b><span>Circuit design, PCB, firmware and control integration</span></li>
-                    <li><span class="no">03</span><b>Software &amp; systems</b><span>Interfaces, cloud and hardware connectivity</span></li>
-                    <li><span class="no">04</span><b>Prototyping &amp; validation</b><span>Samples, functional tests, manufacturability review</span></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="txt txt-b">
-                <p class="when">Product development · Open for projects</p>
-                <p class="scene sm">Not just our ideas. Yours too.</p>
-                <p class="desc">It might be a sketch, a product concept, or existing equipment that needs improving. We can start with design and technical assessment, and work out a practical way to build it together.</p>
-                <a class="btn btn-ink" href="#dev">Our development services</a>
-              </div>
-            </div>
-            <div class="scene-src" aria-hidden="true">
-              <svg class="sc" viewBox="0 0 400 250">
-                <path d="M50 250 V70 H350 V250"/>
-                <text x="200" y="56">STUDIO</text>
-                <rect x="70" y="100" width="84" height="70" rx="3"/>
-                <path d="M84 156 L94 126 L110 120 M110 120 l9 -3 l-2 10 z"/>
-                <path d="M172 250 V146 H228 V250"/>
-                <rect x="246" y="100" width="88" height="90" rx="3"/>
-                <path d="M256 170 H324"/>
-                <rect class="proto gold" x="266" y="152" width="22" height="18" rx="2"/>
-                <path d="M298 170 V160 H314 V170"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <article class="ch ch-3" id="ch3" data-range="0.745,1.01">
-          <div class="ch-in">
-            <div class="txt">
-              <p class="ch-time">22:14</p>
-              <p class="when">Late night · Community</p>
-              <p class="scene">When you need help,<br>just press once.</p>
-              <h2>Neighborhood Watch SOS System</h2>
-              <p class="desc">A simple button press sends a help message to preset contacts, making it easier for family, neighbors and caregivers to look out for one another.</p>
-              <p class="spec">For communities that want to set up mutual support and alerts among neighbors.</p>
-              <p class="fact">Now looking for communities to join product testing.</p>
-              <a class="btn btn-gold" href="partners.html#sos">About the SOS pilot</a>
-            </div>
-            <div class="scene-src" aria-hidden="true">
-              <svg class="sc" viewBox="0 0 400 250">
-                <path d="M20 250 V150 L96 92 L172 150 V250"/>
-                <rect class="win" x="56" y="160" width="26" height="26"/>
-                <rect class="win" x="110" y="160" width="26" height="26"/>
-                <path d="M228 250 V132 L304 66 L380 132 V250"/>
-                <rect class="win" x="250" y="146" width="28" height="28"/>
-                <rect class="win" x="330" y="146" width="28" height="28"/>
-                <path d="M286 250 V196 H322 V250"/>
-                <path class="ln l1" pathLength="1" d="M342 205 C 300 150 140 120 96 74"/>
-                <path class="ln l2" pathLength="1" d="M342 205 C 372 150 330 90 304 48"/>
-                <path class="ln l3" pathLength="1" d="M342 205 C 300 196 230 150 200 104"/>
-                <circle class="ring" cx="342" cy="214" r="9"/>
-                <circle class="ring" cx="342" cy="214" r="9"/>
-                <circle class="ring" cx="342" cy="214" r="9"/>
-                <circle class="sos-btn" cx="342" cy="214" r="9"/>
-                <g class="pill p1"><rect x="56" y="48" width="80" height="26" rx="13"/><text x="96" y="67">Neighbors</text></g>
-                <g class="pill p2"><rect x="272" y="22" width="64" height="26" rx="13"/><text x="304" y="41">Family</text></g>
-                <g class="pill p3"><rect x="156" y="78" width="88" height="26" rx="13"/><text x="200" y="97">Caregivers</text></g>
-              </svg>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap dev" id="dev">
-    <p class="k rv">PRODUCT DEVELOPMENT</p>
-    <h2 class="rv">Have a product in mind?</h2>
-    <p class="lead rv">You don't need complete drawings. It can be an idea, a sketch, or an existing product you want to improve. We'll work through the structure, functions and manufacturing approach with you, and find a way to actually build it.</p>
-    <ul class="dev-list rv">
-      <li><span class="no">01</span><b>Mechanical &amp; product design</b><p>Product structure, part design, assembly and manufacturing planning.</p></li>
-      <li><span class="no">02</span><b>Electronics &amp; control integration</b><p>Circuits, sensing, control and firmware development.</p></li>
-      <li><span class="no">03</span><b>Prototyping &amp; testing</b><p>Proof of concept, functional prototypes, samples and design revisions.</p></li>
-      <li><span class="no">04</span><b>Manufacturability assessment</b><p>Materials, processes, cost and production planning.</p></li>
-    </ul>
-    <a class="btn btn-ink rv" href="mailto:austin@speesso.com">Tell us about your idea</a>
-  </section>
-
-  <section class="wrap fnb" id="flownest">
-    <div class="fnb-in">
-      <div class="fnb-txt rv">
-        <p class="k">SOFTWARE / TEAM FILE SYNC</p>
-        <p class="fnb-name"><img src="../assets/flownest/icon.png" alt="" width="44" height="44"><b>FlowNest</b></p>
-        <h2>Your team's design files, no longer overwriting each other.</h2>
-        <p class="lead">FlowNest compares your local work folder with your team's shared Google Drive folder, and lists what to upload, what to download, and what both sides changed. Every overwrite is backed up first, and a mistaken sync can be undone in one step.</p>
-        <div class="acts">
-          <a class="btn btn-ink" href="flownest.html">About FlowNest</a>
-          <a class="btn btn-line" href="flownest.html#trial">Free 30-day trial</a>
         </div>
-      </div>
-      <figure class="fnb-shot rv"><img src="../assets/flownest/en/project.png" alt="FlowNest project screen" width="1280" height="820" loading="lazy"></figure>
+      </article>
+
+      <article class="item" id="p-flownest" data-steps="4" data-g="sync">
+        <svg class="big" aria-hidden="true"></svg>
+        <div>
+          <p class="when">09:30 · Morning · Sync before work</p>
+          <h2>FlowNest Team File Sync</h2>
+          <p class="line">Your team's design files, no longer overwriting each other.</p>
+          <p class="desc">FlowNest compares your local work folder with your team's shared Google Drive folder, and lists what to upload, what to download, and what both sides changed.</p>
+          <ol class="steps">
+            <li>One scan compares both folders</li>
+            <li>Your changes go up, your teammates' new versions come down</li>
+            <li>If both sides changed a file, you decide which version to keep</li>
+            <li>Every overwrite is backed up first, and any of the last 10 syncs can be undone as a whole</li>
+          </ol>
+          <p class="fact">Free 30-day trial · Windows 10 / 11</p>
+          <div class="acts">
+            <a class="btn btn-ink" href="flownest.html">About FlowNest</a>
+            <a class="btn btn-line" href="flownest-guide.html">How to use it</a>
+            <button class="replay" type="button">↻ Draw again</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="item" id="p-dev" data-steps="4" data-g="bulb">
+        <svg class="big" aria-hidden="true"></svg>
+        <div>
+          <p class="when">13:20 · Afternoon · Our workbench</p>
+          <h2>Product Development</h2>
+          <p class="line">Draw, prototype, test. Then revise once more.</p>
+          <p class="desc">From mechanics and electronics to software, we design and integrate it all ourselves, and test it on site. Besides our own products, we help companies turn ideas into something they can test.</p>
+          <ol class="steps">
+            <li><div>Mechanical design<span>Product structure, parts, sheet metal and assembly</span></div></li>
+            <li><div>Electronics &amp; control<span>Circuit design, PCB, firmware and control integration</span></div></li>
+            <li><div>Software &amp; systems<span>Interfaces, cloud and hardware connectivity</span></div></li>
+            <li><div>Prototyping &amp; validation<span>Samples, functional tests, manufacturability review</span></div></li>
+          </ol>
+          <p class="fact">Not just our ideas. Yours too.</p>
+          <div class="acts">
+            <a class="btn btn-ink" href="mailto:austin@speesso.com">Tell us about your idea</a>
+            <a class="btn btn-line" href="https://line.me/R/ti/p/@speesso">Add us on LINE</a>
+            <button class="replay" type="button">↻ Draw again</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="item" id="p-sos" data-steps="4" data-g="house">
+        <svg class="big" aria-hidden="true"></svg>
+        <div>
+          <p class="when">22:14 · Late night · Community</p>
+          <h2>Neighborhood Watch SOS System</h2>
+          <p class="line">When you need help, just press once.</p>
+          <p class="desc">A simple button press sends a help message to preset contacts, making it easier for family, neighbors and caregivers to look out for each other.</p>
+          <ol class="steps">
+            <li>Press the SOS button</li>
+            <li>Family are notified</li>
+            <li>Neighbors are notified</li>
+            <li>Caregivers are notified</li>
+          </ol>
+          <p class="spec">For communities that want to set up mutual support and alerts among neighbors.</p>
+          <p class="fact">Now looking for communities to join product testing.</p>
+          <div class="acts">
+            <a class="btn btn-ink" href="partners.html#sos">About the SOS pilot</a>
+            <button class="replay" type="button">↻ Draw again</button>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
   <section class="wrap close" id="contact">
-    <h2 class="big rv">We are building products of our own.<br>We would love to be part of your next idea.</h2>
-    <p class="sub rv">Whether you would like to try our products or have a product idea of your own, get in touch.</p>
-    <div class="acts rv">
+    <h2 class="big2">We are building products of our own.<br>We would love to be part of your next idea.</h2>
+    <p class="sub">Whether you would like to try our products or have a product idea of your own, get in touch.</p>
+    <div class="acts">
       <a class="btn btn-ink" href="partners.html">Pilot program</a>
       <a class="btn btn-line" href="mailto:austin@speesso.com">Development inquiry</a>
     </div>
-    <p class="line-id rv">Email<a href="mailto:austin@speesso.com">austin@speesso.com</a>or add us on LINE<a href="https://line.me/R/ti/p/@speesso">@speesso</a></p>
+    <p class="line-id">Email<a href="mailto:austin@speesso.com">austin@speesso.com</a>or add us on LINE<a href="https://line.me/R/ti/p/@speesso">@speesso</a></p>
   </section>
 </main>
 
+<div class="foot-sea">
+<div class="surfer" aria-hidden="true" title="Hi!">
+  <svg viewBox="-38 -66 76 76">
+    <g class="body">
+      <g class="spray"><path class="ln" d="M-34 -3 c-5 -5 -11 -6 -16 -4"/></g>
+      <g class="spray b"><path class="ln" d="M-31 -9 c-3 -6 -8 -9 -13 -9"/></g>
+      <path class="board" d="M-31 0 C-20 5 20 5 33 -3 C22 -7 -20 -6 -31 0 Z"/>
+      <path class="stripe" d="M-18 -1 L18 -2"/>
+      <path class="ln" d="M-7 -3 L-4 -9 L2 -13 M10 -4 L8 -9 L2 -13"/>
+      <path class="ln" d="M2 -13 C3 -16 4 -19 5 -22"/>
+      <path class="ln" d="M4 -19 L-3 -18 L-8 -22 M4 -19 L11 -18 L15 -22"/>
+      <circle class="head" cx="6" cy="-31" r="9"/>
+      <circle cx="10" cy="-32" r="1.5" fill="var(--ink-c)"/>
+    </g>
+  </svg>
+</div>
+<svg class="foot-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+  <path class="w1" d="M0 40 C200 10 420 70 700 34 C980 0 1220 58 1440 22 V120 H0 Z"/>
+  <path class="edge" d="M-10 38 C200 8 420 72 700 36 C980 2 1220 60 1450 24"/>
+  <path class="w2" d="M0 66 C260 36 480 96 760 62 C1030 30 1240 86 1440 52 V120 H0 Z"/>
+  <path class="w3" d="M0 86 C230 64 500 112 800 84 C1060 60 1250 104 1440 78 V120 H0 Z"/>
+  <path class="front" d="M0 104 C280 86 520 122 820 102 C1080 86 1260 116 1440 98 V120 H0 Z"/>
+</svg>
+</div>
 <footer class="footer">
   <div class="wrap">
     <a class="lockup" href="#" aria-label="SPEESSO home">
@@ -516,133 +316,238 @@
 
 <script>
 (function () {
-  var root = document.documentElement, qs = location.search;
-  if (/[?&]static\b/.test(qs)) return;                       // 縮圖用：直排靜態
-  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]calm\b/.test(qs);
-  root.classList.add('anim');
-  if (calm) root.classList.add('calm');                      // 溫和版
+  var root = document.documentElement;
+  if (/[?&]static\b/.test(location.search)) return;
+  root.classList.add('js');
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
 
-  var story = document.getElementById('story');
-  var stage = story.querySelector('.stage');
-  var dev = document.getElementById('dev');
-  var track = story.querySelector('.track');
-  var walker = story.querySelector('.walker');
-  // 把各段的插圖搬進街景（沒有 JS 時插圖留在各段文字下方）
-  var stops = [].slice.call(story.querySelectorAll('.scene-src svg')).map(function (svg) {
-    var d = document.createElement('div');
-    d.className = 'stop';
-    d.appendChild(svg);
-    track.appendChild(d);
-    return d;
-  });
-  var chs = [].slice.call(story.querySelectorAll('.ch'));
-  var ranges = chs.map(function (c) { return c.dataset.range.split(',').map(Number); });
-  var digits = [].slice.call(document.querySelectorAll('.clock .d'));
-  var bar = document.querySelector('.progress i');
-  var rail = [].slice.call(document.querySelectorAll('.rail a'));
-
-  // 各段的小步驟（故事進度 p）
-  var STEPS = {
-    k: [0.07, 0.12, 0.17, 0.22, 0.26],   // 咖啡店：點餐、付款、放入亮燈、開門拿走、謝謝
-    w: [0.41, 0.44, 0.47, 0.50, 0.55],   // 工作室：四項依序、換成「你的也可以」
-    n: [0.76, 0.80, 0.84, 0.88]          // 社區：按下、家人、鄰居、照護者
+  // ---- 一筆畫的小圖：本地座標，線從 (0,0) 進、從 (W,0) 出，y 往上是負 ----
+  var G = {
+    cup: { W: 64, c: [['M', 0, 0], ['L', 42, 0], ['C', 44, -4, 45, -8, 45, -12], ['C', 58, -10, 60, -28, 46, -27], ['C', 46, -32, 47, -38, 47, -42], ['L', 9, -42], ['C', 10, -30, 10, -14, 8, 0], ['C', 16, 6, 40, 6, 54, 1], ['L', 64, 0]],
+           x: '<g class="steam"><path class="ln" d="M20 -50 c-5 -6 5 -10 0 -17"/></g><g class="steam b"><path class="ln" d="M33 -50 c-5 -6 5 -10 0 -17"/></g>' },
+    sync: { W: 104, c: [['M', 0, 0], ['L', 38, 0], ['L', 38, -22], ['L', 18, -22], ['L', 14, -28], ['L', 4, -28], ['L', 4, 0], ['C', 20, 5, 70, 5, 88, 0], ['C', 100, -2, 100, -24, 86, -22], ['C', 84, -38, 58, -38, 56, -20], ['C', 42, -20, 42, -2, 50, 0], ['C', 64, 5, 92, 5, 104, 0]],
+            x: '<g class="arr"><path class="ln" d="M22 -38 C34 -52 54 -54 66 -46"/><path class="ln" d="M66 -46 l-7 -1 M66 -46 l-2 -7"/></g>' },
+    clock: { W: 200, clock: true, c: [['M', 0, 0], ['L', 14, 0], ['C', 20, -4, 18, -10, 14, -9], ['C', 10, -8, 11, -2, 14, 0], ['C', 14, -47.5, 52.5, -86, 100, -86], ['C', 147.5, -86, 186, -47.5, 186, 0], ['C', 186, 47.5, 147.5, 86, 100, 86], ['C', 52.5, 86, 14, 47.5, 14, 0], ['C', 12, -50, 50, -91, 98, -91], ['C', 146, -91, 190, -50, 188, -2], ['C', 192, 4, 198, -2, 194, -6], ['C', 190, -8, 190, 0, 200, 0]] },
+    bulb: { W: 64, c: [['M', 0, 0], ['L', 22, 0], ['L', 22, -12], ['C', 6, -22, 8, -60, 32, -60], ['C', 56, -60, 58, -22, 42, -12], ['L', 42, 0], ['L', 64, 0]],
+            x: '<path class="ln" d="M27 -16 L27 -28 C27 -36 37 -36 37 -28 L37 -16"/><g class="ray"><path class="ln" d="M32 -68 v-8 M8 -56 l-6 -5 M56 -56 l6 -5 M2 -36 h-7 M62 -36 h7"/></g>' },
+    house: { W: 72, c: [['M', 0, 0], ['L', 8, 0], ['L', 8, -32], ['L', 35, -56], ['L', 62, -32], ['L', 62, 0], ['L', 44, 0], ['L', 44, -20], ['L', 28, -20], ['L', 28, 0], ['C', 40, 5, 60, 5, 72, 0]],
+             x: '<rect class="ln" x="14" y="-30" width="9" height="9"/><g class="wv"><path class="ln" d="M68 -44 a10 10 0 0 1 0 14"/></g><g class="wv b"><path class="ln" d="M74 -50 a18 18 0 0 1 0 26"/></g>' }
   };
-  var C = { paper: [251, 246, 238], latte: [246, 227, 200], sheet: [243, 236, 224], night: [47, 58, 74] };
-  var BG = [[-1, C.paper], [0, C.latte], [0.31, C.latte], [0.40, C.sheet], [0.645, C.sheet], [0.745, C.night], [9, C.night]];
-  var TIME = [[0, 478], [0.31, 478], [0.40, 800], [0.645, 800], [0.745, 1334], [1, 1334]];
+  var ITEMS = {
+    locker: { g: 'cup', t: '07:58', name: 'Pickup locker' },
+    flownest: { g: 'sync', t: '09:30', name: 'FlowNest' },
+    dev: { g: 'bulb', t: '13:20', name: 'Development' },
+    sos: { g: 'house', t: '22:14', name: 'SOS system' }
+  };
+  var ORDER = ['locker', 'flownest', 'dev', 'sos'];
 
-  function clamp(x) { return Math.max(0, Math.min(1, x)); }
-  function sm(t) { t = clamp(t); return t * t * (3 - 2 * t); }
-  function at(K, p, mix) {
-    if (p <= K[0][0]) return K[0][1];
-    for (var i = 0; i < K.length - 1; i++) {
-      var a = K[i], b = K[i + 1];
-      if (p <= b[0]) return mix(a[1], b[1], sm((p - a[0]) / (b[0] - a[0])));
-    }
-    return K[K.length - 1][1];
-  }
-  function mixN(a, b, t) { return a + (b - a) * t; }
-  function mixC(a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); }
-  // 小人的位置 q：-0.3 走進畫面 → 0 咖啡店 → 0.5 工作室 → 1 社區（中間是走路）
-  function qmap(p) {
-    if (p < 0.05) return -0.3 + 0.3 * sm(p / 0.05);
-    if (p < 0.31) return 0;
-    if (p < 0.40) return 0.5 * sm((p - 0.31) / 0.09);
-    if (p < 0.645) return 0.5;
-    if (p < 0.745) return 0.5 + 0.5 * sm((p - 0.645) / 0.10);
-    return 1;
-  }
-
-  var lastTime = '', lastBg = '', lastQ = null, wt = 0, ticking = false;
-  function frame() {
-    ticking = false;
-    var r = story.getBoundingClientRect(), vh = innerHeight;
-    var p = -r.top / (r.height - vh);
-    var pc = r.top > 0 ? -Math.min(1, r.top / vh) : p;   // 進故事前用一個螢幕高度過渡
-
-    var bg = at(BG, pc, mixC);
-    var dTop = dev.getBoundingClientRect().top;          // 設計開發區進場：夜藍 → 米白
-    if (dTop < vh) bg = mixC(bg, C.paper, sm((vh - dTop) / (vh * 0.6)));
-    var key = bg.join(',');
-    if (key !== lastBg) {
-      lastBg = key;
-      root.style.setProperty('--bg', 'rgb(' + key + ')');
-      root.classList.toggle('is-dark', (0.299 * bg[0] + 0.587 * bg[1] + 0.114 * bg[2]) < 150);
-    }
-
-    var pp = clamp(p);
-    var m = Math.round(at(TIME, pp, mixN));
-    var s = ('0' + Math.floor(m / 60)).slice(-2) + ('0' + (m % 60)).slice(-2);
-    if (s !== lastTime) { lastTime = s; for (var k = 0; k < 4; k++) digits[k].textContent = s[k]; }
-    bar.style.transform = 'scaleX(' + pp.toFixed(4) + ')';
-
-    chs.forEach(function (c, i) { c.classList.toggle('on', pp >= ranges[i][0] && pp < ranges[i][1]); });
-    Object.keys(STEPS).forEach(function (g) {
-      STEPS[g].forEach(function (t, j) { stage.classList.toggle(g + (j + 1), pp >= t); });
-    });
-    stage.classList.toggle('chat-on', pp >= 0.07 && pp < 0.31);
-    stage.classList.toggle('cup', pp >= 0.22 && pp < 0.45);
-
-    var q = qmap(pp), moving = lastQ !== null && Math.abs(q - lastQ) > 0.0003;
-    stage.classList.toggle('walk', (q > 0.02 && q < 0.48) || (q > 0.52 && q < 0.98));
-    if (calm) {
-      var cur = q < 0.25 ? 0 : q < 0.75 ? 1 : 2;
-      stops.forEach(function (d, i) { d.classList.toggle('cur', i === cur); });
-    } else {
-      stage.style.setProperty('--q', q.toFixed(4));
-      if (moving) {
-        walker.classList.add('walking');
-        walker.classList.toggle('back', q < lastQ);
-        clearTimeout(wt);
-        wt = setTimeout(function () { walker.classList.remove('walking'); }, 180);
+  function n(v) { return (Math.round(v * 10) / 10).toString(); }
+  // 把小圖的指令放到 (ox, oy)；mirror＝由右往左走
+  function place(gl, ox, oy, mirror, skipM) {
+    var s = '';
+    gl.c.forEach(function (cmd, k) {
+      if (k === 0 && skipM) return;
+      var out = [cmd[0]];
+      for (var i = 1; i < cmd.length; i += 2) {
+        var x = cmd[i], y = cmd[i + 1];
+        out.push(n(ox + (mirror ? gl.W - x : x)), n(oy + y));
       }
-    }
-    lastQ = q;
-    var idx = pp < 0.355 ? 0 : pp < 0.695 ? 1 : 2;
-    rail.forEach(function (a, i) { a.classList.toggle('on', i === idx); });
-  }
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
-  addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
-  frame();
-
-  // 時段導引與導覽的 #ch1～#ch3：跳到該段內容完整的位置
-  var mid = [0.24, 0.52, 0.92];
-  function jump(i) {
-    var top = story.offsetTop + (story.offsetHeight - innerHeight) * mid[i];
-    scrollTo({ top: top, behavior: calm ? 'auto' : 'smooth' });
-  }
-  ['#ch1', '#ch2', '#ch3'].forEach(function (h, i) {
-    document.querySelectorAll('a[href="' + h + '"]').forEach(function (a) {
-      a.addEventListener('click', function (e) { e.preventDefault(); jump(i); });
+      s += (k ? ' ' : '') + out[0] + out.slice(1).join(' ');
     });
+    return s;
+  }
+  // 兩點間的線：微微起伏，不是死直線
+  function link(x1, y, x2) { var d = x2 - x1; return ' C' + n(x1 + d * .35) + ' ' + n(y - 3) + ' ' + n(x1 + d * .65) + ' ' + n(y + 3) + ' ' + n(x2) + ' ' + n(y); }
+
+  // 版面：桌機一排；手機蛇行三排
+  var LAYOUT = {
+    wide: { vb: '-20 -150 1100 285', rows: [{ y: 0, dir: 1, x0: -20, x1: 1080, items: [['locker', 90], ['flownest', 240], ['clock', 440], ['dev', 760], ['sos', 920]] }] },
+    narrow: { vb: '-24 -116 410 590', rows: [
+      { y: 0, dir: 1, x0: -24, x1: 330, items: [['clock', 82]] },
+      { y: 230, dir: -1, x0: 330, x1: 30, items: [['flownest', 206], ['locker', 46]] },
+      { y: 410, dir: 1, x0: 30, x1: 386, items: [['dev', 62], ['sos', 226]] }
+    ] }
+  };
+
+  var svg = document.getElementById('line'), state = null;
+  function el(tag, at, p) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); if (p) p.appendChild(e); return e; }
+
+  function build(mode) {
+    var L = LAYOUT[mode], d = '', boxes = {}, cx = null;
+    svg.innerHTML = '';
+    svg.setAttribute('viewBox', L.vb);
+    L.rows.forEach(function (row, ri) {
+      var x = row.x0;
+      if (ri === 0) d = 'M' + n(x) + ' ' + n(row.y);
+      else {                                                   // 轉彎下到下一排
+        var prev = L.rows[ri - 1], ex = prev.x1, bulge = prev.dir > 0 ? 44 : -44;
+        d += ' C' + n(ex + bulge) + ' ' + n(prev.y) + ' ' + n(ex + bulge) + ' ' + n(row.y) + ' ' + n(row.x0) + ' ' + n(row.y);
+      }
+      row.items.forEach(function (it) {
+        var key = it[0], gl = G[key === 'clock' ? 'clock' : ITEMS[key].g], gx = it[1];
+        var entry = row.dir > 0 ? gx : gx + gl.W, exit = row.dir > 0 ? gx + gl.W : gx;
+        d += link(x, row.y, entry) + ' ' + place(gl, gx, row.y, row.dir < 0 && !gl.clock, true);
+        x = exit;
+        boxes[key] = { x: gx, y: row.y, W: gl.W, mirror: row.dir < 0 && !gl.clock };
+        if (gl.clock) cx = [gx + 100, row.y];
+      });
+      d += link(x, row.y, row.x1);
+    });
+
+    var hl = el('path', { class: 'hlp', d: d, 'stroke-dasharray': '0 100000', style: 'visibility:hidden' }, svg);   // 選到之前不顯示（避免起點留一個圓點）
+    var main = el('path', { class: 'ln main', d: d }, svg);
+    // 小動畫細節與文字
+    var extras = el('g', { class: 'x' }, svg);
+    ORDER.forEach(function (k) {
+      var b = boxes[k], gl = G[ITEMS[k].g], gx = el('g', { 'data-k': k }, extras);
+      var detail = el('g', { transform: 'translate(' + b.x + ' ' + b.y + ')' + (b.mirror ? ' translate(' + gl.W + ' 0) scale(-1 1)' : '') }, gx);
+      detail.innerHTML = gl.x || '';
+      var lb = el('g', { class: 'lbl' }, gx);
+      el('text', { class: 'tm', x: b.x + gl.W / 2, y: b.y + 34 }, lb).textContent = ITEMS[k].t;
+      el('text', { class: 'nm', x: b.x + gl.W / 2, y: b.y + 56 }, lb).textContent = ITEMS[k].name;
+      el('rect', { class: 'hit', x: b.x - 18, y: b.y - 86, width: gl.W + 36, height: 152, 'data-go': k }, gx);
+    });
+    // 鬧鐘指針（一筆畫風格的細長圈）
+    var hands = [];
+    [['M0 0 C-5 -12 -6 -40 0 -46 C6 -40 5 -12 0 0', 0], ['M0 0 C-4 -16 -4 -60 0 -68 C4 -60 4 -16 0 0', 1]].forEach(function (h) {
+      var gg = el('g', { transform: 'translate(' + cx[0] + ' ' + cx[1] + ')' }, svg);
+      var hh = el('g', { class: 'hand' }, gg);
+      el('path', { class: 'ln', d: h[0] }, hh);
+      hands.push(hh);
+    });
+    var pen = el('circle', { class: 'pen', r: 6, cx: cx[0], cy: cx[1] }, svg);
+
+    // 每件事在線上佔的長度範圍（螢光筆與筆尖位置用）
+    var total = main.getTotalLength(), ranges = {}, step = 3;
+    ORDER.forEach(function (k) { ranges[k] = [Infinity, -Infinity]; });
+    for (var s = 0; s <= total; s += step) {
+      var p = main.getPointAtLength(s);
+      ORDER.forEach(function (k) {
+        var b = boxes[k];
+        if (p.x >= b.x - 2 && p.x <= b.x + G[ITEMS[k].g].W + 2 && p.y <= b.y + 7 && p.y >= b.y - 80) { ranges[k][0] = Math.min(ranges[k][0], s); ranges[k][1] = Math.max(ranges[k][1], s); }
+      });
+    }
+    var clockLen = (function () { var best = 0, bd = Infinity; for (var s = 0; s <= total; s += step) { var p = main.getPointAtLength(s), dd = Math.abs(p.x - cx[0] + 86) + Math.abs(p.y - cx[1]); if (dd < bd) { bd = dd; best = s; } } return best; })();
+
+    // 開場：線從左畫到右
+    if (!calm && !state) {
+      main.style.strokeDasharray = total; main.style.strokeDashoffset = total;
+      main.getBoundingClientRect();
+      requestAnimationFrame(function () { main.style.strokeDashoffset = 0; });
+      setTimeout(function () { svg.classList.add('ready'); }, 2600);
+    } else svg.classList.add('ready');
+
+    var prev = state;
+    state = { main: main, hl: hl, hands: hands, pen: pen, total: total, ranges: ranges, penAt: clockLen, rot: prev ? prev.rot : [0, 0], cur: prev ? prev.cur : null };
+    placePen(state.penAt);
+    if (state.cur) mark(state.cur, false); else setHands(nowT(), false);
+  }
+
+  function placePen(s) { var p = state.main.getPointAtLength(s); state.pen.setAttribute('cx', p.x); state.pen.setAttribute('cy', p.y); }
+  var penAnim = 0;
+  function movePen(target) {
+    cancelAnimationFrame(penAnim);
+    var from = state.penAt, t0 = performance.now(), dur = calm ? 0 : Math.min(1400, 400 + Math.abs(target - from) * .9);
+    (function tick(now) {
+      var k = dur ? Math.min(1, (now - t0) / dur) : 1, e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      state.penAt = from + (target - from) * e; placePen(state.penAt);
+      if (k < 1) penAnim = requestAnimationFrame(tick);
+    })(t0);
+  }
+  function fwd(p, t) { return p + ((t - p) % 360 + 360) % 360; }
+  function setHands(t) {
+    var m = t.split(':'), a = [((+m[0] % 12) + +m[1] / 60) * 30, +m[1] * 6];
+    state.rot[0] = fwd(state.rot[0], a[0]); state.rot[1] = fwd(state.rot[1], a[1]);
+    state.hands[0].style.transform = 'rotate(' + state.rot[0] + 'deg)'; state.hands[1].style.transform = 'rotate(' + state.rot[1] + 'deg)';
+  }
+  function mark(k, animate) {
+    var r = state.ranges[k];
+    state.hl.setAttribute('stroke-dasharray', n(r[1] - r[0]) + ' 100000');   // 用位移定起點；dasharray 以 0 開頭時圓頭線帽會在線的起點留一個點
+    state.hl.setAttribute('stroke-dashoffset', n(-r[0]));
+    state.hl.style.visibility = 'visible';
+    svg.querySelectorAll('[data-k]').forEach(function (g) { g.classList.toggle('on', g.getAttribute('data-k') === k); });
+    setHands(ITEMS[k].t);
+    if (animate) movePen((r[0] + r[1]) / 2); else { state.penAt = (r[0] + r[1]) / 2; placePen(state.penAt); }
+  }
+  function nowT() { return new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false }).replace(/^24/, '00'); }
+
+  // ---- 說明面板 ----
+  var panel = document.getElementById('panel'), intro = document.getElementById('intro'), timers = [];
+  function later(f, ms) { timers.push(setTimeout(f, ms)); }
+  function drawBig(art) {
+    var gl = G[art.dataset.g], big = art.querySelector('.big');
+    big.setAttribute('viewBox', '-24 -96 ' + (gl.W + 48) + ' 116');
+    big.innerHTML = '<path class="ln main" d="M-24 0 L0 0 ' + place(gl, 0, 0, false, true) + ' L' + (gl.W + 24) + ' 0"/>' + (gl.x || '');
+    var m = big.querySelector('.main'), L = m.getTotalLength();
+    if (calm) return;
+    m.style.strokeDasharray = L; m.style.strokeDashoffset = L; m.getBoundingClientRect();
+    requestAnimationFrame(function () { m.style.strokeDashoffset = 0; });
+  }
+  function play(art) {
+    var lis = art.querySelectorAll('.steps li'), nS = +art.dataset.steps;
+    lis.forEach(function (li) { li.classList.remove('cur', 'done'); });
+    drawBig(art);
+    if (calm) { lis.forEach(function (li) { li.classList.add('done'); }); return; }
+    for (var i = 0; i < nS; i++) (function (i) { later(function () { lis.forEach(function (li, j) { li.classList.toggle('done', j < i); li.classList.toggle('cur', j === i); }); }, 900 + i * 1400); })(i);
+    later(function () { lis.forEach(function (li) { li.classList.remove('cur'); li.classList.add('done'); }); }, 900 + nS * 1400);
+  }
+  function select(k, scroll) {
+    timers.forEach(clearTimeout); timers = [];
+    state.cur = k; mark(k, true);
+    intro.classList.remove('on');
+    ORDER.forEach(function (x) { document.getElementById('p-' + x).classList.toggle('on', x === k); });
+    var art = document.getElementById('p-' + k);
+    play(art);
+    if (scroll) later(function () { panel.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: innerWidth < 760 ? 'start' : 'nearest' }); }, calm ? 0 : 500);
+    if (history.replaceState) history.replaceState(null, '', '#' + k);
+  }
+
+  document.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-go]');
+    if (go) { select(go.getAttribute('data-go'), true); return; }
+    var rp = e.target.closest('.replay');
+    if (rp) { timers.forEach(clearTimeout); timers = []; play(rp.closest('.item')); return; }
+    var a = e.target.closest('a[href^="#"]'), h = a && a.getAttribute('href').slice(1);
+    if (a && ITEMS[h]) { e.preventDefault(); document.getElementById('story').scrollIntoView({ behavior: calm ? 'auto' : 'smooth' }); select(h, false); }
   });
 
-  // 進場淡入
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+  var mq = matchMedia('(max-width: 640px)');
+  build(mq.matches ? 'narrow' : 'wide');
+  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () { build(mq.matches ? 'narrow' : 'wide'); });
+  document.getElementById('now-t').textContent = nowT();
+  // ---- 頁尾衝浪小人 ----
+  (function () {
+    var sea = document.querySelector('.foot-sea'), surfer = sea.querySelector('.surfer'), edge = sea.querySelector('.edge');
+    var L = edge.getTotalLength(), s = L * .3, dir = 1, run = true, raf = 0, t0 = performance.now() - 2600;
+    function at(len) { var p = edge.getPointAtLength(Math.max(0, Math.min(L, len))).matrixTransform(edge.getScreenCTM()), r = sea.getBoundingClientRect(); return [p.x - r.left, p.y - r.top]; }
+    function draw(t) {
+      var p = at(s), a = at(s - 6), b = at(s + 6);
+      var ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI, bob = Math.sin(t / 380) * 2.2, tilt = Math.sin(t / 520) * 3;
+      surfer.style.transform = 'translate(' + p[0].toFixed(1) + 'px,' + (p[1] + bob).toFixed(1) + 'px) rotate(' + (ang + tilt).toFixed(1) + 'deg) scaleX(' + dir + ')';
+    }
+    // 位置直接由時間算（來回一趟），不累加每格的時間差：畫面卡頓或背景分頁也不會走錯
+    function tick() {
+      var t = performance.now(), w = sea.getBoundingClientRect().width, P = Math.max(4000, w * 3.6);   // 單程約 4～7 秒
+      var u = ((t - t0) % (2 * P)) / P, k = u < 1 ? u : 2 - u;
+      dir = u < 1 ? 1 : -1;
+      k = k * k * (3 - 2 * k);                                  // 兩端放慢，像在轉身
+      s = L * (.06 + .88 * k);
+      draw(t);
+      if (run) raf = requestAnimationFrame(tick);
+    }
+    surfer.addEventListener('click', function () { surfer.classList.remove('hop'); void surfer.offsetWidth; surfer.classList.add('hop'); });
+    if (calm) { s = L * .7; draw(0); addEventListener('resize', function () { draw(0); }); return; }
+    // 只在頁尾看得到時才動
+    new IntersectionObserver(function (es) {
+      run = es[0].isIntersecting; cancelAnimationFrame(raf);
+      if (run) raf = requestAnimationFrame(tick);
+    }).observe(sea);
+    raf = requestAnimationFrame(tick);
+  })();
+
+  var h0 = location.hash.slice(1);
+  if (ITEMS[h0]) setTimeout(function () { select(h0, true); }, calm ? 0 : 2800);
 })();
 </script>
 </body>
