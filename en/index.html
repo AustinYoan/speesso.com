@@ -31,6 +31,7 @@
   .kv .sub { margin: 14px auto 0; max-width: 560px; font-size: 17px; color: var(--ink-2); }
 
   .line-wrap { max-width: 1180px; margin: 0 auto; padding: 8px 12px 0; }
+  @media (max-width: 640px) { .line-wrap { padding-top: 22px; } }
   #line { display: block; width: 100%; height: auto; overflow: visible; -webkit-tap-highlight-color: transparent; }
   #line .ln { fill: none; stroke: var(--ink-c); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
   #line .main { transition: stroke-dashoffset 3s cubic-bezier(.45, .05, .35, 1); }
@@ -155,7 +156,6 @@
   <section class="wrap kv">
     <p class="eyebrow">SPEESSO / PRODUCT DEVELOPMENT</p>
     <h1><span class="ph">Got an idea?</span> <span class="ph">Let's build it together.</span></h1>
-    <p class="sub">One line draws our whole day. Tap a drawing on the line to see what we are doing at that hour.</p>
   </section>
 
   <section id="story">
