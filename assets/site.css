@@ -316,3 +316,12 @@ details p { margin: 0 0 18px; color: var(--ink-2); }
 .quota dd.todo { font-family: var(--sans); font-weight: 400; font-size: 15px; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* 頁尾上方的起伏（米白 → 淡灰綠 → 灰綠 → 品牌深綠）。上線版由 build_launch.py 在各頁 footer 前插入同一段 SVG；首頁 L8 自帶 */
+.foot-wave { display: block; width: 100%; height: clamp(90px, 10vw, 170px); margin-bottom: -2px; position: relative; z-index: 1; }
+.foot-wave .w1 { fill: #E4E6DC; }
+.foot-wave .w2 { fill: #9DB2A8; opacity: .55; }
+.foot-wave .w3 { fill: #2F5249; opacity: .75; }
+.foot-wave .front { fill: var(--speesso-forest); }
+.foot-wave .edge { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; opacity: .55; vector-effect: non-scaling-stroke; }
+.foot-wave + .footer .wrap { padding-top: 28px; }
