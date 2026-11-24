@@ -344,16 +344,22 @@
   var ORDER = ['locker', 'flownest', 'dev', 'sos'];
 
   function n(v) { return (Math.round(v * 10) / 10).toString(); }
-  // 把小圖的指令放到 (ox, oy)；mirror＝由右往左走
-  function place(gl, ox, oy, mirror, skipM) {
-    var s = '';
-    gl.c.forEach(function (cmd, k) {
+  // 把小圖的指令放到 (ox, oy)；reverse＝這一排由右往左走（見 reversed）
+  // 反向走同一個圖：圖案不翻面，只把筆畫順序倒過來（由 (W,0) 進、從 (0,0) 出）
+  function reversed(c) {
+    var pts = c.map(function (cmd) { return [cmd[cmd.length - 2], cmd[cmd.length - 1]]; }), out = [['M'].concat(pts[pts.length - 1])];
+    for (var k = c.length - 1; k > 0; k--) {
+      var cmd = c[k], prev = pts[k - 1];
+      out.push(cmd[0] === 'C' ? ['C', cmd[3], cmd[4], cmd[1], cmd[2], prev[0], prev[1]] : ['L', prev[0], prev[1]]);
+    }
+    return out;
+  }
+  function place(gl, ox, oy, reverse, skipM) {
+    var s = '', c = reverse ? (gl._rev || (gl._rev = reversed(gl.c))) : gl.c;
+    c.forEach(function (cmd, k) {
       if (k === 0 && skipM) return;
       var out = [cmd[0]];
-      for (var i = 1; i < cmd.length; i += 2) {
-        var x = cmd[i], y = cmd[i + 1];
-        out.push(n(ox + (mirror ? gl.W - x : x)), n(oy + y));
-      }
+      for (var i = 1; i < cmd.length; i += 2) out.push(n(ox + cmd[i]), n(oy + cmd[i + 1]));
       s += (k ? ' ' : '') + out[0] + out.slice(1).join(' ');
     });
     return s;
@@ -402,7 +408,7 @@
     var extras = el('g', { class: 'x' }, svg);
     ORDER.forEach(function (k) {
       var b = boxes[k], gl = G[ITEMS[k].g], gx = el('g', { 'data-k': k }, extras);
-      var detail = el('g', { transform: 'translate(' + b.x + ' ' + b.y + ')' + (b.mirror ? ' translate(' + gl.W + ' 0) scale(-1 1)' : '') }, gx);
+      var detail = el('g', { transform: 'translate(' + b.x + ' ' + b.y + ')' }, gx);   // 細節不翻面
       detail.innerHTML = gl.x || '';
       var lb = el('g', { class: 'lbl' }, gx);
       el('text', { class: 'tm', x: b.x + gl.W / 2, y: b.y + 34 }, lb).textContent = ITEMS[k].t;
