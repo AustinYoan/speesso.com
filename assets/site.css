@@ -317,11 +317,11 @@ details p { margin: 0 0 18px; color: var(--ink-2); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
-/* 頁尾上方的起伏（米白 → 淡灰綠 → 灰綠 → 品牌深綠）。上線版由 build_launch.py 在各頁 footer 前插入同一段 SVG；首頁 L8 自帶 */
+/* 頁尾上方的起伏（米白 → 淡灰綠 → 灰綠 → 品牌深綠；頁面配色不同時用 --wave-1～4、--wave-edge 覆寫）。上線版由 build_launch.py 在各頁 footer 前插入同一段 SVG；首頁 L8 自帶 */
 .foot-wave { display: block; width: 100%; height: clamp(90px, 10vw, 170px); margin-bottom: -2px; position: relative; z-index: 1; }
-.foot-wave .w1 { fill: #E4E6DC; }
-.foot-wave .w2 { fill: #9DB2A8; opacity: .55; }
-.foot-wave .w3 { fill: #2F5249; opacity: .75; }
-.foot-wave .front { fill: var(--speesso-forest); }
-.foot-wave .edge { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; opacity: .55; vector-effect: non-scaling-stroke; }
+.foot-wave .w1 { fill: var(--wave-1, #E4E6DC); }
+.foot-wave .w2 { fill: var(--wave-2, #9DB2A8); opacity: var(--wave-2o, .55); }
+.foot-wave .w3 { fill: var(--wave-3, #2F5249); opacity: var(--wave-3o, .75); }
+.foot-wave .front { fill: var(--wave-4, var(--speesso-forest)); }
+.foot-wave .edge { fill: none; stroke: var(--wave-edge, var(--ink)); stroke-width: 1.6; stroke-linecap: round; opacity: .55; vector-effect: non-scaling-stroke; }
 .foot-wave + .footer .wrap { padding-top: 28px; }
