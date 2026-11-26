@@ -368,11 +368,12 @@
   function link(x1, y, x2) { var d = x2 - x1; return ' C' + n(x1 + d * .35) + ' ' + n(y - 3) + ' ' + n(x1 + d * .65) + ' ' + n(y + 3) + ' ' + n(x2) + ' ' + n(y); }
 
   // 版面：桌機一排；手機蛇行三排
+  // 手機：由右往左的那一排只放一個圖，線走的順序和由左往右讀的順序才會一致（07:58 → 09:30 → 13:20 → 22:14）
   var LAYOUT = {
     wide: { vb: '-20 -150 1100 285', rows: [{ y: 0, dir: 1, x0: -20, x1: 1080, items: [['locker', 90], ['flownest', 240], ['clock', 440], ['dev', 760], ['sos', 920]] }] },
     narrow: { vb: '-24 -116 410 590', rows: [
-      { y: 0, dir: 1, x0: -24, x1: 330, items: [['clock', 82]] },
-      { y: 230, dir: -1, x0: 330, x1: 30, items: [['flownest', 206], ['locker', 46]] },
+      { y: 0, dir: 1, x0: -24, x1: 330, items: [['clock', 0], ['locker', 244]] },
+      { y: 230, dir: -1, x0: 330, x1: 30, items: [['flownest', 128]] },
       { y: 410, dir: 1, x0: 30, x1: 386, items: [['dev', 62], ['sos', 226]] }
     ] }
   };
