@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SPEESSO | Product Development</title>
-<meta name="description" content="SPEESSO is a product development company. We build our own smart pickup locker, Neighborhood Watch SOS System and FlowNest team file sync, and help companies with mechanical design, electronics and prototyping.">
+<meta name="description" content="SPEESSO is a product development company. We build our own smart pickup locker, Neighborhood Watch SOS System and FlowNest team file sync, and help companies with mechanical design, electronics, prototyping and CAD/CAE engineering analysis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Patrick+Hand&family=Noto+Sans+TC:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://speesso.com/en/">
 <style>
-  /* L8：一筆畫 — 一條線從左邊進來，畫出咖啡杯、資料夾與雲、鬧鐘、燈泡、房子，再從右邊出去。
+  /* L8：一筆畫 — 一條線從左邊進來，畫出咖啡杯、資料夾與雲、鬧鐘、燈泡、懸臂梁、房子，再從右邊出去。
      點線上的小圖：金色筆尖沿著線走過去、那一段畫上螢光筆、鬧鐘指針走到那個時刻，下方說明面板把小圖放大重畫一次並逐步說明。
      手機：同一條線改成蛇行三排。系統「減少動態」：不畫線、不走動，直接顯示。 */
   :root { --ink-c: #23201D; --hl: #F7C873; --hand: 'LXGW WenKai TC', 'Noto Sans TC', serif; --hnum: 'Patrick Hand', 'LXGW WenKai TC', sans-serif; --ease: cubic-bezier(.2, .7, .1, 1); }
@@ -59,6 +59,9 @@
   .wv { animation: wv 1.8s ease-out infinite; opacity: 0; }
   .wv.b { animation-delay: .6s; }
   @keyframes wv { 0% { opacity: 1; } 100% { opacity: 0; } }
+  .load { animation: load 1.6s ease-in-out infinite; }
+  @keyframes load { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(2px); } }
+  #line .ghost, .big .ghost { stroke-dasharray: 3 5; stroke-width: 1.6; opacity: .45; }
 
   /* 說明面板 */
   .panel { max-width: 920px; margin: 28px auto 0; padding: 28px; border: 2px solid var(--ink-c); border-radius: 18px 26px 20px 24px / 24px 18px 26px 20px; background: #FFFDF8; scroll-margin-top: 12px; }
@@ -143,7 +146,7 @@
     <a class="logo" href="#">SPEESSO</a>
     <div class="nav-links">
       <a class="hide-md" href="#story">Our day</a>
-      <a class="hide-md" href="#dev">Development</a>
+      <a class="hide-md" href="services.html">Services</a>
       <a class="hide-md" href="partners.html">Pilot program</a>
       <a class="hide-md" href="#flownest">FlowNest</a>
       <a class="lang" href="../" lang="zh-Hant" hreflang="zh-Hant">中文</a>
@@ -164,12 +167,13 @@
     <div class="panel" id="panel" aria-live="polite">
       <div class="intro-card on" id="intro">
         <p class="when">Now · Taipei <b id="now-t">--:--</b></p>
-        <h2>Four things in our day</h2>
-        <p class="desc">The pickup locker in the morning, team file sync before noon, product development in the afternoon, and Neighborhood Watch late at night.</p>
+        <h2>Five things in our day</h2>
+        <p class="desc">The pickup locker in the morning, team file sync before noon, product development and engineering analysis in the afternoon, and Neighborhood Watch late at night.</p>
         <div class="picks">
           <button class="pick" type="button" data-go="locker"><b>07:58</b>Pickup locker</button>
           <button class="pick" type="button" data-go="flownest"><b>09:30</b>FlowNest</button>
           <button class="pick" type="button" data-go="dev"><b>13:20</b>Development</button>
+          <button class="pick" type="button" data-go="cae"><b>16:00</b>Simulation</button>
           <button class="pick" type="button" data-go="sos"><b>22:14</b>SOS system</button>
         </div>
       </div>
@@ -233,7 +237,30 @@
           <p class="fact">Not just our ideas. Yours too.</p>
           <div class="acts">
             <a class="btn btn-ink" href="mailto:austin@speesso.com">Tell us about your idea</a>
-            <a class="btn btn-line" href="https://line.me/R/ti/p/@speesso">Add us on LINE</a>
+            <a class="btn btn-line" href="services.html#dev">See our services</a>
+            <button class="replay" type="button">↻ Draw again</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="item" id="p-cae" data-steps="4" data-g="beam">
+        <svg class="big" aria-hidden="true"></svg>
+        <div>
+          <p class="when">16:00 · Afternoon · Simulation</p>
+          <h2>CAD/CAE Engineering Analysis</h2>
+          <p class="line">Simulate first, then prototype.</p>
+          <p class="desc">Before tooling, prototyping or installation, we use 3D models and simulation to check strength, vibration, flow and temperature. We also work as consultants, reviewing models and analysis results with your design team.</p>
+          <ol class="steps">
+            <li><div>Structural analysis (FEA)<span>Strength, deformation, natural frequencies and bolted joints</span></div></li>
+            <li><div>Flow analysis (CFD)<span>Pressure drop, velocity distribution, mixing uniformity and baffle design</span></div></li>
+            <li><div>Thermal analysis<span>Heat conduction and thermal stress</span></div></li>
+            <li><div>CAD modeling &amp; design review<span>3D modeling, model revisions and analysis reports</span></div></li>
+          </ol>
+          <p class="spec">We work in SOLIDWORKS Simulation and Flow Simulation, on an hourly consulting basis or as a one-off analysis.</p>
+          <p class="fact">Confirm the design works before prototyping and tooling.</p>
+          <div class="acts">
+            <a class="btn btn-ink" href="mailto:austin@speesso.com">Ask about analysis</a>
+            <a class="btn btn-line" href="services.html#cae">See our services</a>
             <button class="replay" type="button">↻ Draw again</button>
           </div>
         </div>
@@ -265,7 +292,7 @@
 
   <section class="wrap close" id="contact">
     <h2 class="big2">We are building products of our own.<br>We would love to be part of your next idea.</h2>
-    <p class="sub">Whether you would like to try our products or have a product idea of your own, get in touch.</p>
+    <p class="sub">Whether you would like to try our products, have a product idea of your own, or need CAD/CAE engineering analysis, get in touch.</p>
     <div class="acts">
       <a class="btn btn-ink" href="partners.html">Pilot program</a>
       <a class="btn btn-line" href="mailto:austin@speesso.com">Development inquiry</a>
@@ -331,6 +358,8 @@
     clock: { W: 200, clock: true, c: [['M', 0, 0], ['L', 14, 0], ['C', 20, -4, 18, -10, 14, -9], ['C', 10, -8, 11, -2, 14, 0], ['C', 14, -47.5, 52.5, -86, 100, -86], ['C', 147.5, -86, 186, -47.5, 186, 0], ['C', 186, 47.5, 147.5, 86, 100, 86], ['C', 52.5, 86, 14, 47.5, 14, 0], ['C', 12, -50, 50, -91, 98, -91], ['C', 146, -91, 190, -50, 188, -2], ['C', 192, 4, 198, -2, 194, -6], ['C', 190, -8, 190, 0, 200, 0]] },
     bulb: { W: 64, c: [['M', 0, 0], ['L', 22, 0], ['L', 22, -12], ['C', 6, -22, 8, -60, 32, -60], ['C', 56, -60, 58, -22, 42, -12], ['L', 42, 0], ['L', 64, 0]],
             x: '<path class="ln" d="M27 -16 L27 -28 C27 -36 37 -36 37 -28 L37 -16"/><g class="ray"><path class="ln" d="M32 -68 v-8 M8 -56 l-6 -5 M56 -56 l6 -5 M2 -36 h-7 M62 -36 h7"/></g>' },
+    beam: { W: 80, c: [['M', 0, 0], ['L', 10, 0], ['L', 10, -48], ['L', 10, -38], ['C', 30, -38, 50, -36, 66, -30], ['L', 67, -23], ['C', 50, -28, 30, -29, 10, -29], ['L', 10, 0], ['C', 30, 5, 60, 5, 80, 0]],
+            x: '<path class="ln ghost" d="M10 -38 H68 V-29 H10"/><path class="ln" d="M10 -46 l-7 7 M10 -36 l-7 7 M10 -26 l-7 7 M10 -16 l-7 7"/><g class="load"><path class="ln" d="M66 -64 v20 M66 -44 l-5 -7 M66 -44 l5 -7"/></g>' },
     house: { W: 72, c: [['M', 0, 0], ['L', 8, 0], ['L', 8, -32], ['L', 35, -56], ['L', 62, -32], ['L', 62, 0], ['L', 44, 0], ['L', 44, -20], ['L', 28, -20], ['L', 28, 0], ['C', 40, 5, 60, 5, 72, 0]],
              x: '<rect class="ln" x="14" y="-30" width="9" height="9"/><g class="wv"><path class="ln" d="M68 -44 a10 10 0 0 1 0 14"/></g><g class="wv b"><path class="ln" d="M74 -50 a18 18 0 0 1 0 26"/></g>' }
   };
@@ -338,9 +367,10 @@
     locker: { g: 'cup', t: '07:58', name: 'Pickup locker' },
     flownest: { g: 'sync', t: '09:30', name: 'FlowNest' },
     dev: { g: 'bulb', t: '13:20', name: 'Development' },
+    cae: { g: 'beam', t: '16:00', name: 'Simulation' },
     sos: { g: 'house', t: '22:14', name: 'SOS system' }
   };
-  var ORDER = ['locker', 'flownest', 'dev', 'sos'];
+  var ORDER = ['locker', 'flownest', 'dev', 'cae', 'sos'];
 
   function n(v) { return (Math.round(v * 10) / 10).toString(); }
   // 把小圖的指令放到 (ox, oy)；reverse＝這一排由右往左走（見 reversed）
@@ -369,11 +399,11 @@
   // 版面：桌機一排；手機蛇行三排
   // 手機：由右往左的那一排只放一個圖，線走的順序和由左往右讀的順序才會一致（07:58 → 09:30 → 13:20 → 22:14）
   var LAYOUT = {
-    wide: { vb: '-20 -150 1100 285', rows: [{ y: 0, dir: 1, x0: -20, x1: 1080, items: [['locker', 90], ['flownest', 240], ['clock', 440], ['dev', 760], ['sos', 920]] }] },
+    wide: { vb: '-20 -150 1100 285', rows: [{ y: 0, dir: 1, x0: -20, x1: 1080, items: [['locker', 60], ['flownest', 200], ['clock', 400], ['dev', 680], ['cae', 810], ['sos', 950]] }] },
     narrow: { vb: '-24 -116 410 590', rows: [
       { y: 0, dir: 1, x0: -24, x1: 330, items: [['clock', 0], ['locker', 244]] },
       { y: 230, dir: -1, x0: 330, x1: 30, items: [['flownest', 128]] },
-      { y: 410, dir: 1, x0: 30, x1: 386, items: [['dev', 62], ['sos', 226]] }
+      { y: 410, dir: 1, x0: 30, x1: 386, items: [['dev', 40], ['cae', 150], ['sos', 280]] }
     ] }
   };
 

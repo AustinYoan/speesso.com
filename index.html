@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SPEESSO｜速倍速科技</title>
-<meta name="description" content="速倍速科技（SPEESSO）是一家產品開發公司：自己開發智慧取餐櫃、守望相助 SOS 系統與 FlowNest 團隊檔案同步，也協助企業進行機構、電子控制與原型開發。">
+<meta name="description" content="速倍速科技（SPEESSO）是一家產品開發公司：自己開發智慧取餐櫃、守望相助 SOS 系統與 FlowNest 團隊檔案同步，也協助企業進行機構、電子控制、原型開發與 CAD／CAE 工程分析。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Patrick+Hand&family=Noto+Sans+TC:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://speesso.com/">
 <style>
-  /* L8：一筆畫 — 一條線從左邊進來，畫出咖啡杯、資料夾與雲、鬧鐘、燈泡、房子，再從右邊出去。
+  /* L8：一筆畫 — 一條線從左邊進來，畫出咖啡杯、資料夾與雲、鬧鐘、燈泡、懸臂梁、房子，再從右邊出去。
      點線上的小圖：金色筆尖沿著線走過去、那一段畫上螢光筆、鬧鐘指針走到那個時刻，下方說明面板把小圖放大重畫一次並逐步說明。
      手機：同一條線改成蛇行三排。系統「減少動態」：不畫線、不走動，直接顯示。 */
   :root { --ink-c: #23201D; --hl: #F7C873; --hand: 'LXGW WenKai TC', 'Noto Sans TC', serif; --hnum: 'Patrick Hand', 'LXGW WenKai TC', sans-serif; --ease: cubic-bezier(.2, .7, .1, 1); }
@@ -59,6 +59,9 @@
   .wv { animation: wv 1.8s ease-out infinite; opacity: 0; }
   .wv.b { animation-delay: .6s; }
   @keyframes wv { 0% { opacity: 1; } 100% { opacity: 0; } }
+  .load { animation: load 1.6s ease-in-out infinite; }
+  @keyframes load { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(2px); } }
+  #line .ghost, .big .ghost { stroke-dasharray: 3 5; stroke-width: 1.6; opacity: .45; }
 
   /* 說明面板 */
   .panel { max-width: 920px; margin: 28px auto 0; padding: 28px; border: 2px solid var(--ink-c); border-radius: 18px 26px 20px 24px / 24px 18px 26px 20px; background: #FFFDF8; scroll-margin-top: 12px; }
@@ -143,7 +146,7 @@
     <a class="logo" href="#">SPEESSO</a>
     <div class="nav-links">
       <a class="hide-md" href="#story">我們的一天</a>
-      <a class="hide-md" href="#dev">設計開發</a>
+      <a class="hide-md" href="services.html">服務項目</a>
       <a class="hide-md" href="partners.html">合作試行</a>
       <a class="hide-md" href="#flownest">FlowNest</a>
       <a class="lang" href="en/" lang="en" hreflang="en">EN</a>
@@ -164,12 +167,13 @@
     <div class="panel" id="panel" aria-live="polite">
       <div class="intro-card on" id="intro">
         <p class="when">現在 · 台北 <b id="now-t">--:--</b></p>
-        <h2>我們一天裡的四件事</h2>
-        <p class="desc">早上的取餐櫃、上午的團隊檔案同步、下午的設計開發，還有深夜社區裡的守望相助。</p>
+        <h2>我們一天裡的五件事</h2>
+        <p class="desc">早上的取餐櫃、上午的團隊檔案同步、下午的設計開發與工程分析，還有深夜社區裡的守望相助。</p>
         <div class="picks">
           <button class="pick" type="button" data-go="locker"><b>07:58</b>智慧取餐櫃</button>
           <button class="pick" type="button" data-go="flownest"><b>09:30</b>FlowNest</button>
           <button class="pick" type="button" data-go="dev"><b>13:20</b>設計開發</button>
+          <button class="pick" type="button" data-go="cae"><b>16:00</b>工程分析</button>
           <button class="pick" type="button" data-go="sos"><b>22:14</b>守望相助 SOS</button>
         </div>
       </div>
@@ -233,7 +237,30 @@
           <p class="fact">不只是自己的點子，你的也可以。</p>
           <div class="acts">
             <a class="btn btn-ink" href="https://line.me/R/ti/p/@speesso">聊聊你的產品想法</a>
-            <a class="btn btn-line" href="mailto:austin@speesso.com">來信洽詢</a>
+            <a class="btn btn-line" href="services.html#dev">看服務項目</a>
+            <button class="replay" type="button">↻ 再畫一次</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="item" id="p-cae" data-steps="4" data-g="beam">
+        <svg class="big" aria-hidden="true"></svg>
+        <div>
+          <p class="when">16:00 · 下午 · 模擬分析</p>
+          <h2>CAD／CAE 工程分析</h2>
+          <p class="line"><span class="ph">先算過，</span><span class="ph">再打樣。</span></p>
+          <p class="desc"><span class="ph">在開模、打樣或施工之前，用 3D 模型與模擬分析確認強度、振動、流場與溫度。</span><span class="ph">也以顧問形式協助企業的設計團隊檢討模型與分析結果。</span></p>
+          <ol class="steps">
+            <li><div>結構分析（FEA）<span>強度、變形、振動頻率與螺栓接合</span></div></li>
+            <li><div>流場分析（CFD）<span>壓損、流速分布、混合均勻度與導流設計</span></div></li>
+            <li><div>熱分析<span>熱傳導與熱應力</span></div></li>
+            <li><div>CAD 建模與設計檢討<span>3D 建模、模型修正與分析報告</span></div></li>
+          </ol>
+          <p class="spec">使用 SOLIDWORKS Simulation 與 Flow Simulation。可採時數制顧問或單次分析委託，依案件由速倍速科技或是睿科技承接。</p>
+          <p class="fact">打樣與開模之前，先確認設計可行。</p>
+          <div class="acts">
+            <a class="btn btn-ink" href="https://line.me/R/ti/p/@speesso">洽詢工程分析</a>
+            <a class="btn btn-line" href="services.html#cae">看服務項目</a>
             <button class="replay" type="button">↻ 再畫一次</button>
           </div>
         </div>
@@ -265,12 +292,12 @@
 
   <section class="wrap close" id="contact">
     <h2 class="big2"><span class="ph">我們正在做一些自己的產品。</span><br><span class="ph">也期待參與你的下一個想法。</span></h2>
-    <p class="sub">想試用我們的產品，或有自己的產品想法，都歡迎聯絡我們。</p>
+    <p class="sub">想試用我們的產品、有自己的產品想法，或需要 CAD／CAE 工程分析，都歡迎聯絡我們。</p>
     <div class="acts">
       <a class="btn btn-ink" href="partners.html">了解產品合作</a>
       <a class="btn btn-line" href="https://line.me/R/ti/p/@speesso">洽詢設計開發</a>
     </div>
-    <p class="line-id">兩種需求都可以直接加 LINE<a href="https://line.me/R/ti/p/@speesso">@speesso</a>，或來信<a href="mailto:austin@speesso.com">austin@speesso.com</a></p>
+    <p class="line-id">各種需求都可以直接加 LINE<a href="https://line.me/R/ti/p/@speesso">@speesso</a>，或來信<a href="mailto:austin@speesso.com">austin@speesso.com</a></p>
   </section>
 </main>
 
@@ -332,6 +359,8 @@
     clock: { W: 200, clock: true, c: [['M', 0, 0], ['L', 14, 0], ['C', 20, -4, 18, -10, 14, -9], ['C', 10, -8, 11, -2, 14, 0], ['C', 14, -47.5, 52.5, -86, 100, -86], ['C', 147.5, -86, 186, -47.5, 186, 0], ['C', 186, 47.5, 147.5, 86, 100, 86], ['C', 52.5, 86, 14, 47.5, 14, 0], ['C', 12, -50, 50, -91, 98, -91], ['C', 146, -91, 190, -50, 188, -2], ['C', 192, 4, 198, -2, 194, -6], ['C', 190, -8, 190, 0, 200, 0]] },
     bulb: { W: 64, c: [['M', 0, 0], ['L', 22, 0], ['L', 22, -12], ['C', 6, -22, 8, -60, 32, -60], ['C', 56, -60, 58, -22, 42, -12], ['L', 42, 0], ['L', 64, 0]],
             x: '<path class="ln" d="M27 -16 L27 -28 C27 -36 37 -36 37 -28 L37 -16"/><g class="ray"><path class="ln" d="M32 -68 v-8 M8 -56 l-6 -5 M56 -56 l6 -5 M2 -36 h-7 M62 -36 h7"/></g>' },
+    beam: { W: 80, c: [['M', 0, 0], ['L', 10, 0], ['L', 10, -48], ['L', 10, -38], ['C', 30, -38, 50, -36, 66, -30], ['L', 67, -23], ['C', 50, -28, 30, -29, 10, -29], ['L', 10, 0], ['C', 30, 5, 60, 5, 80, 0]],
+            x: '<path class="ln ghost" d="M10 -38 H68 V-29 H10"/><path class="ln" d="M10 -46 l-7 7 M10 -36 l-7 7 M10 -26 l-7 7 M10 -16 l-7 7"/><g class="load"><path class="ln" d="M66 -64 v20 M66 -44 l-5 -7 M66 -44 l5 -7"/></g>' },
     house: { W: 72, c: [['M', 0, 0], ['L', 8, 0], ['L', 8, -32], ['L', 35, -56], ['L', 62, -32], ['L', 62, 0], ['L', 44, 0], ['L', 44, -20], ['L', 28, -20], ['L', 28, 0], ['C', 40, 5, 60, 5, 72, 0]],
              x: '<rect class="ln" x="14" y="-30" width="9" height="9"/><g class="wv"><path class="ln" d="M68 -44 a10 10 0 0 1 0 14"/></g><g class="wv b"><path class="ln" d="M74 -50 a18 18 0 0 1 0 26"/></g>' }
   };
@@ -339,9 +368,10 @@
     locker: { g: 'cup', t: '07:58', name: '智慧取餐櫃' },
     flownest: { g: 'sync', t: '09:30', name: 'FlowNest' },
     dev: { g: 'bulb', t: '13:20', name: '設計開發' },
+    cae: { g: 'beam', t: '16:00', name: '工程分析' },
     sos: { g: 'house', t: '22:14', name: '守望相助 SOS' }
   };
-  var ORDER = ['locker', 'flownest', 'dev', 'sos'];
+  var ORDER = ['locker', 'flownest', 'dev', 'cae', 'sos'];
 
   function n(v) { return (Math.round(v * 10) / 10).toString(); }
   // 把小圖的指令放到 (ox, oy)；reverse＝這一排由右往左走（見 reversed）
@@ -370,11 +400,11 @@
   // 版面：桌機一排；手機蛇行三排
   // 手機：由右往左的那一排只放一個圖，線走的順序和由左往右讀的順序才會一致（07:58 → 09:30 → 13:20 → 22:14）
   var LAYOUT = {
-    wide: { vb: '-20 -150 1100 285', rows: [{ y: 0, dir: 1, x0: -20, x1: 1080, items: [['locker', 90], ['flownest', 240], ['clock', 440], ['dev', 760], ['sos', 920]] }] },
+    wide: { vb: '-20 -150 1100 285', rows: [{ y: 0, dir: 1, x0: -20, x1: 1080, items: [['locker', 60], ['flownest', 200], ['clock', 400], ['dev', 680], ['cae', 810], ['sos', 950]] }] },
     narrow: { vb: '-24 -116 410 590', rows: [
       { y: 0, dir: 1, x0: -24, x1: 330, items: [['clock', 0], ['locker', 244]] },
       { y: 230, dir: -1, x0: 330, x1: 30, items: [['flownest', 128]] },
-      { y: 410, dir: 1, x0: 30, x1: 386, items: [['dev', 62], ['sos', 226]] }
+      { y: 410, dir: 1, x0: 30, x1: 386, items: [['dev', 40], ['cae', 150], ['sos', 280]] }
     ] }
   };
 
